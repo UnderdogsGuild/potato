@@ -1,0 +1,10 @@
+development: &defaults
+  host: localhost
+  database: singerbones
+  autocreate_indexes: true
+test:
+  <<: *defaults
+  database: singerbones_test
+production:
+  <<: *defaults
+  autocreate_indexes: false
