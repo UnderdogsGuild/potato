@@ -1,5 +1,4 @@
 class String
-  ##
   # Convert a string to html with RDiscount
   #
   # @param bare Boolean Omit wrapping paragraph tags in output

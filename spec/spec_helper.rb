@@ -1,9 +1,11 @@
 ENV['RACK_ENV'] ||= "test"
 
 require 'bundler/setup'
-Bundler.require(:default, :test)
-
-#require 'application'
+require 'application'
+require 'rspec'
+require 'rack/test'
+require 'rr'
+require 'webrat'
 
 module SpecHelpers
   def app
@@ -27,8 +29,8 @@ RSpec.configure do |c|
     DataMapper.auto_migrate!
   end
 
-  c.after :all do
-    DatabaseCleaner.strategy = :truncation
-    DatabaseCleaner.clean
-  end
+  #c.after :all do
+    #DatabaseCleaner.strategy = :truncation
+    #DatabaseCleaner.clean
+  #end
 end

@@ -24,4 +24,5 @@ class Application < Sinatra::Base
     throw :halt, [404, "Not found"] unless @page
     haml :'pages/show'
   end
+
 end

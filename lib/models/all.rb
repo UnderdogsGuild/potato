@@ -11,15 +11,15 @@ unless ENV['DB_HOST'].blank?
     :database => ENV['DB_DB']
   }
 else
-  opts = Application.database[Application.environment.to_s]
+  opts = Application.database
 end
 
 ##
 # There should just be a valid adapter name for this instead.
-opts = opts['adapter'] == "sqlite-in-memory" ? "sqlite3::memory:" : opts
+opts = opts["adapter"] == "sqlite-in-memory" ? "sqlite3::memory:" : opts
 
 DataMapper.setup(:default, opts)
-Application.logger.debug "DM Conf: " + opts.to_s
+Application.logger.debug "DB Conf: " + opts.to_s
 
 ##
 # Require all ruby files on or under this level.

@@ -2,7 +2,7 @@ require 'bundler/setup'
 Bundler.require
 
 class Application < Sinatra::Base
-  use Rack::Session::Cookie
+  use Rack::Session::Cookie, :secret => '2-oWcq(|Yo@ZV)VBdX]<.MEl0JtH.$RVAyX2gyl[Nl{bPRWD/$:./}P'
   register Sinatra::Namespace
   register Sinatra::ConfigFile
   register Sinatra::R18n
@@ -22,7 +22,7 @@ class Application < Sinatra::Base
     logger.level = Logger::DEBUG
 
     enable :static
-    set :public, Proc.new { File.join(root, "public") }
+    set :public_folder, Proc.new { File.join(root, "public") }
   end
 
   configure :production do
