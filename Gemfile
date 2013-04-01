@@ -37,7 +37,7 @@ gem "sass"
 
 #gem "compass"
 #gem "compass-susy-plugin"
-gem 'coffee-script'
+gem 'coffee-filter'
 
 group :development do
   gem "rake", :require => "rake/clean"

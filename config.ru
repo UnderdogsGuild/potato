@@ -1,5 +1,5 @@
 require 'bundler/setup'
-Bundler.require
+require 'application'
 
 #use Rack::Profiler if ENV['RACK_ENV'] == 'development'
 
