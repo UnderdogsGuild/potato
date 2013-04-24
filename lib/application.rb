@@ -20,9 +20,10 @@ class Application < Sinatra::Base
   configure :development, :test do
     set :logger, Logger.new(STDOUT)
     logger.level = Logger::DEBUG
+		disable :static
 
-    enable :static
-    set :public_folder, Proc.new { File.join(root, "public") }
+    #enable :static
+    #set :public_folder, Proc.new { File.join(root, "public") }
   end
 
   configure :production do
