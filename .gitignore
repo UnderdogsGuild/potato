@@ -1,3 +1,4 @@
 *.db
 static/css/*.css
 static/js/*.js
+public/css
