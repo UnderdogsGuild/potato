@@ -8,9 +8,10 @@ gem "application", "0.0", :path => "."
 gem "sinatra", :require => "sinatra/base"
 gem "sinatra-namespace", :require => "sinatra/namespace"
 gem "sinatra-config-file", :require => "sinatra/config_file"
-# gem "rack-flash", :require => "rack/flash"
+#gem "rack-flash", :require => "rack/flash"
 gem "rack-contrib", :require => "rack/contrib"
-gem "sinatra-r18n", :require => 'sinatra/r18n'
+gem "sinatra-r18n", :require => "sinatra/r18n"
+gem "sinatra-partial", :require => "sinatra/partial"
 
 # Tools
 #gem "logger"
@@ -21,19 +22,19 @@ gem "rdiscount"
 #gem "redcarpet"
 gem "unicorn"
 #gem "tmail"
-# gem "i18n"
+#gem "i18n"
 
 # DB: Adapters included in groups below
 gem "dm-core"
 gem "dm-validations"
 gem "dm-migrations"
 gem "dm-types"
-# gem "mongomatic"
-# gem "bson_ext"
+#gem "mongomatic"
+#gem "bson_ext"
 
 # Templating
 gem "haml"
-gem "sass"
+#gem "sass"
 
 #gem "compass"
 #gem "compass-susy-plugin"
@@ -57,5 +58,5 @@ group :test do
   gem "rack-test", :require => "rack/test"
   gem "rr"
   gem "webrat"
-  # gem "database_cleaner"
+  #gem "database_cleaner"
 end

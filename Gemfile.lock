@@ -6,19 +6,22 @@ PATH
 GEM
   remote: https://rubygems.org/
   specs:
-    addressable (2.2.8)
-    backports (2.6.5)
-    bcrypt-ruby (3.0.1)
+    addressable (2.3.5)
+    backports (3.3.5)
+    bcrypt-ruby (3.1.2)
+    coffee-filter (0.1.3)
+      coffee-script (>= 2.2.0)
+      haml (< 4.0)
     coffee-script (2.2.0)
       coffee-script-source
       execjs
-    coffee-script-source (1.4.0)
+    coffee-script-source (1.6.3)
     daemons (1.1.9)
-    data_objects (0.10.12)
+    data_objects (0.10.13)
       addressable (~> 2.1)
-    diff-lcs (1.1.3)
-    dm-core (1.2.0)
-      addressable (~> 2.2.6)
+    diff-lcs (1.2.5)
+    dm-core (1.2.1)
+      addressable (~> 2.3)
     dm-do-adapter (1.2.0)
       data_objects (~> 0.10.6)
       dm-core (~> 1.2.0)
@@ -40,75 +43,79 @@ GEM
       uuidtools (~> 2.1)
     dm-validations (1.2.0)
       dm-core (~> 1.2.0)
-    do_mysql (0.10.12)
-      data_objects (= 0.10.12)
-    do_sqlite3 (0.10.12)
-      data_objects (= 0.10.12)
-    eventmachine (1.0.0)
-    execjs (1.4.0)
-      multi_json (~> 1.0)
+    do_mysql (0.10.13)
+      data_objects (= 0.10.13)
+    do_sqlite3 (0.10.13)
+      data_objects (= 0.10.13)
+    dotenv (0.9.0)
+    eventmachine (1.0.3)
+    execjs (2.0.2)
     extlib (0.9.16)
     fastercsv (1.5.5)
-    foreman (0.62.0)
+    foreman (0.63.0)
+      dotenv (>= 0.7)
       thor (>= 0.13.6)
-    haml (3.1.7)
-    json (1.7.6)
-    kgio (2.8.0)
-    multi_json (1.5.0)
-    nokogiri (1.5.6)
-    r18n-core (1.1.4)
-    rack (1.4.3)
+    haml (3.1.8)
+    json (1.8.1)
+    kgio (2.8.1)
+    mini_portile (0.5.2)
+    multi_json (1.8.2)
+    nokogiri (1.6.0)
+      mini_portile (~> 0.5.0)
+    r18n-core (1.1.7)
+    rack (1.5.2)
     rack-contrib (1.1.0)
       rack (>= 0.9.1)
-    rack-protection (1.3.2)
+    rack-protection (1.5.1)
       rack
     rack-test (0.6.2)
       rack (>= 1.0)
-    raindrops (0.10.0)
-    rake (10.0.3)
-    rdiscount (1.6.8)
-    rr (1.0.4)
-    rspec (2.12.0)
-      rspec-core (~> 2.12.0)
-      rspec-expectations (~> 2.12.0)
-      rspec-mocks (~> 2.12.0)
-    rspec-core (2.12.2)
-    rspec-expectations (2.12.1)
-      diff-lcs (~> 1.1.3)
-    rspec-mocks (2.12.1)
-    sass (3.2.5)
+    raindrops (0.12.0)
+    rake (10.1.0)
+    rdiscount (2.1.7)
+    rr (1.1.2)
+    rspec (2.14.1)
+      rspec-core (~> 2.14.0)
+      rspec-expectations (~> 2.14.0)
+      rspec-mocks (~> 2.14.0)
+    rspec-core (2.14.7)
+    rspec-expectations (2.14.4)
+      diff-lcs (>= 1.1.3, < 2.0)
+    rspec-mocks (2.14.4)
     shotgun (0.9)
       rack (>= 1.0)
-    sinatra (1.3.3)
-      rack (~> 1.3, >= 1.3.6)
-      rack-protection (~> 1.2)
-      tilt (~> 1.3, >= 1.3.3)
+    sinatra (1.4.4)
+      rack (~> 1.4)
+      rack-protection (~> 1.4)
+      tilt (~> 1.3, >= 1.3.4)
     sinatra-config-file (1.0)
       sinatra-contrib
-    sinatra-contrib (1.3.2)
+    sinatra-contrib (1.4.2)
       backports (>= 2.0)
-      eventmachine
+      multi_json
       rack-protection
       rack-test
-      sinatra (~> 1.3.0)
+      sinatra (~> 1.4.0)
       tilt (~> 1.3)
     sinatra-namespace (1.0)
       sinatra-contrib
-    sinatra-r18n (1.1.4)
-      r18n-core (= 1.1.4)
+    sinatra-partial (0.4.0)
+      sinatra
+    sinatra-r18n (1.1.7)
+      r18n-core (= 1.1.7)
       sinatra (>= 1.3)
     stringex (1.5.1)
-    thin (1.5.1)
+    thin (1.6.1)
       daemons (>= 1.0.9)
-      eventmachine (>= 0.12.6)
+      eventmachine (>= 1.0.0)
       rack (>= 1.0.0)
-    thor (0.18.0)
-    tilt (1.3.3)
-    unicorn (4.6.2)
+    thor (0.18.1)
+    tilt (1.4.1)
+    unicorn (4.7.0)
       kgio (~> 2.6)
       rack
       raindrops (~> 0.7)
-    uuidtools (2.1.3)
+    uuidtools (2.1.4)
     webrat (0.7.3)
       nokogiri (>= 1.2.0)
       rack (>= 1.0)
@@ -121,7 +128,7 @@ PLATFORMS
 DEPENDENCIES
   application (= 0.0)!
   bcrypt-ruby
-  coffee-script
+  coffee-filter
   dm-core
   dm-migrations
   dm-mysql-adapter
@@ -137,11 +144,11 @@ DEPENDENCIES
   rdiscount
   rr
   rspec
-  sass
   shotgun
   sinatra
   sinatra-config-file
   sinatra-namespace
+  sinatra-partial
   sinatra-r18n
   stringex
   thin

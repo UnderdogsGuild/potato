@@ -5,6 +5,7 @@ class Application < Sinatra::Base
   use Rack::Session::Cookie, :secret => '2-oWcq(|Yo@ZV)VBdX]<.MEl0JtH.$RVAyX2gyl[Nl{bPRWD/$:./}P'
   register Sinatra::Namespace
   register Sinatra::ConfigFile
+	register Sinatra::Partial
   register Sinatra::R18n
 
   enable :logging, :sessions
