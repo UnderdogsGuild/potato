@@ -1,0 +1,3 @@
+*.db
+static/css/*.css
+static/js/*.js

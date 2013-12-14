@@ -1,0 +1,8 @@
+---
+database:
+  development:
+    adapter: sqlite
+    path: development.db
+  test:
+    adapter: sqlite-in-memory
+  # Production values are read from execution environment on the deployment server

@@ -1,0 +1,7 @@
+%article{ :class => :article, :id => "entry-#{news_entry.id}" }
+  %header
+    %h1= news_entry.title.to_html(true)
+    %p.tagline= news_entry.tagline.to_html(true)
+    %p.meta= l news_entry.publish_on, :human
+
+    = news_entry.content.to_html
