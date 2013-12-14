@@ -14,16 +14,16 @@ module SpecHelpers
 end
 
 Webrat.configure do |c|
-  c.mode = :rack
+	c.mode = :rack
 end
 
 RSpec.configure do |c|
-  c.include Rack::Test::Methods
+	c.include Rack::Test::Methods
   c.include Webrat::Methods
   c.include Webrat::Matchers
   c.include SpecHelpers
 
-  c.mock_with :rr
+  #c.mock_with :rr
 
   c.before :all do
     DataMapper.auto_migrate!
