@@ -34,9 +34,9 @@ gem "dm-types"
 
 # Templating
 gem "haml"
-#gem "sass"
+gem "sass"
 
-#gem "compass"
+gem "compass"
 #gem "compass-susy-plugin"
 gem 'coffee-filter'
 
@@ -47,6 +47,7 @@ group :development do
 	gem 'foreman'
 	gem 'shotgun'
 	gem 'thin'
+	gem 'rb-inotify', '~> 0.9'
 end
 
 group :production do

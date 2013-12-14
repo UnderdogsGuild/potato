@@ -49,7 +49,7 @@
 
   %link{ "rel" => "stylesheet", "href" => "/css/styles.css" }
 
-  %script{ "src" => "/js/modernizr.min.js" }
+  %script{ "src" => "/js/libs/modernizr.js" }
 
 %body
   .wrapper
@@ -76,10 +76,10 @@
   :javascript
     Modernizr.load([
       {
-        load: '//ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.js',
+        load: '//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.js',
         complete: function () {
           if ( !window.jQuery ) {
-                Modernizr.load('/js/libs/jquery-1.6.1.min.js');
+                Modernizr.load('/js/libs/jquery-2.0.3.js');
           }
         }
       },
