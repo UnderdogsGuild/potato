@@ -1,6 +1,6 @@
 ##
 # Configure DB connection
-unless ENV['DB_HOST'].blank?
+unless ENV['DB_ADAPTER'].blank?
   opts = {
     :adapter => ENV['DB_ADAPTER'],
     :path => ENV['DB_PATH'],
@@ -8,7 +8,7 @@ unless ENV['DB_HOST'].blank?
     :port => ENV['DB_PORT'],
     :user => ENV['DB_USER'],
     :password => ENV['DB_PASSWORD'],
-    :database => ENV['DB_DB']
+    :database => ENV['DB_DATABASE']
   }
 else
   opts = Application.database

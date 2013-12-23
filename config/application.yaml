@@ -5,4 +5,20 @@ database:
     path: development.db
   test:
     adapter: sqlite-in-memory
-  # Production values are read from execution environment on the deployment server
+
+# Production values are read from execution environment, to avoid placing
+# production credentials in version history.
+#
+# The database configurator looks for the following environment variables:
+# DB_ADAPTER, DB_PATH, DB_HOST, DB_PORT, DB_USER, DB_PASSWORD, DB_DATABASE
+#
+# but only if it finds DB_ADAPTER first
+#
+# Example for mysql:
+# DB_ADAPTER="mysql"
+# DB_HOST="localhost"
+# DB_USER="mysqluser"
+# DB_PASSWORD="mysqlpassword"
+# DB_DATABASE="awesomedb"
+#
+# TODO: Allow for table prefix
