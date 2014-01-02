@@ -6,7 +6,6 @@ class Application < Sinatra::Base
   register Sinatra::Namespace
   register Sinatra::ConfigFile
 	register Sinatra::Partial
-  register Sinatra::R18n
 
   enable :logging, :sessions
   set :app_file, __FILE__
@@ -14,8 +13,6 @@ class Application < Sinatra::Base
   set :views, Proc.new { File.join(root, "templates") }
 
   set :haml, :format => :html5
-  set :default_locale, 'en'
-  set :translations,   File.join( root,'translations' )
   config_file "config/application.yaml"
 
   configure :development, :test do
@@ -32,7 +29,7 @@ class Application < Sinatra::Base
     disable :static
   end
 
-  logger.debug "Env: #{environment}"
+  logger.debug "Execution environment: #{environment}"
 end
 
 #require_relative 'models/all'
