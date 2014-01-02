@@ -23,14 +23,7 @@ RSpec.configure do |c|
   c.include Webrat::Matchers
   c.include SpecHelpers
 
-  #c.mock_with :rr
-
   c.before :all do
-    DataMapper.auto_migrate!
+    #DataMapper.auto_migrate!
   end
-
-  #c.after :all do
-    #DatabaseCleaner.strategy = :truncation
-    #DatabaseCleaner.clean
-  #end
 end

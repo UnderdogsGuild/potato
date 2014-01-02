@@ -16,7 +16,7 @@ gem "sinatra-partial", require: "sinatra/partial"
 # Tools
 #gem "logger"
 gem "extlib"
-gem "stringex"
+#gem "stringex"
 gem "bcrypt-ruby", require: "bcrypt"
 gem "rdiscount"
 #gem "redcarpet"
@@ -25,10 +25,10 @@ gem "unicorn"
 #gem "i18n"
 
 # DB: Adapters included in groups below
-gem "dm-core"
-gem "dm-validations"
-gem "dm-migrations"
-gem "dm-types"
+#gem "dm-core"
+#gem "dm-validations"
+#gem "dm-migrations"
+#gem "dm-types"
 #gem "mongomatic"
 #gem "bson_ext"
 
@@ -43,7 +43,7 @@ gem 'coffee-filter'
 group :development do
   gem "rake", require: "rake/clean"
   gem "wirble"
-  gem "dm-sqlite-adapter"
+  #gem "dm-sqlite-adapter"
 	gem 'foreman'
 	gem 'shotgun'
 	gem 'thin'
@@ -51,7 +51,7 @@ group :development do
 end
 
 group :production do
-  gem "dm-mysql-adapter"
+  #gem "dm-mysql-adapter"
 end
 
 group :test do

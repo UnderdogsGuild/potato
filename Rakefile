@@ -10,23 +10,6 @@ task :env do
   Bundler.require
 end
 
-namespace :db do
-  task :migrate => :env do
-    puts "Clearing..."
-    require 'database_cleaner'
-    DatabaseCleaner.strategy = :truncation
-    DatabaseCleaner.clean
-  end
-
-  task :seed => :migrate do
-    puts "Seeding..."
-    @news_entry = NewsEntry.create title: "Test entries are cool", tagline: "They really are",
-      content: "Oh so fucking cool", published: true
-    @page = Page.create title: "Pagey pagey on the wall", content: "Who's the prettiest coder of all"
-    puts "Done."
-  end
-end
-
 task :shell => :env do
   require 'irb'
   require 'models/all'

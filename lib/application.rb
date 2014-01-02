@@ -14,7 +14,7 @@ class Application < Sinatra::Base
   set :views, Proc.new { File.join(root, "templates") }
 
   set :haml, :format => :html5
-  set :default_locale, 'es'
+  set :default_locale, 'en'
   set :translations,   File.join( root,'translations' )
   config_file "config/application.yaml"
 
@@ -22,9 +22,6 @@ class Application < Sinatra::Base
     set :logger, Logger.new(STDOUT)
     logger.level = Logger::DEBUG
 		disable :static
-
-    #enable :static
-    #set :public_folder, Proc.new { File.join(root, "public") }
   end
 
   configure :production do
@@ -38,6 +35,6 @@ class Application < Sinatra::Base
   logger.debug "Env: #{environment}"
 end
 
-require_relative 'models/all'
+#require_relative 'models/all'
 require_relative 'routes/all'
 require_relative 'helpers/all'
