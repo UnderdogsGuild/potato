@@ -66,12 +66,13 @@
           %li
             %a{ :href => "" } Nav Link 3
 
-    -# Sub-templates need to declare their own container, like %article, or %div.whatever
+    -# The next line is replaced with the rendered content of the subtemplate
+    -# Subtemplates need to declare their own container, like %article, or %div.whatever
     = yield
 
     %footer
       %p
-        %small &copy; Copyright Michishige Kaito #{Date.today.year}. All Rights Reserved.
+        %small &copy; Copyleft Michishige Kaito 2009-#{Date.today.year}. No Rights Reserved.
 
   :javascript
     Modernizr.load([

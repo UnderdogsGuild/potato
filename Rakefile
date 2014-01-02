@@ -8,7 +8,6 @@ task :env do
   ENV['RACK_ENV'] ||= "development"
   require 'bundler/setup'
   Bundler.require
-  Mongoid.load! File.expand_path( File.join( File.dirname(__FILE__), "config", "mongoid.yml" ) )
 end
 
 namespace :db do
