@@ -1,4 +1,5 @@
 *.db
-static/css/*.css
-static/js/*.js
-public/css
+.bundle/*
+.gitignore~
+potato.sublime-project
+potato.sublime-workspace

@@ -1,0 +1,37 @@
+/Global Off Canvas
+%div#status-offcanvas.uk-offcanvas
+    %div.uk-offcanvas-bar.uk-offcanvas-bar-flip
+        /JSON Search Result Retrieval. Not working yet.
+        %form.uk-search{'data-uk-search' => '{source:\'/searchresults.json\'}'}
+            %input.uk-search-field{'type' => 'search', 'placeholder' => 'Search...'}
+            %button.uk-search-close{'type' => 'reset'}
+        /Off Canvas Statuses
+        %ul.uk-nav.uk-nav-offcanvas.uk-nav-parent-icon{'data-uk-nav' => ''}
+            %li.uk-nav-header
+                Server Statuses
+            %li
+                %a{:href => '#'}
+                    TeamSpeak
+                    %div.uk-badge.uk-badge-success
+                        Online
+            %li
+                %a{:href => '#'}
+                    Starbound
+                    %div.uk-badge.uk-badge-success
+                        Online
+            %li
+                %a{:href => '#'}
+                    Killing Floor
+                    %div.uk-badge.uk-badge-danger
+                        Offline
+            %li
+                %a{:href => '#'}
+                    Minecraft
+                    %div.uk-badge.uk-badge-danger
+                        Offline
+            %li
+                %a{:href => '#'}
+                    VPN
+                    %div.uk-badge.uk-badge-success
+                        Online
+/End Global Off Canvas

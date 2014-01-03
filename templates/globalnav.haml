@@ -1,0 +1,113 @@
+/Navbar
+%div.uk-width-1-1
+    %nav.uk-navbar.uk-navbar-attached
+        %a.uk-navbar-toggle.uk-visible-small{:href => '#mobile-offcanvas', 'data-uk-offcanvas' => ''}
+        %a.uk-navbar-brand{:href => '/'}
+            %img.ud-navbar-logo{'src' => '/img/logos/logo.png', 'alt' => 'Underdogs Logo'}
+        %ul.uk-navbar-nav.uk-hidden-small
+            /Active Element
+            %li.uk-active
+                %a.uk-navbar-nav-subtitle{:href => '/'}
+                    Home
+                    %div
+                        Once an Underdog...
+            %li.uk-parent{'data-uk-dropdown' => ''}
+                %a.uk-navbar-nav-subtitle{:href => '#'}
+                    News & Events
+                    %div
+                        Do Stuff!
+                %div.uk-dropdown.uk-dropdown-navbar
+                    %ul.uk-nav.uk-nav-navbar
+                        %li
+                            %a{:href => '#'}
+                                News
+                        %li.uk-nav-header
+                            Events
+                        %li
+                            %a{:href => '#'}
+                                Special Events
+                        %li
+                            %a{:href => '#'}
+                                Derp Knights
+                        %li
+                            %a{:href => '#'}
+                                Stream Events
+            %li.uk-parent{'data-uk-dropdown' => ''}
+                %a.uk-navbar-nav-subtitle{:href => '#'}
+                    Community
+                    %div
+                        Get Together
+                %div.uk-dropdown.uk-dropdown-navbar
+                    %ul.uk-nav.uk-nav-navbar
+                        %li.uk-nav-header
+                            Underdogs
+                        %li
+                            %a
+                                Forum
+                        %li
+                            %a
+                                Members
+                        %li.uk-nav-header
+                            Linkshells
+                        %li
+                            %a
+                                DoomFinders
+            %li.uk-parent{'data-uk-dropdown' => ''}
+                %a.uk-navbar-nav-subtitle{:href => '#'}
+                    Servers
+                    %div
+                        VoIP & Games
+                %div.uk-dropdown.uk-dropdown-navbar
+                    %ul.uk-nav.uk-nav-navbar
+                        %li.uk-nav-header
+                            Utilities and VoIP
+                        %li
+                            %a{:href => '#'}
+                                TeamSpeak
+                        %li
+                            %a{:href => '#'}
+                                Private VPN
+                        %li.uk-nav-header
+                            Game Servers
+                        %li
+                            %a
+                                Starbound
+                        %li
+                            %a
+                                Minecraft
+                        %li
+                            %a
+                                Killing Floor
+            %li
+                %a.uk-navbar-nav-subtitle{:href => '#'}
+                    Wiki
+                    %div
+                        Planning
+        %div.uk-navbar-flip
+            %ul.uk-navbar-nav
+                %li.uk-parent{'data-uk-dropdown' => '{mode\'click\'}'}
+                    %a{:href => '#'}
+                        Login
+                    %div.uk-dropdown.uk-dropdown-width-1.uk-dropdown-navbar
+                        %div.uk-grid
+                            %div.uk-width-1-1
+                                %form.uk-form
+                                    %fieldset
+                                        %legend
+                                            Sign In
+                                        %div.uk-form-row
+                                            %input{'type' => 'text', 'placeholder' => 'UnderdogsID'}
+                                        %div.uk-form-row
+                                            %input{'type' => 'password', 'placeholder' => 'Password'}
+                                        %div.uk-form-row
+                                            %button.uk-button{'type' => 'submit'}
+                                                Login!
+                                            %button.uk-button{'type' => 'submit'}
+                                                Join Us!
+                                        %div.uk-form-row
+                                            %a{:href => '#'}
+                                                Forget your password?
+                %li
+                    %a{:href => '#status-offcanvas', 'data-uk-offcanvas' => ''}
+                        %i.uk-icon-cog.uk-icon-medium
+/End Navbar
