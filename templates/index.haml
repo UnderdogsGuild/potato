@@ -1,2 +1,89 @@
-%article
-  %p Hello World!
+/Slideshow
+%div.ud-slideshow-bg
+	%div.ud-slideshow-inner.uk-container.uk-container-center
+		%div.cycle-slideshow{'data-cycle-fx' => 'scrollHorz', 'data-cycle-pause-on-hover' => 'true', 'data-cylce-timeout' => '10000'}
+			%div.cycle-prev
+			%div.cycle-next
+			%div.cycle-overlay
+			%img{'src' => '/img/slides/starter/slide1.png', 'alt' => 'Coil-Ready!', 'data-cycle-title' => 'Coil-Ready!', 'data-cycle-desc' => 'Members of Underdogs equipped and ready to take on Coil.'}
+			%img{'src' => '/img/slides/starter/slide2.png', 'alt' => 'Draco Streams the Praetorium!', 'data-cycle-title' => 'Draco Streams the Praetorium!', 'data-cycle-desc' => 'Watch it now on <a href=\'http://www.youtube.com/watch?v=U9NDvhmHbbA\'>YouTube</a>.'}
+			%img{'src' => '/img/slides/starter/slide3.png', 'alt' => 'Starbound!', 'data-cycle-title' => 'Starbound!', 'data-cycle-desc' => 'The new Starbound Server is ready to be played on! <a href=\'#\'>Check it out.</a>'}
+			%div#progress
+/End Slideshow
+/Main Content
+%div.ud-mainpage-bg.uk-container.uk-container-center
+	=haml :breadcrumbs
+	%div.uk-grid.uk-grid-divider.ud-mainpage{'data-uk-grid-margin' => true}
+		%div.uk-width-large-1-5.uk-visible-large
+			%h2
+				Recent Posts
+			%div.ud-rpost-cont
+				%h6.ud-rpost-title.uk-text-truncate
+					Home Sweet Home
+				%p.uk-comment-meta.ud-rpost-meta
+					By Mirakell. Last post by mkaito.
+			%div.ud-rpost-cont
+				%h6.ud-rpost-title.uk-text-truncate
+					FC actions rotation
+				%p.uk-comment-meta.ud-rpost-meta
+					By Valestrix. Last post by mkaito.
+			%div.ud-rpost-cont
+				%h6.ud-rpost-title.uk-text-truncate
+					Guild Meeting After Holidays - When are you free!?
+				%p.uk-comment-meta.ud-rpost-meta
+					By Mirakell. Last post by silentshadeu.
+		%div.uk-width-large-2-5.uk-width-medium-1-2
+			%h2
+				Upcoming Events
+			%article.uk-article
+				%h3.uk-article-title
+					Derp Knights
+				%p.uk-article-meta
+					By
+					%img.ud-rank{'src' => '/img/rank-ico/td-ico.png', 'alt' => 'TD'}
+					Mirakell on January 31, 2014.
+				%p
+					Neque porro quisquam est, qui dolorem ipsum quia 
+					%a{:href => 'http://xivdb.com/?item/1955/Artemis-Bow'}
+						dolor
+					sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?
+				%a.uk-button.ud-readmore.uk-buttonmini.uk-button-primary{:href => '#'}
+					Read More
+			%article.uk-article
+				%h3.uk-article-title
+					Herp Nites
+				%p.uk-article-meta
+					By
+					%img.ud-rank{'src' => '/img/rank-ico/td-ico.png', 'alt' => 'TD'}
+					Mirakell on January 31, 2014.
+				%p
+					Aenean pharetra a purus vitae dictum. Curabitur placerat pellentesque nisl in facilisis. Nam vehicula, sapien ut tristique elementum, sapien eros tristique nisi, a lobortis eros nibh ut libero. Praesent at ipsum ultrices, rutrum quam non, consequat sem. Mauris accumsan vitae felis eget scelerisque. Integer volutpat est eu commodo placerat. Proin gravida, metus et placerat interdum, turpis elit varius dui, quis tincidunt leo enim id eros. Etiam convallis pharetra velit at cursus. Aliquam consequat mauris non lacus scelerisque, quis fermentum enim condimentum. Cras fermentum est in tortor cursus cursus.
+				%a.uk-button.ud-readmore.uk-buttonmini.uk-button-primary{:href => '#'}
+					Read More
+		%div.uk-width-large-2-5.uk-width-medium-1-2
+			%h2
+				Recent News
+			%article.uk-article
+				%h3.uk-article-title
+					New Website Up and Running
+				%p.uk-article-meta
+					By
+					%img.ud-rank{'src' => '/img/rank-ico/sa-ico.png', 'alt' => 'SA'}
+					%img.ud-rank{'src' => '/img/rank-ico/ud-ico.png', 'alt' => 'UD'}
+					Faore on January 31, 2014.
+				%p
+					Rawr. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.
+				%a.uk-button.ud-readmore.uk-buttonmini.uk-button-primary{:href => '#'}
+					Read More
+			%article.uk-article
+				%h3.uk-article-title
+					Enjin Blown Up
+				%p.uk-article-meta
+					By
+					%img.ud-rank{'src' => '/img/rank-ico/sa-ico.png', 'alt' => 'SA'}
+					%img.ud-rank{'src' => '/img/rank-ico/ud-ico.png', 'alt' => 'UD'}
+					Faore on January 31, 2014.
+				%p
+					Kaboom. Nunc felis quam, posuere nec elementum nec, tempor in elit. Praesent sed ultrices tortor. Sed eu felis consectetur, interdum lorem sit amet, pretium erat. Phasellus eu orci risus. Quisque quis porttitor mi. Aliquam pellentesque felis ut fermentum eleifend. Mauris pretium aliquet lorem, in consequat odio. Suspendisse id augue eu nisi malesuada tincidunt sit amet vitae risus. Cras blandit magna eros. Nulla lacinia dapibus dui, ac sollicitudin massa commodo a. Aenean tempor nulla eu suscipit faucibus.		
+				%a.uk-button.ud-readmore.uk-buttonmini.uk-button-primary{:href => '#'}
+					Read More

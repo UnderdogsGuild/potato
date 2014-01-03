@@ -1,7 +1,7 @@
 /Navbar
 %div.uk-width-1-1
     %nav.uk-navbar.uk-navbar-attached
-        %a.uk-navbar-toggle.uk-visible-small{:href => '#mobile-offcanvas', 'data-uk-offcanvas' => ''}
+        %a.uk-navbar-toggle.uk-visible-small{:href => '#mobile-offcanvas', 'data-uk-offcanvas' => true}
         %a.uk-navbar-brand{:href => '/'}
             %img.ud-navbar-logo{'src' => '/img/logos/logo.png', 'alt' => 'Underdogs Logo'}
         %ul.uk-navbar-nav.uk-hidden-small
@@ -11,7 +11,7 @@
                     Home
                     %div
                         Once an Underdog...
-            %li.uk-parent{'data-uk-dropdown' => ''}
+            %li.uk-parent{'data-uk-dropdown' => true}
                 %a.uk-navbar-nav-subtitle{:href => '#'}
                     News & Events
                     %div
@@ -32,7 +32,7 @@
                         %li
                             %a{:href => '#'}
                                 Stream Events
-            %li.uk-parent{'data-uk-dropdown' => ''}
+            %li.uk-parent{'data-uk-dropdown' => true}
                 %a.uk-navbar-nav-subtitle{:href => '#'}
                     Community
                     %div
@@ -52,7 +52,7 @@
                         %li
                             %a
                                 DoomFinders
-            %li.uk-parent{'data-uk-dropdown' => ''}
+            %li.uk-parent{'data-uk-dropdown' => true}
                 %a.uk-navbar-nav-subtitle{:href => '#'}
                     Servers
                     %div
@@ -108,6 +108,6 @@
                                             %a{:href => '#'}
                                                 Forget your password?
                 %li
-                    %a{:href => '#status-offcanvas', 'data-uk-offcanvas' => ''}
+                    %a{:href => '#status-offcanvas', 'data-uk-offcanvas' => true}
                         %i.uk-icon-cog.uk-icon-medium
 /End Navbar
