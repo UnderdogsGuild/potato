@@ -35,6 +35,7 @@
             }
 %body
     =haml :offcanvas
+    =haml :mobilenav
     /Main Page
     %div.uk-grid
         /Notice Section
@@ -44,8 +45,11 @@
                 %p
                     The Underdogs Website will undergo maintenance at some point in time. In the meantime enjoy the eyecandy?
         /End Notice Section
-        =haml :globalnav
-    =yield
+    %div.uk-container.uk-container-center
+        %div.uk-grid
+            %div#ud-hbanner.uk-width-1-1
+            =haml :globalnav
+            =yield
     =haml :globalfooter
     /Initiate Slideshow (If one Exists on the Page)
     :javascript
