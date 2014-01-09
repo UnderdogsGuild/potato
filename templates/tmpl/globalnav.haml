@@ -116,9 +116,12 @@
                                     %legend
                                         Sign In
                                     %div.uk-form-row
-                                        %input{'type' => 'text', 'placeholder' => 'UnderdogsID'}
+                                        %input{'type' => 'text', 'placeholder' => 'UnderdogsID', 'name' => 'nav-username'}
                                     %div.uk-form-row
-                                        %input{'type' => 'password', 'placeholder' => 'Password'}
+                                        %input{'type' => 'password', 'placeholder' => 'Password', 'name' => 'nav-username'}
+                                    %div.uk-form-row
+                                        %input{'type' => 'checkbox', 'name' => 'nav-remember'}
+                                            Remember Me
                                     %div.uk-form-row
                                         %button.uk-button{'type' => 'submit'}
                                             Login!

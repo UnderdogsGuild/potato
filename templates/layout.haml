@@ -4,7 +4,7 @@
     %title
         Underdogs Guild
     %meta{'charset' => 'utf-8'}
-    =haml :globalmeta
+    =haml :'tmpl/globalmeta'
     /Mobile Device Support
     %meta{'name' => 'viewport', 'content' => 'width=device-width, user-scalable=no'}
     %link{'rel' => 'shortcut icon', 'href' => '/img/meta/favicon.ico'}
@@ -34,8 +34,8 @@
                 'showIcon' : true,
             }
 %body
-    =haml :offcanvas
-    =haml :mobilenav
+    =haml :'tmpl/offcanvas'
+    =haml :'tmpl/mobilenav'
     /Main Page
     %div.uk-grid
         /Notice Section
@@ -47,9 +47,9 @@
         /End Notice Section
     %div.uk-container.uk-container-center.ud-banner
         %div#ud-hbanner.uk-hidden-small
-        =haml :globalnav
+        =haml :'tmpl/globalnav'
     =yield
-    =haml :globalfooter
+    =haml :'tmpl/globalfooter'
     /Initiate Slideshow (If one Exists on the Page)
     :javascript
         var progress = $('#progress'),

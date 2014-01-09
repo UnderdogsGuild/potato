@@ -1,0 +1,67 @@
+/Main Content
+%div.ud-pagetitle.uk-container.uk-container-center
+	%h1.ud-pagetitle
+		Oops! You need to login to do that.
+%div.ud-mainpage-bg.uk-container.uk-container-center
+	=haml :'tmpl/breadcrumbs'
+	%div.uk-grid.ud-mainpage
+		%div.uk-width-large-3-4.uk-width-medium-3-4
+			%div.uk-form.uk-form-horizontal
+				%fieldset
+					%legend
+						Login with Your UnderdogsID
+					%div.uk-alert.uk-alert-warning{'data-uk-alert' => true}
+						%a.uk-alert-close.uk-close{:href => ''}
+						The UnderdogsID and password you entered are incorrect.
+					%div.uk-alert.uk-alert-danger.uk-alert-large{'data-uk-alert' => true}
+						%a.uk-alert-close.uk-close{:href => ''}
+						%h2
+							Oh no...We Have Just a Little Problem
+						%p
+							Unfortunately, we can't let you in. It seems you've been banned. If you need to know more about your ban, 
+							%a{:href => '#'}
+								click here
+							or talk to an officer.
+						%p
+							Please keep in mind that attempting to circumvent forum security, or trolling our forums will not help your case. Please do not reapply for the guild to dispute a ban. Talk with an officer instead. If you need a copy of the guild rules, you can find them
+							%a{:href => '#'}
+								here
+							for your reference. We appreciate your time with the guild and wish you luck in your future endevours.
+						%p
+							\-- The Underdogs Guild
+					%div.uk-alert{'data-uk-alert' => true}
+						%a.uk-alert-close.uk-close{:href => ''}
+						An error occured while logging you in. Try again later. If the problem persists feel tell one of our tech monkeys.
+					%div.uk-form-row
+						%label.uk-form-label
+							UnderdogsID
+						%div.uk-form-controls
+							%input{'type' => 'text', 'placeholder' => 'UnderdogsID', 'name' => 'login-username'}
+					%div.uk-form-row
+						%label.uk-form-label
+							Password
+						%div.uk-form-controls
+							%input{'type' => 'password', 'placeholder' => 'Password', 'name' => 'login-username'}
+					%div.uk-form-row
+						%label.uk-form-label
+							Remember You?
+						%div.uk-form-controls
+							%input{'type' => 'checkbox', 'name' => 'nav-remember'}
+								Remember Me
+					%div.uk-form-row
+						%div.uk-form-controls
+							%button.uk-button.uk-button-primary{'type' => 'submit'}
+								Login!
+							%button.uk-button.uk-button-success{'type' => 'submit'}
+								Join Us!
+					%div.uk-form-row
+						%div.uk-form-controls
+							%a{:href => '#'}
+								Forget your password?
+		%div.uk-width-1-4.uk-hidden-small
+			%h2
+				We're Recruiting!
+			%p
+				Underdogs is a casual Final Fantasy XIV guild. We're here to have fun together, not climb our way to the top. If you're the person that takes fun over progression, we invite you to apply to join us!
+				%i.uk-icon.uk-icon-heart
+/End Main Content
