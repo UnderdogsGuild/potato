@@ -1,5 +1,6 @@
+-if !@less_pallet
+-   @less_pallet='/css/ud_master.less' end
 !!!html5
-
 %head
     %title
         Underdogs Guild
@@ -11,8 +12,7 @@
     %link{'rel' => 'apple-touch-icon', 'href' => '/img/meta/apple-touch-icon.png'}
     /End Mobile Device Support
     /Stylesheets
-    %link{'rel' => 'stylesheet', 'href' => '/css/ud_uikit.css'}
-    %link{'rel' => 'stylesheet/less', 'href' => '/css/additional.less'}
+    %link{'rel' => 'stylesheet/less', 'href' => @less_pallet}
     /End Stylesheets
     %script{'type' => 'text/javascript'}
         less = {env: "development"};

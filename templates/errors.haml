@@ -1,0 +1,22 @@
+<!DOCTYPE html class="uk-height-1-1">
+-#Cant use HAML because element needs doctype and a class.
+%head
+    %title
+        Underdogs Guild
+    %meta{'charset' => 'utf-8'}
+    /Mobile Device Support
+    %meta{'name' => 'viewport', 'content' => 'width=device-width,user-scalable=no'}
+    /End Mobile Device Support
+    /Stylesheets
+    %link{'rel' => 'stylesheet/less', :href => '/css/ud_master.less'}
+    /End Stylesheets
+    :javascript
+        less = {
+            env: "development" //Remove this entire script on launch.
+        };
+    %script{'src' => '/js/jquery.js'}
+    %script{'src' => '/js/uikit.min.js'}
+    %script{'src' => '/js/less.min.js'}
+%body.uk-height-1-1.ud-error
+    =yield
+    
