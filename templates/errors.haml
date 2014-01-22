@@ -9,6 +9,7 @@
     /End Mobile Device Support
     /Stylesheets
     %link{'rel' => 'stylesheet/less', :href => '/css/ud_master.less'}
+    %link{'rel' => 'stylesheet', :href => 'css/nojs.css', :type => 'text/css'}
     /End Stylesheets
     :javascript
         less = {
@@ -18,5 +19,12 @@
     %script{'src' => '/js/uikit.min.js'}
     %script{'src' => '/js/less.min.js'}
 %body.uk-height-1-1.ud-error
+    %noscript
+        %div.nojs
+            %div
+                %h1
+                    Oh no! You murdered the JavaScript!
+                %p
+                    Hi there person! You seem to have disabled JavaScript. While that is perfectly understandable, we designed this entire site using JavaScript to enhance it and make development easier. Unfortunately, you can't browse the site without it. It just won't work. So enable your JS and reload the page! It'll be well worth it. No viruses; no ads; just our website.
     =yield
     
