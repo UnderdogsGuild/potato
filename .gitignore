@@ -3,3 +3,4 @@
 .gitignore~
 potato.sublime-project
 potato.sublime-workspace
+.sass-cache

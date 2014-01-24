@@ -179,7 +179,7 @@ img.ud-navbar-logo {
 .ud-buttonfix {
 	padding-top: 10px;
 }
-$media (max-width: 767px) {
+@media (max-width: 767px) {
 	.ud-mobile-padding {
 		padding: 0 20px !important;
 	}
