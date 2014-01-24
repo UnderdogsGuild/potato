@@ -5,7 +5,7 @@ class Application < Sinatra::Base
 	end
 
 	get '/community/linkshells/doomfinders' do
-		@less_pallet='/css/df_master.less'
+		@sass_pallet='/css/df_master.css'
 		haml :'pages/community/linkshells/doomfinders'
 	end
 
