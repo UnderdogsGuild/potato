@@ -1,0 +1,17 @@
+/* Color Variables */
+$pal-1:#287558;
+$pal-2:#318F6D;
+$pal-3:#C9A0DC;
+$pal-4:#CC4E67;
+$pal-5:#FFB1D5;
+$wht:#fff;
+$blk:#000;
+$gry:#c6c6c6;
+$bgry:#eeeeee;
+/* Other Vars */
+$navbar-height:40px;
+/* Google Font APIs */
+@import url("http://fonts.googleapis.com/css?family=Oxygen:400,700,300");
+/* Get all the StyleSheets */
+@import "/css/ud_uikit.less";
+@import "/css/additional.less";

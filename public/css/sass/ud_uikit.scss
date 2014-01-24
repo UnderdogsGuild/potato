@@ -188,10 +188,10 @@ a:hover {
   text-decoration: underline;
 }
 a {
-  color: @pal-4;
+  color: $pal-4;
 }
 a:hover {
-  color: @pal-5;
+  color: $pal-5;
 }
 em {
   color: #dd0055;
@@ -206,12 +206,12 @@ mark {
   color: #444444;
 }
 ::-moz-selection {
-  background: @pal-1;
+  background: $pal-1;
   color: #ffffff;
   text-shadow: none;
 }
 ::selection {
-  background: @pal-1;
+  background: $pal-1;
   color: #ffffff;
   text-shadow: none;
 }
@@ -354,7 +354,7 @@ blockquote p:last-of-type {
   margin-bottom: 5px;
 }
 code {
-  color: @pal-3;
+  color: $pal-3;
   font-size: 12px;
   white-space: nowrap;
 }
@@ -1004,7 +1004,7 @@ ul.uk-nav-sub {
   outline: none;
 }
 .uk-nav-side > li.uk-active > a {
-  background: @pal-2;
+  background: $pal-2;
   color: #ffffff;
 }
 .uk-nav-side .uk-nav-header {
@@ -1014,17 +1014,17 @@ ul.uk-nav-sub {
   border-top: 1px solid #dddddd;
 }
 .uk-nav-side ul a {
-  color: @pal-4;
+  color: $pal-4;
 }
 .uk-nav-side ul a:hover {
-  color: @pal-5;
+  color: $pal-5;
 }
 .uk-nav-dropdown > li > a {
   color: #444444;
 }
 .uk-nav-dropdown > li > a:hover,
 .uk-nav-dropdown > li > a:focus {
-  background: @pal-2;
+  background: $pal-2;
   color: #ffffff;
   outline: none;
 }
@@ -1035,17 +1035,17 @@ ul.uk-nav-sub {
   border-top: 1px solid #dddddd;
 }
 .uk-nav-dropdown ul a {
-  color: @pal-4;
+  color: $pal-4;
 }
 .uk-nav-dropdown ul a:hover {
-  color: @pal-5;
+  color: $pal-5;
 }
 .uk-nav-navbar > li > a {
   color: #444444;
 }
 .uk-nav-navbar > li > a:hover,
 .uk-nav-navbar > li > a:focus {
-  background: @pal-2;
+  background: $pal-2;
   color: #ffffff;
   outline: none;
 }
@@ -1056,16 +1056,16 @@ ul.uk-nav-sub {
   border-top: 1px solid #dddddd;
 }
 .uk-nav-navbar ul a {
-  color: @pal-4;
+  color: $pal-4;
 }
 .uk-nav-navbar ul a:hover {
-  color: @pal-5;
+  color: $pal-5;
 }
 .uk-nav-search > li > a {
   color: #444444;
 }
 .uk-nav-search > li.uk-active > a {
-  background: @pal-2;
+  background: $pal-2;
   color: #ffffff;
   outline: none;
 }
@@ -1076,10 +1076,10 @@ ul.uk-nav-sub {
   border-top: 1px solid #dddddd;
 }
 .uk-nav-search ul a {
-  color: @pal-4;
+  color: $pal-4;
 }
 .uk-nav-search ul a:hover {
-  color: @pal-5;
+  color: $pal-5;
 }
 .uk-nav-offcanvas > li > a {
   color: #cccccc;
@@ -1190,10 +1190,10 @@ html:not(.uk-touch) .uk-nav-offcanvas ul a:hover {
   padding-left: 0;
 }
 .uk-navbar-content > a:not([class]) {
-  color: @pal-4;
+  color: $pal-4;
 }
 .uk-navbar-content > a:not([class]):hover {
-  color: @pal-5;
+  color: $pal-5;
 }
 .uk-navbar-brand {
   font-size: 18px;
@@ -1250,10 +1250,10 @@ html:not(.uk-touch) .uk-nav-offcanvas ul a:hover {
   margin-left: 10px;
 }
 .uk-subnav > li > a {
-  color: @pal-4;
+  color: $pal-4;
 }
 .uk-subnav > li > a:hover {
-  color: @pal-5;
+  color: $pal-5;
 }
 .uk-subnav > li > span {
   color: #999999;
@@ -1277,7 +1277,7 @@ html:not(.uk-touch) .uk-nav-offcanvas ul a:hover {
   outline: none;
 }
 .uk-subnav-pill > li.uk-active > a {
-  background: @pal-2;
+  background: $pal-2;
   color: #ffffff;
 }
 .uk-breadcrumb {
@@ -1349,7 +1349,7 @@ html:not(.uk-touch) .uk-nav-offcanvas ul a:hover {
   color: #444444;
 }
 .uk-pagination > .uk-active > span {
-  background: @pal-2;
+  background: $pal-2;
   color: #ffffff;
 }
 .uk-pagination > .uk-disabled > span {
@@ -1392,7 +1392,7 @@ html:not(.uk-touch) .uk-nav-offcanvas ul a:hover {
   padding: 8px 12px;
   border: 1px solid transparent;
   border-bottom-width: 0;
-  color: @pal-4;
+  color: $pal-4;
   text-decoration: none;
 }
 .uk-tab > li:nth-child(n+2) > a {
@@ -1403,7 +1403,7 @@ html:not(.uk-touch) .uk-nav-offcanvas ul a:hover {
 .uk-tab > li.uk-open > a {
   border-color: #f5f5f5;
   background: #f5f5f5;
-  color: @pal-5;
+  color: $pal-5;
   outline: none;
 }
 .uk-tab > li:not(.uk-active) > a:hover,
@@ -1913,12 +1913,12 @@ a.uk-button {
   color: #444444;
 }
 .uk-button-primary {
-  background-color: @pal-2;
+  background-color: $pal-2;
   color: #ffffff;
 }
 .uk-button-primary:hover,
 .uk-button-primary:focus {
-  background-color: @pal-3;
+  background-color: $pal-3;
   color: #ffffff;
 }
 .uk-button-primary:active,
@@ -1927,31 +1927,31 @@ a.uk-button {
   color: #ffffff;
 }
 .uk-button-success {
-  background-color: @pal-3;
+  background-color: $pal-3;
   color: #ffffff;
 }
 .uk-button-success:hover,
 .uk-button-success:focus {
-  background-color: @pal-4;
+  background-color: $pal-4;
   color: #ffffff;
 }
 .uk-button-success:active,
 .uk-button-success.uk-active {
-  background-color: @pal-5;
+  background-color: $pal-5;
   color: #ffffff;
 }
 .uk-button-danger {
-  background-color: @pal-5;
+  background-color: $pal-5;
   color: #ffffff;
 }
 .uk-button-danger:hover,
 .uk-button-danger:focus {
-  background-color: @pal-3;
+  background-color: $pal-3;
   color: #ffffff;
 }
 .uk-button-danger:active,
 .uk-button-danger.uk-active {
-  background-color: @pal-3;
+  background-color: $pal-3;
   color: #ffffff;
 }
 .uk-button:disabled {
@@ -1969,13 +1969,13 @@ a.uk-button {
   background: none;
 }
 .uk-button-link {
-  color: @pal-4;
+  color: $pal-4;
 }
 .uk-button-link:hover,
 .uk-button-link:focus,
 .uk-button-link:active,
 .uk-button-link.uk-active {
-  color: @pal-5;
+  color: $pal-5;
   text-decoration: underline;
 }
 .uk-button-link:disabled {
@@ -3231,7 +3231,7 @@ a.uk-close:hover {
 .uk-badge {
   display: inline-block;
   padding: 0 5px;
-  background: @pal-2;
+  background: $pal-2;
   font-size: 10px;
   font-weight: bold;
   line-height: 14px;
@@ -3249,19 +3249,19 @@ a.uk-close:hover {
   line-height: 18px;
 }
 .uk-badge-success {
-  background-color: @pal-3;
+  background-color: $pal-3;
 }
 .uk-badge-warning {
-  background-color: @pal-4;
+  background-color: $pal-4;
 }
 .uk-badge-danger {
-  background-color: @pal-5;
+  background-color: $pal-5;
 }
 .uk-alert {
   margin-bottom: 10px;
   padding: 10px;
   background: #ebf7fd;
-  color: @pal-2;
+  color: $pal-2;
 }
 * + .uk-alert {
   margin-top: 10px;
@@ -3285,15 +3285,15 @@ a.uk-close:hover {
 }
 .uk-alert-success {
   background: #f2fae3;
-  color: @pal-3;
+  color: $pal-3;
 }
 .uk-alert-warning {
   background: #f2fae3;
-  color: @pal-4;
+  color: $pal-4;
 }
 .uk-alert-danger {
-  background: @pal-2;
-  color: @pal-5;
+  background: $pal-2;
+  color: $pal-5;
 }
 .uk-alert-large {
   padding: 20px;
@@ -3406,7 +3406,7 @@ a.uk-thumbnail:focus {
 .uk-progress-bar {
   width: 0;
   height: 100%;
-  background: @pal-2;
+  background: $pal-2;
   float: left;
   -webkit-transition: width 0.6s ease;
   transition: width 0.6s ease;
@@ -3421,13 +3421,13 @@ a.uk-thumbnail:focus {
   height: 12px;
 }
 .uk-progress-success .uk-progress-bar {
-  background-color: @pal-3;
+  background-color: $pal-3;
 }
 .uk-progress-warning .uk-progress-bar {
-  background-color: @pal-4;
+  background-color: $pal-4;
 }
 .uk-progress-danger .uk-progress-bar {
-  background-color: @pal-5;
+  background-color: $pal-5;
 }
 .uk-progress-striped .uk-progress-bar {
   background-image: -webkit-linear-gradient(-45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
