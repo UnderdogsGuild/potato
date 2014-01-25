@@ -13,6 +13,7 @@ class Application < Sinatra::Base
   set :views, Proc.new { File.join(root, "templates") }
 
   set :haml, :format => :html5
+	set :db, 0
   config_file "config/application.yaml"
 
   configure :development, :test do
@@ -32,6 +33,6 @@ class Application < Sinatra::Base
   logger.debug "Execution environment: #{environment}"
 end
 
-#require_relative 'models/all'
+require_relative 'models/all'
 require_relative 'routes/all'
 require_relative 'helpers/all'

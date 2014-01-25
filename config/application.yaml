@@ -1,10 +1,8 @@
 ---
 database:
-  development:
-    adapter: sqlite
-    path: development.db
-  test:
-    adapter: sqlite-in-memory
+  development: 'sqlite://development.db'
+  test: 'sqlite:/'
+  production: 'mysql2://foo:bar@localhost/underdogs'
 
 # Production values are read from execution environment, to avoid placing
 # production credentials in version history.

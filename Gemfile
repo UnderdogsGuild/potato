@@ -32,6 +32,9 @@ gem "unicorn"
 #gem "mongomatic"
 #gem "bson_ext"
 
+gem "sequel"
+gem "sqlite3"
+
 # Templating
 gem "haml"
 gem "sass"

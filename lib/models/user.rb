@@ -1,28 +1,24 @@
-class User
-	include DataMapper::Resource
+class User < Sequel::Model
 	include BCrypt
 
-	has n, :groups, :through => Resource
-	
-	property :id, Serial
-	property :login, String, :required => true
-	property :password, String, :length => 60
-	property :last_login, DateTime, :default => ->(a,b) { DateTime.now }
+	many_to_many :roles
+	many_to_many :permissions
+	one_to_many :news, class: :NewsEntry
 
 	##
 	# Take care of password encoding and decoding
 	def password
-		Password.new( attribute_get(:password) )
+		Password.new( self[:password] )
 	end
 	
 	def password= p
-		attribute_set :password, Password.create( attribute_get(:password) )
+		self[:password] = Password.create( self[:password] )
 	end
 
 	##
 	# Validate credentials
 	def self.login? login, pass
-		u = self.find_one({"login" => login})
+		u = self.find(login: login)
 		u.password == pass ? u : nil
 	end
 
@@ -35,7 +31,7 @@ class User
 
 		@permissions = []
 
-		groups.all.each do |g|
+		roles.all.each do |g|
 			@permissions << g.permissions.all.to_a
 		end
 
@@ -43,25 +39,14 @@ class User
 
 		@permissions
 	end
-
 end
 
-class Group
-	include DataMapper::Resource
-	has n, :users, :through => Resource
-	has n, :permissions
-
-	property :id, Serial
-	property :label, String
-	property :description, String
-	#property :permissions, Array
+class Role < Sequel::Model
+	many_to_many :users
+	many_to_many :permissions
 end
 
-class Permission
-	include DataMapper::Resource
-	belongs_to :group
-
-	property :id, Serial
-	property :label, String
-	property :description, String
+class Permission < Sequel::Model
+	many_to_many :users
+	many_to_many :roles
 end
