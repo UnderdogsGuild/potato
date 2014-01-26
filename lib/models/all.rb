@@ -1,6 +1,6 @@
 ##
 # Configure DB connection
-unless ENV['DB_URI'].blank?
+unless ENV['DB_URI'].nil?
   uri = ENV['DB_URI']
 else
   uri = Application.database
