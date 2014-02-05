@@ -13,6 +13,14 @@ class Application < Sinatra::Base
 		haml :'views/login'
 	end
 
+	get '/donate/success' do
+		haml :'pages/donate/success'
+	end
+
+	get '/donate/cancel' do
+		haml :'pages/donate/cancel'
+	end
+
 	not_found do
 		haml :'pages/errors/404', :layout => :'errors'
 	end
