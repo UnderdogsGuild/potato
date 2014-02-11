@@ -4529,12 +4529,10 @@ ul.uk-navbar-nav li a:hover {
 
 /* Main Page Grid */
 .ud-mainpage-bg {
-  margin-bottom: 20px;
   background: #eeeeee; }
 
 .ud-mainpage {
-  padding: 10px;
-  padding-bottom: 20px; }
+  padding: 10px; }
 
 h3.uk-article-title {
   font-size: 16px;
@@ -4618,3 +4616,12 @@ img.ud-navbar-logo {
 @media (max-width: 767px) {
   .ud-mobile-padding {
     padding: 0 20px !important; } }
+/* Fancy Transparency Button */
+.ud-transbutton-bg {
+  background: url("../img/transbtns/floatingcity.png") fixed no-repeat top center;
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto; }
+
+.ud-transbutton-trans {
+  height: 250px; }
