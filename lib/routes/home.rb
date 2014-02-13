@@ -13,6 +13,10 @@ class Application < Sinatra::Base
 		haml :'views/login'
 	end
 
+	get '/tmp/new_thread' do
+		haml :'views/new_thread'
+	end
+
 	get '/donate/success' do
 		haml :'pages/donate/success'
 	end

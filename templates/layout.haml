@@ -12,13 +12,37 @@
     %link{'rel' => 'apple-touch-icon', 'href' => '/img/meta/apple-touch-icon.png'}
     /End Mobile Device Support
     /Stylesheets
-    %link{'rel' => 'stylesheet', 'href' => @sass_pallet, :type => 'text/css'}
+    %link{'rel' => 'stylesheet', :href => @sass_pallet, :type => 'text/css'}
     %link{'rel' => 'stylesheet', :href => 'css/nojs.css', :type => 'text/css'}
+    %link{'rel' => 'stylesheet', :href => '/codemirror/lib/codemirror.css'}
+    %link{'rel' => 'stylesheet', :href => '/css/markdownarea.min.css'}
+    %link{'rel' => 'stylesheet', :href => '/css/datepicker.min.css'}
+    %link{'rel' => 'stylesheet', :href => '/css/form-file.min.css'}
+    %link{'rel' => 'stylesheet', :href => '/css/notify.min.css'}
+    %link{'rel' => 'stylesheet', :href => '/css/sticky.min.css'}
+    %link{'rel' => 'stylesheet', :href => '/css/timepicker.min.css'}
+
     /End Stylesheets
     %script{'src' => '/js/jquery.js'}
     %script{'src' => '/js/uikit.min.js'}
     %script{'src' => '/js/jquery.cycle2.js'}
     %script{'src' => 'http://xivdb.com/tooltips.js'}
+    /Post Editor JS
+    %script{'src' => '/codemirror/lib/codemirror.js'}
+    %script{'src' => '/codemirror/mode/markdown/markdown.js'}
+    %script{'src' => '/codemirror/addon/mode/overlay.js'}
+    %script{'src' => '/codemirror/mode/xml/xml.js'}
+    %script{'src' => '/codemirror/mode/gfm/gfm.js'}
+    %script{'src' => '/js/marked.js'}
+    %script{'src' => '/js/markdownarea.min.js'}
+    /End Post Editor JS
+    /Additional Addons
+    %script{'src' => '/js/datepicker.min.js'}
+    %script{'src' => '/js/form-file.min.js'}
+    %script{'src' => '/js/notify.min.js'}
+    %script{'src' => '/js/sticky.min.js'}
+    %script{'src' => '/js/timepicker.min.js'}
+    /End Additional Addons
     :javascript 
         var xivdb_tooltips =
             {

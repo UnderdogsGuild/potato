@@ -1,0 +1,12 @@
+%div.ud-pagetitle.uk-container.uk-container-center
+	%h1.ud-pagetitle
+		New Thread
+%div.ud-mainpage-bg.uk-container.uk-container-center
+	=haml :'tmpl/breadcrumbs'
+	%div.uk-grid.ud-mainpage.uk-grid-divider{'data-uk-grid-margin' => true}
+		%div.uk-width-1-1
+			%div.uk-form.uk-form-horizontal
+				%fieldset
+					%legend
+						Thread Content
+					%textarea{'data-uk-markdownarea' => '{toolbar:[\'bold\',\'italic\',\'strike\',\'link\',\'picture\',\'blockquote\',\'listUl\',\'listOl\']}'}

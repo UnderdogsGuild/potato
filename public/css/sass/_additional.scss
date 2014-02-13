@@ -28,6 +28,9 @@ ul.uk-navbar-nav li a:hover {
 	transition: background-color .5s;
 	-webkit-transition: background-color .5s; /* Safari */
 }
+.uk-navbar {
+	z-index: 1000;
+}
 /* Site Banner */
 #ud-hbanner {
 	background: $pal-3;
@@ -127,7 +130,7 @@ h3.uk-article-title {
 	text-decoration: none;
 }
 .ud-footersocial {
-	width: 250px;
+	width: 259px;
 	margin-top: 40px;
 }
 .ud-footersocial a {
@@ -183,11 +186,17 @@ img.ud-navbar-logo {
 	}
 }
 /* Fancy Transparency Button */
+
 .ud-transbutton-bg {
-	background: url("../img/transbtns/floatingcity.png") fixed  no-repeat top center;
+	background: url("../img/transbtns/floatingcity.png") fixed no-repeat center center;
 	max-width: 1200px;
 	width: 100%;
 	margin: 0 auto;
+}
+@media (max-width: 1220px) {
+	.ud-transbutton-bg {
+		max-width: 1000px !important;
+	}
 }
 .ud-transbutton-trans {
 	height: 250px;
