@@ -1470,7 +1470,7 @@ ul.uk-nav-sub {
   width: 20px;
   margin-right: -10px;
   float: right;
-  font-family: Oxygen, Arial, sans-serif;
+  font-family: FontAwesome;
   text-align: center; }
 
 .uk-nav-parent-icon > .uk-parent.uk-open > a:after {
@@ -4896,7 +4896,7 @@ input.uk-search-field {
 .uk-search-close:after {
   display: block;
   content: "\f00d";
-  font-family: Oxygen, Arial, sans-serif; }
+  font-family: FontAwesome; }
 
 /* Loading icon */
 .uk-loading > .uk-search-close:after {
