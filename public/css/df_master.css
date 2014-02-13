@@ -4331,7 +4331,7 @@ select.uk-form-width-mini {
 .uk-close:after {
   display: block;
   content: "\f00d";
-  font-family: Oxygen, Arial, sans-serif; }
+  font-family: FontAwesome; }
 
 /*
  * Hover
