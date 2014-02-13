@@ -1,7 +1,7 @@
 /* Global Style Changes */
 body {
-	font-family: Oxygen, Arial, sans-serif;
-	background:$pal-1;
+	font-family: $font;
+	background:$pal-1 url("/img/blurbg.png") fixed repeat-y top center;
 	font-size: 12px;
 }
 div.ud-pagetitle {
@@ -188,7 +188,7 @@ img.ud-navbar-logo {
 /* Fancy Transparency Button */
 
 .ud-transbutton-bg {
-	background: url("../img/transbtns/floatingcity.png") fixed no-repeat center center;
+	background: url("../img/transbtns/floatingcity.png") fixed repeat-y top center;
 	max-width: 1200px;
 	width: 100%;
 	margin: 0 auto;
@@ -200,4 +200,12 @@ img.ud-navbar-logo {
 }
 .ud-transbutton-trans {
 	height: 250px;
+}
+.ud-transbutton-content {
+	margin-top: 83px;
+}
+h3.ud-transbutton-text {
+	color: $pal-5;
+	font-size: 36px;
+	margin-bottom:20px;
 }

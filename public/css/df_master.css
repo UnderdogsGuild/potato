@@ -1,5 +1,11 @@
 @import url("http://fonts.googleapis.com/css?family=Oxygen:400,700,300");
+/*
+*
+*  ALL VARIABLES MUST BE DEFINED.
+*
+*/
 /* Color Variables */
+/*Font Variables*/
 /* Other Vars */
 /* Google Font APIs */
 /* Get all the StyleSheets */
@@ -15,7 +21,7 @@
  */
 html {
   /* 1 */
-  font-family: sans-serif;
+  font-family: Oxygen, Arial, sans-serif;
   /* 2 */
   -webkit-text-size-adjust: 100%;
   -ms-text-size-adjust: 100%; }
@@ -177,7 +183,7 @@ pre,
 samp {
   font-size: 1em;
   /* 1 */
-  font-family: Consolas, monospace, serif; }
+  font-family: Oxygen, Arial, sans-serif; }
 
 /* Forms
  ========================================================================== */
@@ -356,7 +362,7 @@ html {
 
 body {
   background: white;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: Oxygen, Arial, sans-serif;
   font-weight: normal;
   line-height: 20px;
   color: #444444; }
@@ -500,7 +506,7 @@ h4,
 h5,
 h6 {
   margin: 0 0 15px 0;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: Oxygen, Arial, sans-serif;
   font-weight: normal;
   color: #444444;
   text-transform: none; }
@@ -1464,7 +1470,7 @@ ul.uk-nav-sub {
   width: 20px;
   margin-right: -10px;
   float: right;
-  font-family: FontAwesome;
+  font-family: Oxygen, Arial, sans-serif;
   text-align: center; }
 
 .uk-nav-parent-icon > .uk-parent.uk-open > a:after {
@@ -1740,7 +1746,7 @@ html:not(.uk-touch) .uk-nav-offcanvas ul a:hover {
   /* 2 */
   color: #444444;
   font-size: 14px;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: Oxygen, Arial, sans-serif;
   font-weight: normal; }
 
 /* Appear not as link */
@@ -1863,7 +1869,7 @@ html:not(.uk-touch) .uk-nav-offcanvas ul a:hover {
  */
 .uk-navbar-toggle:after {
   content: "\f0c9";
-  font-family: FontAwesome;
+  font-family: Oxygen, Arial, sans-serif;
   /* 1 */
   vertical-align: middle; }
 
@@ -2223,7 +2229,7 @@ html:not(.uk-touch) .uk-nav-offcanvas ul a:hover {
 
 .uk-tab-responsive > a:before {
   content: "\f0c9\00a0";
-  font-family: FontAwesome; }
+  font-family: Oxygen, Arial, sans-serif; }
 
 /* Only phones */
 @media (max-width: 767px) {
@@ -3065,7 +3071,7 @@ select.uk-form-width-mini {
    Component: Icon
  ========================================================================== */
 @font-face {
-  font-family: 'FontAwesome';
+  font-family: FontAwesome;
   src: url("../fonts/fontawesome-webfont.eot");
   src: url("../fonts/fontawesome-webfont.eot?#iefix") format("embedded-opentype"), url("../fonts/fontawesome-webfont.woff") format("woff"), url("../fonts/fontawesome-webfont.ttf") format("truetype");
   font-weight: normal;
@@ -4325,7 +4331,7 @@ select.uk-form-width-mini {
 .uk-close:after {
   display: block;
   content: "\f00d";
-  font-family: FontAwesome; }
+  font-family: Oxygen, Arial, sans-serif; }
 
 /*
  * Hover
@@ -4603,7 +4609,7 @@ a.uk-thumbnail:focus {
   margin-left: -25px;
   font-size: 50px;
   line-height: 1;
-  font-family: FontAwesome;
+  font-family: Oxygen, Arial, sans-serif;
   text-align: center;
   color: white; }
 
@@ -4806,7 +4812,7 @@ a.uk-thumbnail:focus {
   width: 30px;
   line-height: 30px;
   text-align: center;
-  font-family: FontAwesome;
+  font-family: Oxygen, Arial, sans-serif;
   font-size: 14px;
   color: rgba(0, 0, 0, 0.2); }
 
@@ -4890,7 +4896,7 @@ input.uk-search-field {
 .uk-search-close:after {
   display: block;
   content: "\f00d";
-  font-family: FontAwesome; }
+  font-family: Oxygen, Arial, sans-serif; }
 
 /* Loading icon */
 .uk-loading > .uk-search-close:after {
@@ -6268,7 +6274,7 @@ input.uk-search-field {
 /* Global Style Changes */
 body {
   font-family: Oxygen, Arial, sans-serif;
-  background: #287558;
+  background: #287558 url("/img/blurbg.png") fixed repeat-y top center;
   font-size: 12px; }
 
 div.ud-pagetitle {
@@ -6444,7 +6450,7 @@ img.ud-navbar-logo {
     padding: 0 20px !important; } }
 /* Fancy Transparency Button */
 .ud-transbutton-bg {
-  background: url("../img/transbtns/floatingcity.png") fixed no-repeat center center;
+  background: url("../img/transbtns/floatingcity.png") fixed repeat-y top center;
   max-width: 1200px;
   width: 100%;
   margin: 0 auto; }
@@ -6454,3 +6460,11 @@ img.ud-navbar-logo {
     max-width: 1000px !important; } }
 .ud-transbutton-trans {
   height: 250px; }
+
+.ud-transbutton-content {
+  margin-top: 83px; }
+
+h3.ud-transbutton-text {
+  color: #ffb1d5;
+  font-size: 36px;
+  margin-bottom: 20px; }
