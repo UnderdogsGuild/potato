@@ -1,7 +1,7 @@
 /* Global Style Changes */
 body {
 	font-family: $font;
-	background:$pal-1 url("/img/blurbg.png") fixed repeat-y top center;
+	background:$pal-1;
 	font-size: 12px;
 }
 div.ud-pagetitle {
@@ -208,4 +208,8 @@ h3.ud-transbutton-text {
 	color: $pal-5;
 	font-size: 36px;
 	margin-bottom:20px;
+}
+/* Some Fixes */
+.ud-submit-margin-fix{
+	margin-left:
 }
