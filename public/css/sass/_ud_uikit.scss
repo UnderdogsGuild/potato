@@ -2557,7 +2557,7 @@ html:not(.uk-touch) .uk-nav-offcanvas ul a:hover {
 /* Modifier: `uk-table-hover`
  ========================================================================== */
 .uk-table-hover tbody tr:hover {
-  background: #eeeeee;
+  background: $table-highlight;
 }
 /* ========================================================================
    Component: Form

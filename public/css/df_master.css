@@ -2541,7 +2541,7 @@ html:not(.uk-touch) .uk-nav-offcanvas ul a:hover {
 /* Modifier: `uk-table-hover`
  ========================================================================== */
 .uk-table-hover tbody tr:hover {
-  background: #eeeeee; }
+  background: #f2fae3; }
 
 /* ========================================================================
    Component: Form
@@ -6469,7 +6469,6 @@ h3.ud-transbutton-text {
   font-size: 36px;
   margin-bottom: 20px; }
 
-/* Some Fixes */
 div.nojs {
   position: fixed;
   top: 0px;

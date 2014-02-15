@@ -9,6 +9,10 @@ class Application < Sinatra::Base
 		haml :'pages/community/linkshells/doomfinders'
 	end
 
+	get '/community/underdogs/forum' do
+		haml :'pages/community/underdogs/forum'
+	end
+
 	get '/tmp/login' do
 		haml :'views/login'
 	end
