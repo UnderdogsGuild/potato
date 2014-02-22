@@ -1,37 +1,33 @@
 /Main Content
-%div.ud-pagetitle.uk-container.uk-container-center
-	%h1.ud-pagetitle
-		Oops! You need to login to do that.
 %div.ud-mainpage-bg.uk-container.uk-container-center
 	=haml :'tmpl/breadcrumbs'
 	%div.uk-grid.ud-mainpage
 		%div.uk-width-large-3-4.uk-width-medium-3-4
-			%div.uk-form.uk-form-horizontal
+			%form.uk-form.uk-form-horizontal
 				%fieldset
 					%legend
 						Login with Your UnderdogsID
-					%div.uk-alert.uk-alert-warning{'data-uk-alert' => true}
-						%a.uk-alert-close.uk-close{:href => ''}
-						The UnderdogsID and password you entered are incorrect.
-					%div.uk-alert.uk-alert-danger.uk-alert-large{'data-uk-alert' => true}
-						%a.uk-alert-close.uk-close{:href => ''}
-						%h2
-							Oh no...We Have Just a Little Problem
-						%p
-							Unfortunately, we can't let you in. It seems you've been banned. If you need to know more about your ban, 
-							%a{:href => '#'}
-								click here
-							or talk to an officer.
-						%p
-							Please keep in mind that attempting to circumvent forum security, or trolling our forums will not help your case. Please do not reapply for the guild to dispute a ban. Talk with an officer instead. If you need a copy of the guild rules, you can find them
-							%a{:href => '#'}
-								here
-							for your reference. We appreciate your time with the guild and wish you luck in your future endevours.
-						%p
-							\-- The Underdogs Guild
-					%div.uk-alert{'data-uk-alert' => true}
-						%a.uk-alert-close.uk-close{:href => ''}
-						An error occured while logging you in. Try again later. If the problem persists feel tell one of our tech monkeys.
+					- if @error == :password || @error == :notfound
+						%div.uk-alert.uk-alert-warning{'data-uk-alert' => true}
+							%a.uk-alert-close.uk-close{:href => ''}
+							The UnderdogsID and password you entered are incorrect.
+					- if @error == :permission
+						%div.uk-alert.uk-alert-danger.uk-alert-large{'data-uk-alert' => true}
+							%a.uk-alert-close.uk-close{:href => ''}
+							%h2
+								Oh no...We Have Just a Little Problem
+							%p
+								Unfortunately, we can't let you in. It seems you've been banned. If you need to know more about your ban, 
+								%a{:href => '#'}
+									click here
+								or talk to an officer.
+							%p
+								Please keep in mind that attempting to circumvent forum security, or trolling our forums will not help your case. Please do not reapply for the guild to dispute a ban. Talk with an officer instead. If you need a copy of the guild rules, you can find them
+								%a{:href => '#'}
+									here
+								for your reference. We appreciate your time with the guild and wish you luck in your future endevours.
+							%p
+								\-- The Underdogs Guild
 					%div.uk-form-row
 						%label.uk-form-label
 							UnderdogsID
