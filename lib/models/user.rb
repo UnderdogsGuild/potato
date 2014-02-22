@@ -17,17 +17,16 @@ class User < Sequel::Model
 
 	##
 	# Validate credentials
-	def self.login?( login, pass )
-		u = self.find( login: login )
-		if u && u.password == pass then
-			u.last_login = Time.now
-			return u
+	def login?( pass )
+		if self.password == pass then
+			self.last_login = Time.now
+			self
 		end
 	end
 
 	def can?( perm )
 		return true if self._is_root?
-		_perms.include? perm.to_sym
+		_perms.include?(perm.to_s)
 	end
 
 	def _perms
@@ -39,7 +38,7 @@ class User < Sequel::Model
 			@permissions << r.permissions.to_a
 		end
 
-		@permissions.flatten!.map!(&:to_sym)
+		@permissions.flatten!.map!(&:to_s)
 
 		@permissions
 	end
@@ -47,7 +46,7 @@ class User < Sequel::Model
 	def _is_root?
 		roles.each do |r|
 			 return true if r.is_root?
-			 false
+			 return false
 		end
 	end
 end
@@ -65,7 +64,7 @@ class Permission < Sequel::Model
 	many_to_many :users
 	many_to_many :roles
 
-	def to_sym
-		self[:label].to_sym
+	def to_s
+		self[:label].to_s
 	end
 end

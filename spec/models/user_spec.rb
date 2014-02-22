@@ -23,15 +23,13 @@ describe User do
 	it "can create and verify roles and permissions" do
 		@r.permissions << @p
 		@u.roles << @r
-		@r.save
-		@u.save
 
 		expect(@u.can?(:create_world)).to be_true
+		expect(@u.can?(:read_newspaper_in_the_toilet)).to be_false
 	end
 
 	it "should recognize root's power" do
 		 @u.roles << @root
-		 @u.save
 
 		 expect(@u.can?(:create_apes)).to be_true
 	end
@@ -49,10 +47,10 @@ describe User do
 	end
 
 	it "should return the user object on successful authentication" do
-		 expect(User.login?("mkaito", "doomimpending").id).to eq(User.first.id)
+		 expect(User.first.login?("doomimpending").id).to eq(User.first.id)
 	end
 
 	it "should return nil on failed authentication" do
-		 expect(User.login?("mkaito", "notmypassword")).to be_nil
+		 expect(User.first.login?("notmypassword")).to be_nil
 	end
 end
