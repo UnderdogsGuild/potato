@@ -44,7 +44,6 @@ class User < Sequel::Model
 	end
 
 	def _is_root?
-		Application.logger.debug "Roles for user #{self.login}: #{roles.inspect}"
 		self.roles.each do |r|
 			return true if r.is_root?
 		end

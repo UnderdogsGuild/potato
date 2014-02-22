@@ -17,23 +17,21 @@ class Application < Sinatra::Base
   config_file "config/application.yaml"
 	disable :static
 
-  configure :development do
-    set :logger, Logger.new(STDOUT)
-    logger.level = Logger::DEBUG
-  end
+  #configure :development do
+    #set :logger, Logger.new(STDOUT)
+    #logger.level = Logger::DEBUG
+  #end
 
-	configure :test do
-		set :logger, Logger.new(STDOUT)
-		logger.level = Logger::ERROR
-	end
+	#configure :test do
+		#set :logger, Logger.new(STDOUT)
+		#logger.level = Logger::ERROR
+	#end
 
-  configure :production do
-    set :logfile, "logs/sinatra.log"
-    set :logger, Logger.new(logfile 'weekly')
-    logger.level = Logger::INFO
-  end
-
-  logger.debug "Execution environment: #{environment}"
+  #configure :production do
+    #set :logfile, "logs/sinatra.log"
+    #set :logger, Logger.new(logfile 'weekly')
+    #logger.level = Logger::INFO
+  #end
 end
 
 require_relative 'models/all'

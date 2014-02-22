@@ -11,7 +11,6 @@ end
 #opts = opts["adapter"] == "sqlite-in-memory" ? "sqlite3::memory:" : opts
 
 Application.db = Sequel.connect(uri)
-Application.logger.debug "DB Conf: " + uri
 
 ##
 # Require all ruby files on or under this level.
