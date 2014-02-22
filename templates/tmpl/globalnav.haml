@@ -105,7 +105,8 @@
             -# And this is how you check for an active user. This is probably the only place on the entire site
             -# where you would want to check for the existence of a user, instead of a specific permission token.
             -# In all other instances, use the helper method:
-            -# can_the_user? :do_stuff
+            -# $ can? :do_stuff
+            -# which will check with the active user.
             - if session[:user].nil?
                 %li.uk-parent{'data-uk-dropdown' => '{mode\'click\'}'}
                     %a{:href => '#'}
@@ -135,10 +136,10 @@
             - else
                 -# Probably want to replace this with a dropdown with options/info/stuff for the active user.
                 %li
-                    %a.uk-navbar-nav-subtitle
+                    %a.uk-navbar-nav-subtitle{href: '/logout'}
                         Welcome, #{session[:user].login}!
                         %div
-                            Successfully logged in!
+                            Click here to log out.
             %li
                 %a{:href => '#status-offcanvas', 'data-uk-offcanvas' => true}
                     %i.uk-icon-cog.uk-icon-medium

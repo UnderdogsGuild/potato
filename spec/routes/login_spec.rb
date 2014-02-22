@@ -11,7 +11,22 @@ feature "Auth routes" do
 			@uactive.add_role @rmember
 		end
 
-		scenario "logging in" do
+		scenario "logging in and out" do
+			visit '/login'
+			expect(page).to_not have_content("Welcome, active!")
+
+			within ".ud-mainpage form" do
+				fill_in 'username', with: "active"
+				fill_in 'password', with: 'doomimpending'
+				check "remember"
+				click_button 'Login!'
+			end
+
+			expect(page).to_not have_selector('.ud-mainpage .uk-alert')
+			expect(page).to have_content("Welcome, active!")
+		end
+
+		scenario "logging out" do
 			visit '/login'
 			within ".ud-mainpage form" do
 				fill_in 'username', with: "active"
@@ -19,8 +34,8 @@ feature "Auth routes" do
 				check "remember"
 				click_button 'Login!'
 			end
-			expect(page).to_not have_selector('.ud-mainpage .uk-alert')
-			expect(page).to have_content("Welcome, active!")
+			visit '/logout'
+			expect(page).to_not have_content("Welcome, active!")
 		end
 
 		scenario "logging in as inactive user" do

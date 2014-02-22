@@ -13,25 +13,25 @@ class Application < Sinatra::Base
 			end
 		end
 
-		def can_the_user?(perm)
+		def can?(perm)
 			session[:user].can?(perm)
 		end
 
 		def authenticate!
-			if @user =	User[login: params['username']]
-				if @user.can?(:log_in)
-					if @user.login? params['password']
+			if user =	User[login: params['username']]
+				if user.can?(:log_in)
+					if user.login? params['password']
 
 						if params['remember']
-							logger.debug "Setting up permanent session for user #{@user.login}"
+							logger.debug "Setting up permanent session for user #{user.login}"
 							rand = SecureRandom.hex(32)
-							@user.update remember_token: rand
+							user.update remember_token: rand
 							response.set_cookie "remember",
 								{value: rand, expires: (Time.now + 365*24*60*60)}
 						end
 
-						logger.debug "User #{@user.login} authenticated. Configuring session."
-						session[:user] = @user
+						logger.debug "User #{user.login} authenticated. Configuring session."
+						session[:user] = user
 
 						if session.has_key?(:go_back)
 							redirect session.delete(:go_back)
@@ -40,13 +40,13 @@ class Application < Sinatra::Base
 						end
 
 					else
-						logger.debug "User #{@user.login} provided wrong password."
+						logger.debug "User #{user.login} provided wrong password."
 						@error = :password
 						haml :'views/login'
 					end
 
 				else
-					logger.debug "User #{@user.login} is not allowed to log in."
+					logger.debug "User #{user.login} is not allowed to log in."
 					@error = :permission
 					haml :'views/login'
 				end

@@ -38,7 +38,8 @@ class Application < Sinatra::Base
 	get '/logout' do
 		logger.debug "Clearing session for user #{session[:user].id}."
 		require_permission :log_in
-		session[:user] = nil
-		redirect to('/login')
+		session.delete(:user)
+		response.delete_cookie "remember"
+		redirect to('/')
 	end
 end
