@@ -102,33 +102,44 @@
                             Create a New Page
     %div.uk-navbar-flip
         %ul.uk-navbar-nav
-            %li.uk-parent{'data-uk-dropdown' => '{mode\'click\'}'}
-                %a{:href => '#'}
-                    Login
-                %div.uk-dropdown.uk-dropdown-width-1.uk-dropdown-navbar
-                    %div.uk-grid
-                        %div.uk-width-1-1
-                            %form.uk-form{action: '/login'}
-                                %fieldset
-                                    %legend
-                                        Sign In
-                                    %div.uk-form-row
-                                        %input{'type' => 'text', 'placeholder' => 'UnderdogsID', 'name' => 'login'}
-                                    %div.uk-form-row
-                                        %input{'type' => 'password', 'placeholder' => 'Password', 'name' => 'password'}
-                                    %div.uk-form-row
-                                        %input{'type' => 'checkbox', 'name' => 'remember'}
-                                            Remember Me
-                                    %div.uk-form-row
-                                        %button.uk-button{'type' => 'submit', name: "action-login"}
-                                            Login!
-                                        %button.uk-button{'type' => 'submit', name: "action-register"}
-                                            Join Us!
-                                    %div.uk-form-row
-                                        %a{:href => '#'}
-                                            Forget your password?
+            -# And this is how you check for an active user. This is probably the only place on the entire site
+            -# where you would want to check for the existence of a user, instead of a specific permission token.
+            -# In all other instances, use the helper method:
+            -# can_the_user? :do_stuff
+            - if session[:user].nil?
+                %li.uk-parent{'data-uk-dropdown' => '{mode\'click\'}'}
+                    %a{:href => '#'}
+                        Login
+                    %div.uk-dropdown.uk-dropdown-width-1.uk-dropdown-navbar
+                        %div.uk-grid
+                            %div.uk-width-1-1
+                                %form.uk-form{action: '/login'}
+                                    %fieldset
+                                        %legend
+                                            Sign In
+                                        %div.uk-form-row
+                                            %input{'type' => 'text', 'placeholder' => 'UnderdogsID', 'name' => 'login'}
+                                        %div.uk-form-row
+                                            %input{'type' => 'password', 'placeholder' => 'Password', 'name' => 'password'}
+                                        %div.uk-form-row
+                                            %input{'type' => 'checkbox', 'name' => 'remember'}
+                                                Remember Me
+                                        %div.uk-form-row
+                                            %button.uk-button{'type' => 'submit', name: "action-login"}
+                                                Login!
+                                            %button.uk-button{'type' => 'submit', name: "action-register"}
+                                                Join Us!
+                                        %div.uk-form-row
+                                            %a{:href => '#'}
+                                                Forget your password?
+            - else
+                -# Probably want to replace this with a dropdown with options/info/stuff for the active user.
+                %li
+                    %a.uk-navbar-nav-subtitle
+                        Welcome, #{session[:user].login}!
+                        %div
+                            Successfully logged in!
             %li
                 %a{:href => '#status-offcanvas', 'data-uk-offcanvas' => true}
                     %i.uk-icon-cog.uk-icon-medium
 /End Navbar
--# vim:sw=4:sts=4:tw=4

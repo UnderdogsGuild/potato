@@ -13,6 +13,10 @@ class Application < Sinatra::Base
 			end
 		end
 
+		def can_the_user?(perm)
+			session[:user].can?(perm)
+		end
+
 		def authenticate!
 			if @user =	User[login: params['username']]
 				if @user.can?(:log_in)

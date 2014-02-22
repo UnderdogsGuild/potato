@@ -20,6 +20,7 @@ feature "Auth routes" do
 				click_button 'Login!'
 			end
 			expect(page).to_not have_selector('.ud-mainpage .uk-alert')
+			expect(page).to have_content("Welcome, active!")
 		end
 
 		scenario "logging in as inactive user" do

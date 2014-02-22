@@ -12,7 +12,7 @@ class User < Sequel::Model
 	end
 	
 	def password=(p)
-		self.password_hash = Password.create( p )
+		self.password_hash = Password.create(p)
 	end
 
 	##

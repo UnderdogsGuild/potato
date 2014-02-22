@@ -57,4 +57,6 @@ group :test do
   #gem "webrat"
 	gem "capybara"
 	gem "selenium-webdriver"
+	gem "watchr"
+	gem "rev"
 end
