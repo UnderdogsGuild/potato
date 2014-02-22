@@ -1,6 +1,6 @@
 describe "Home routes" do
 	it "/" do
 		get '/'
-		last_response.status.should == 200
+		expect(last_response.status).to eq(200)
 	end
 end

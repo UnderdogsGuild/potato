@@ -24,6 +24,10 @@ RSpec.configure do |c|
   c.include Webrat::Methods
   c.include Webrat::Matchers
   c.include SpecHelpers
+
+	c.expect_with :rspec do |x|
+		x.syntax = :expect
+	end
 	
 	c.before(:all) do
 		Sequel::Migrator.apply(Application.db, './migrations')

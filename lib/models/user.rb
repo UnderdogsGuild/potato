@@ -8,45 +8,64 @@ class User < Sequel::Model
 	##
 	# Take care of password encoding and decoding
 	def password
-		Password.new( self[:password] )
+		Password.new( self.password_hash )
 	end
 	
-	def password= p
-		self[:password] = Password.create( self[:password] )
+	def password=(p)
+		self.password_hash = Password.create( p )
 	end
 
 	##
 	# Validate credentials
-	def self.login? login, pass
-		u = self.find(login: login)
-		u.password == pass ? u : nil
+	def self.login?( login, pass )
+		u = self.find( login: login )
+		if u && u.password == pass then
+			u.last_login = Time.now
+			return u
+		end
 	end
 
-	def can? perm
-		permissions.include? perm.to_sym
+	def can?( perm )
+		return true if self._is_root?
+		_perms.include? perm.to_sym
 	end
 
-	def permissions
+	def _perms
 		return @permissions if @permissions
 
 		@permissions = []
 
-		roles.all.each do |g|
-			@permissions << g.permissions.all.to_a
+		roles.each do |r|
+			@permissions << r.permissions.to_a
 		end
 
 		@permissions.flatten!.map!(&:to_sym)
 
 		@permissions
 	end
+
+	def _is_root?
+		roles.each do |r|
+			 return true if r.is_root?
+			 false
+		end
+	end
 end
 
 class Role < Sequel::Model
 	many_to_many :users
 	many_to_many :permissions
+
+	def is_root?
+		self[:root]
+	end
 end
 
 class Permission < Sequel::Model
 	many_to_many :users
 	many_to_many :roles
+
+	def to_sym
+		self[:label].to_sym
+	end
 end

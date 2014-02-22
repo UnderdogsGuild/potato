@@ -3,8 +3,8 @@ Sequel.migration do
 		create_table(:users) do
 			primary_key :id
 			String :login, null: false
-			String :password, null: false
-			DateTime :last_login, default: Sequel::CURRENT_TIMESTAMP
+			String :password_hash, length: 60, null: false
+			DateTime :last_login
 		end
 
 		create_table(:roles) do
@@ -20,7 +20,7 @@ Sequel.migration do
 			String :description
 		end
 
-		create_join_table users_id: :users, role_id: :roles
+		create_join_table role_id: :roles, user_id: :users 
 		create_join_table role_id: :roles, permission_id: :permissions
 		create_join_table user_id: :users, permission_id: :permissions
 	end
