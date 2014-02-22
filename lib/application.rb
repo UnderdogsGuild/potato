@@ -17,10 +17,15 @@ class Application < Sinatra::Base
   config_file "config/application.yaml"
 	disable :static
 
-  configure :development, :test do
+  configure :development do
     set :logger, Logger.new(STDOUT)
     logger.level = Logger::DEBUG
   end
+
+	configure :test do
+		set :logger, Logger.new(STDOUT)
+		logger.level = Logger::ERROR
+	end
 
   configure :production do
     set :logfile, "logs/sinatra.log"
