@@ -3,11 +3,11 @@
 	=haml :'tmpl/breadcrumbs'
 	%div.uk-grid.ud-mainpage
 		%div.uk-width-large-3-4.uk-width-medium-3-4
-			%form.uk-form.uk-form-horizontal
+			%form.uk-form.uk-form-horizontal{'action' => '/login', 'method' => 'POST'}
 				%fieldset
 					%legend
 						Login with Your UnderdogsID
-					- if @error == :password || @error == :notfound
+					- if [:password, :notfound].include? @error
 						%div.uk-alert.uk-alert-warning{'data-uk-alert' => true}
 							%a.uk-alert-close.uk-close{:href => ''}
 							The UnderdogsID and password you entered are incorrect.
@@ -32,23 +32,23 @@
 						%label.uk-form-label
 							UnderdogsID
 						%div.uk-form-controls
-							%input{'type' => 'text', 'placeholder' => 'UnderdogsID', 'name' => 'login-username'}
+							%input{'type' => 'text', 'placeholder' => 'UnderdogsID', 'name' => 'username'}
 					%div.uk-form-row
 						%label.uk-form-label
 							Password
 						%div.uk-form-controls
-							%input{'type' => 'password', 'placeholder' => 'Password', 'name' => 'login-username'}
+							%input{'type' => 'password', 'placeholder' => 'Password', 'name' => 'password'}
 					%div.uk-form-row
 						%label.uk-form-label
 							Remember You?
 						%div.uk-form-controls
-							%input{'type' => 'checkbox', 'name' => 'nav-remember'}
+							%input{'type' => 'checkbox', 'name' => 'remember'}
 								Remember Me
 					%div.uk-form-row
 						%div.uk-form-controls
-							%button.uk-button.uk-button-primary{'type' => 'submit'}
+							%button.uk-button.uk-button-primary{'type' => 'submit', 'name' => 'action', 'value' => 'login'}
 								Login!
-							%button.uk-button.uk-button-success{'type' => 'submit'}
+							%button.uk-button.uk-button-success{'type' => 'submit', 'name' => 'action', 'value' => 'register'}
 								Join Us!
 					%div.uk-form-row
 						%div.uk-form-controls

@@ -15,19 +15,17 @@ class Application < Sinatra::Base
   set :haml, :format => :html5
 	set :db, 0
   config_file "config/application.yaml"
+	disable :static
 
   configure :development, :test do
     set :logger, Logger.new(STDOUT)
     logger.level = Logger::DEBUG
-		disable :static
   end
 
   configure :production do
     set :logfile, "logs/sinatra.log"
     set :logger, Logger.new(logfile 'weekly')
-    logger.level = Logger::ERROR
-
-    disable :static
+    logger.level = Logger::INFO
   end
 
   logger.debug "Execution environment: #{environment}"

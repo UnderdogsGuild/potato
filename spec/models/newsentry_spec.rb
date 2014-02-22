@@ -1,11 +1,4 @@
 describe NewsEntry do
-	##
-	# Models are loaded before the migrations are run, so we need to refresh the
-	# dataset to get our accessor methods.
-	before :all do
-		 NewsEntry.dataset = NewsEntry.dataset
-	end
-
 	it "creates the test entry successfully" do
 		NewsEntry.create title: "Dat News Post", content: "Hell yeah!"
 		expect(NewsEntry.first).to_not be_nil

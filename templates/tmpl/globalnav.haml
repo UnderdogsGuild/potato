@@ -12,7 +12,7 @@
                     Once an Underdog...
         %li.uk-parent{'data-uk-dropdown' => true}
             %a.uk-navbar-nav-subtitle{:href => '#'}
-                News & Events
+                News &amp; Events
                 %div
                     Do Stuff!
             %div.uk-dropdown.uk-dropdown-navbar
@@ -52,7 +52,7 @@
             %a.uk-navbar-nav-subtitle{:href => '#'}
                 Servers
                 %div
-                    VoIP & Games
+                    VoIP &amp; Games
             %div.uk-dropdown.uk-dropdown-navbar
                 %ul.uk-nav.uk-nav-navbar
                     %li.uk-nav-header
@@ -108,21 +108,21 @@
                 %div.uk-dropdown.uk-dropdown-width-1.uk-dropdown-navbar
                     %div.uk-grid
                         %div.uk-width-1-1
-                            %form.uk-form
+                            %form.uk-form{action: '/login'}
                                 %fieldset
                                     %legend
                                         Sign In
                                     %div.uk-form-row
-                                        %input{'type' => 'text', 'placeholder' => 'UnderdogsID', 'name' => 'nav-username'}
+                                        %input{'type' => 'text', 'placeholder' => 'UnderdogsID', 'name' => 'login'}
                                     %div.uk-form-row
-                                        %input{'type' => 'password', 'placeholder' => 'Password', 'name' => 'nav-username'}
+                                        %input{'type' => 'password', 'placeholder' => 'Password', 'name' => 'password'}
                                     %div.uk-form-row
-                                        %input{'type' => 'checkbox', 'name' => 'nav-remember'}
+                                        %input{'type' => 'checkbox', 'name' => 'remember'}
                                             Remember Me
                                     %div.uk-form-row
-                                        %button.uk-button{'type' => 'submit'}
+                                        %button.uk-button{'type' => 'submit', name: "action-login"}
                                             Login!
-                                        %button.uk-button{'type' => 'submit'}
+                                        %button.uk-button{'type' => 'submit', name: "action-register"}
                                             Join Us!
                                     %div.uk-form-row
                                         %a{:href => '#'}
@@ -131,3 +131,4 @@
                 %a{:href => '#status-offcanvas', 'data-uk-offcanvas' => true}
                     %i.uk-icon-cog.uk-icon-medium
 /End Navbar
+-# vim:sw=4:sts=4:tw=4

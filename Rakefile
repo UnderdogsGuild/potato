@@ -20,9 +20,10 @@ namespace :db do
     end
 
 		task :shell => :environment do
-			require 'irb'
-			ARGV.clear
-			IRB.start
+			require 'pry'
+			binding.pry
+			#ARGV.clear
+			#IRB.start
 		end
 
     namespace :migrate do

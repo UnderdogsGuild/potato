@@ -38,7 +38,8 @@ gem "sass"
 group :development do
 	gem "sqlite3"
   gem "rake", require: "rake/clean"
-  gem "wirble"
+	gem "pry"
+  #gem "wirble"
 	gem 'foreman'
 	gem 'shotgun'
 	gem 'thin'
@@ -53,5 +54,7 @@ group :test do
   gem "rspec"
   gem "rack-test", require: "rack/test"
   gem "rr", require: false
-  gem "webrat"
+  #gem "webrat"
+	gem "capybara"
+	gem "selenium-webdriver"
 end

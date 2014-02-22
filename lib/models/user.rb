@@ -19,7 +19,7 @@ class User < Sequel::Model
 	# Validate credentials
 	def login?( pass )
 		if self.password == pass then
-			self.last_login = Time.now
+			self.update last_login: Time.now
 			self
 		end
 	end
@@ -34,20 +34,21 @@ class User < Sequel::Model
 
 		@permissions = []
 
-		roles.each do |r|
+		self.roles.each do |r|
 			@permissions << r.permissions.to_a
 		end
 
-		@permissions.flatten!.map!(&:to_s)
+		@permissions << self.permissions.to_a
 
-		@permissions
+		@permissions.empty? ? [] : @permissions.flatten!.map!(&:to_s)
 	end
 
 	def _is_root?
-		roles.each do |r|
-			 return true if r.is_root?
-			 return false
+		Application.logger.debug "Roles for user #{self.login}: #{roles.inspect}"
+		self.roles.each do |r|
+			return true if r.is_root?
 		end
+		return false
 	end
 end
 

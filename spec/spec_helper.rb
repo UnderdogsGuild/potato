@@ -5,25 +5,14 @@ require 'application'
 require 'rspec'
 require 'rack/test'
 require 'rr'
-require 'webrat'
+require 'capybara/rspec'
 
-module SpecHelpers
-  def app
-    Application
-  end
-end
-
-Webrat.configure do |c|
-	c.mode = :rack
-end
+Capybara.app = Application
 
 Sequel.extension :migration
 
 RSpec.configure do |c|
 	c.include Rack::Test::Methods
-  c.include Webrat::Methods
-  c.include Webrat::Matchers
-  c.include SpecHelpers
 
 	c.expect_with :rspec do |x|
 		x.syntax = :expect
@@ -31,6 +20,14 @@ RSpec.configure do |c|
 	
 	c.before(:all) do
 		Sequel::Migrator.apply(Application.db, './migrations')
+
+		# After migrating, reset all the models
+		NewsEntry.dataset = NewsEntry.dataset
+		User.dataset = User.dataset
+		Role.dataset = Role.dataset
+		Permission.dataset = Permission.dataset
+		Page.dataset = Page.dataset
+		PageVersion.dataset = PageVersion.dataset
 	end
 
   c.around(:each) do |example|
