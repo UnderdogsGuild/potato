@@ -1,0 +1,63 @@
+%div.ud-pagetitle.uk-container.uk-container-center
+	%h1.ud-pagetitle
+		New Thread
+%div.ud-mainpage-bg.uk-container.uk-container-center
+	=haml :'tmpl/breadcrumbs'
+	%div.uk-grid.ud-mainpage.uk-grid-divider{'data-uk-grid-margin' => true}
+		%div.uk-width-1-1
+			%div.uk-form
+				%fieldset.uk-form-horizontal
+					%legend
+						Thread Content
+					%div.uk-form-row
+						%label.uk-form-label{'for' => 'thread_title'}
+							Thread Title
+						%div.uk-form-controls
+							%input.uk-width-1-1{'type' => 'text', 'name' => 'thread_title', 'placeholder' => 'What\'s this thread about?'}
+					%div.uk-form-row
+						%textarea{'data-uk-markdownarea' => '{toolbar:[\'bold\',\'italic\',\'strike\',\'link\',\'picture\',\'blockquote\',\'listUl\',\'listOl\']}', 'name' => 'post_content'}
+				%fieldset.uk-form-horizontal
+					%legend
+						Some More Stuff
+					%div.uk-form-row
+						%label.uk-form-label{'for' => 'permissions'}
+							Who can see this thread?
+						%div.uk-form-controls
+							%select{'name' => 'permissions'}
+								%option
+									Anyone
+								%option
+									Linkshell Members
+								%option
+									Underdogs
+								%option
+									Watchdogs
+				%fieldset.uk-form-horizontal
+					%legend
+						Special Stuff
+					%div.uk-form-row
+						%label.uk-form-label{'for' => 'show_home'}
+							Make this news item?
+						%div.uk-form-controls
+							%input{'type' => 'radio', 'name' => 'show_home', 'value' => 'yes'}
+								Yes
+							%input{'type' => 'radio', 'name' => 'show_home', 'value' => 'no'}
+								No
+							%div.uk-form-help-inline
+								It'll show up on the homepage news section and the news page.
+					%div.uk-form-row
+						%label.uk-form-label{'for' => 'sticky'}
+							Sticky this thread?
+						%div.uk-form-controls
+							%input{'type' => 'radio', 'name' => 'show_home', 'value' => 'yes'}
+								Yes
+							%input{'type' => 'radio', 'name' => 'show_home', 'value' => 'no'}
+								No
+							%div.uk-form-help-inline
+								It'll show up at the top of the forums with all the other sticky threads.
+				%fieldset.uk-container
+					%div.uk-form-controls.uk-grid
+						%button.uk-button-large.uk-button.uk-width-1-1.uk-width-medium-1-2.uk-width-large-3-4.uk-button-success{'type' => 'submit', 'formaction' => '#'}
+							Post a Magical Thread!
+						%button.uk-button-large.uk-button.uk-hidden-small.uk-width-medium-1-2.uk-width-large-1-4.uk-button-danger{'type' => 'reset'}
+							I Screwed Up

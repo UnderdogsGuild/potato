@@ -1,0 +1,31 @@
+/*
+*
+*  ALL VARIABLES MUST BE DEFINED.
+*
+*/
+/* Color Variables */
+$pal-1:#0d1c33;
+$pal-2:#17373c;
+$pal-3:#2b6832;
+$pal-4:#4f9300;
+$pal-5:#A1D700;
+$wht:#fff;
+$blk:#000;
+$gry:#c6c6c6;
+$bgry:#eeeeee;
+$table-highlight:#f2fae3;
+/*Font Variables*/
+$font:Oxygen, Arial, sans-serif;
+/* Other Vars */
+$navbar-height:40px;
+/* Google Font APIs */
+@import url("http://fonts.googleapis.com/css?family=Oxygen:400,700,300");
+/* Get all the StyleSheets */
+@import "_ud_uikit.scss";
+@import "_additional.scss";
+@import "_nojs.scss";
+@import "_codemirror.scss";
+@import "_markdownarea.min.scss";
+@import "_datepicker.min.scss";
+@import "_form-file.min.scss";
+@import "_notify.min.scss";

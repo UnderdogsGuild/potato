@@ -4,9 +4,10 @@
 		%div.cycle-prev
 		%div.cycle-next
 		%div.cycle-overlay
-		%img{'src' => '/img/slides/starter/slide1.png', 'alt' => 'Coil-Ready!', 'data-cycle-title' => 'Coil-Ready!', 'data-cycle-desc' => 'Members of Underdogs equipped and ready to take on Coil.'}
-		%img{'src' => '/img/slides/starter/slide2.png', 'alt' => 'Draco Streams the Praetorium!', 'data-cycle-title' => 'Draco Streams the Praetorium!', 'data-cycle-desc' => 'Watch it now on <a href=\'http://www.youtube.com/watch?v=U9NDvhmHbbA\'>YouTube</a>.'}
-		%img{'src' => '/img/slides/starter/slide3.png', 'alt' => 'Starbound!', 'data-cycle-title' => 'Starbound!', 'data-cycle-desc' => 'The new Starbound Server is ready to be played on! <a href=\'#\'>Check it out.</a>'}
+		%img{'src' => '/img/slides/starter/slide_guildphoto.jpg', 'alt' => 'Guild Photo!', 'data-cycle-title' => 'Guild Photo!', 'data-cycle-desc' => 'Here\'s our most recent guild photo! Thanks to all who came.'}
+		%img{'src' => '/img/slides/starter/slide_coil.png', 'alt' => 'Coil-Ready!', 'data-cycle-title' => 'Coil-Ready!', 'data-cycle-desc' => 'Members of Underdogs equipped and ready to take on Coil.'}
+		%img{'src' => '/img/slides/starter/slide_praetorium.png', 'alt' => 'Draco Streams the Praetorium!', 'data-cycle-title' => 'Draco Streams the Praetorium!', 'data-cycle-desc' => 'Watch it now on <a href=\'http://www.youtube.com/watch?v=U9NDvhmHbbA\'>YouTube</a>.'}
+		%img{'src' => '/img/slides/starter/slide_starbound.png', 'alt' => 'Starbound!', 'data-cycle-title' => 'Starbound!', 'data-cycle-desc' => 'The new Starbound Server is ready to be played on! <a href=\'#\'>Check it out.</a>'}
 		%div#progress
 /End Slideshow
 /Main Content
@@ -39,7 +40,7 @@
 					Derp Knights
 				%p.uk-article-meta
 					By
-					%img.ud-rank{'src' => '/img/rank-ico/td-ico.png', 'alt' => 'TD'}
+					%img.ud-rank{'src' => '/img/rank-ico/td-ico.png', 'alt' => 'TD', 'data-uk-tooltip' => true, :title => 'Top Dog'}
 					Mirakell on January 31, 2014.
 				%p
 					Neque porro quisquam est, qui dolorem ipsum quia 
@@ -53,7 +54,7 @@
 					Herp Nites
 				%p.uk-article-meta
 					By
-					%img.ud-rank{'src' => '/img/rank-ico/td-ico.png', 'alt' => 'TD'}
+					%img.ud-rank{'src' => '/img/rank-ico/td-ico.png', 'alt' => 'TD', 'data-uk-tooltip' => true, :title => 'Top Dog'}
 					Mirakell on January 31, 2014.
 				%p
 					Aenean pharetra a purus vitae dictum. Curabitur placerat pellentesque nisl in facilisis. Nam vehicula, sapien ut tristique elementum, sapien eros tristique nisi, a lobortis eros nibh ut libero. Praesent at ipsum ultrices, rutrum quam non, consequat sem. Mauris accumsan vitae felis eget scelerisque. Integer volutpat est eu commodo placerat. Proin gravida, metus et placerat interdum, turpis elit varius dui, quis tincidunt leo enim id eros. Etiam convallis pharetra velit at cursus. Aliquam consequat mauris non lacus scelerisque, quis fermentum enim condimentum. Cras fermentum est in tortor cursus cursus.
@@ -67,8 +68,8 @@
 					New Website Up and Running
 				%p.uk-article-meta
 					By
-					%img.ud-rank{'src' => '/img/rank-ico/sa-ico.png', 'alt' => 'SA'}
-					%img.ud-rank{'src' => '/img/rank-ico/ud-ico.png', 'alt' => 'UD'}
+					%img.ud-rank{'src' => '/img/rank-ico/sa-ico.png', 'alt' => 'SA', 'data-uk-tooltip' => true, :title => 'Server Administrator'}
+					%img.ud-rank{'src' => '/img/rank-ico/wd-ico.png', 'alt' => 'WD', 'data-uk-tooltip' => true, :title => 'Watchdog'}
 					Faore on January 31, 2014.
 				%p
 					Rawr. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.
@@ -79,10 +80,17 @@
 					Enjin Blown Up
 				%p.uk-article-meta
 					By
-					%img.ud-rank{'src' => '/img/rank-ico/sa-ico.png', 'alt' => 'SA'}
-					%img.ud-rank{'src' => '/img/rank-ico/ud-ico.png', 'alt' => 'UD'}
+					%img.ud-rank{'src' => '/img/rank-ico/sa-ico.png', 'alt' => 'SA', 'data-uk-tooltip' => true, :title => 'Server Administrator'}
+					%img.ud-rank{'src' => '/img/rank-ico/wd-ico.png', 'alt' => 'WD', 'data-uk-tooltip' => true, :title => 'Watchdog'}
 					Faore on January 31, 2014.
 				%p
 					Kaboom. Nunc felis quam, posuere nec elementum nec, tempor in elit. Praesent sed ultrices tortor. Sed eu felis consectetur, interdum lorem sit amet, pretium erat. Phasellus eu orci risus. Quisque quis porttitor mi. Aliquam pellentesque felis ut fermentum eleifend. Mauris pretium aliquet lorem, in consequat odio. Suspendisse id augue eu nisi malesuada tincidunt sit amet vitae risus. Cras blandit magna eros. Nulla lacinia dapibus dui, ac sollicitudin massa commodo a. Aenean tempor nulla eu suscipit faucibus.		
 				%a.uk-button.ud-readmore.uk-buttonmini.uk-button-primary{:href => '#'}
 					Read More
+/%div.ud-transbutton-bg
+/	%div.uk-container.uk-container-center.ud-transbutton-trans
+/		%div.uk-container.ud-transbutton-content.uk-text-center
+/			%h3.ud-transbutton-text
+/				Once and Underdog, Always an Underdog!
+/			%a.uk-button.uk-button-large.uk-button-success{:href => '#'}
+/				Apply Now!

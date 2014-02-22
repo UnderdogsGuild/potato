@@ -1,5 +1,5 @@
--if !@less_pallet
--   @less_pallet='/css/ud_master.less' end
+-if !@sass_pallet
+-   @sass_pallet='/css/ud_master.css' end
 !!!html5
 %head
     %title
@@ -12,16 +12,10 @@
     %link{'rel' => 'apple-touch-icon', 'href' => '/img/meta/apple-touch-icon.png'}
     /End Mobile Device Support
     /Stylesheets
-    %link{'rel' => 'stylesheet/less', 'href' => @less_pallet}
-    %link{'rel' => 'stylesheet', :href => 'css/nojs.css', :type => 'text/css'}
+    %link{'rel' => 'stylesheet', :href => @sass_pallet, :type => 'text/css'}
     /End Stylesheets
-    %script{'type' => 'text/javascript'}
-        less = {env: "development"};
-    %script{'src' => '/js/jquery.js'}
-    %script{'src' => '/js/uikit.min.js'}
-    %script{'src' => '/js/less.min.js'}
-    %script{'src' => '/js/jquery.cycle2.js'}
-    %script{'src' => '/js/jquery.xivtooltips.js'}
+    %script{'src' => '/js/super.js'}
+    %script{'src' => 'http://xivdb.com/tooltips.js'}
     :javascript 
         var xivdb_tooltips =
             {
