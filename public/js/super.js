@@ -10098,4 +10098,3 @@ if (typeof exports === 'object') {
 /*END UIKIT ADDONS*/
 
 /*Custom JS*/
-//Check form elements for emptiness and change them red if it so.
