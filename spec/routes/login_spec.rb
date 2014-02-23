@@ -1,8 +1,8 @@
 feature "Auth routes" do
 	feature '/login' do
 		background :each do
-			@uactive = User.create login: "active", password: "doomimpending"
-			@uinactive = User.create login: "inactive", password: "alreadydoomed"
+			@uactive = create(:user, login: "active", password: "doomimpending")
+			@uinactive = create(:user, login: "inactive", password: "alreadydoomed")
 
 			@plogin = Permission.create label: "log_in", description: "Can log in"
 			@rmember = Role.create label: "Member", description: "Active members"

@@ -3,7 +3,9 @@ Sequel.migration do
 		create_table(:forum_threads) do
 			primary_key :id
 			String :title, null: false
+			Boolean :officer, default: false
 			DateTime :created_at, default: Sequel::CURRENT_TIMESTAMP
+			Integer :views, default: 0
 		end
 
 		create_table(:forum_posts) do

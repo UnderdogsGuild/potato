@@ -1,5 +1,14 @@
 class ForumThread < Sequel::Model
 	one_to_many :forum_posts
+
+	def self.visible_for(user)
+		return [] unless user.can? :view_forum_threads
+		if user.can? :view_officer_threads
+			return self.all
+		else
+			return self[officer: false]
+		end
+	end
 end
 
 class ForumPost < Sequel::Model
@@ -8,5 +17,9 @@ class ForumPost < Sequel::Model
 
 	def before_save
 		self.updated_at = Time.now
+	end
+
+	def is_thread_opener?
+		self.forum_thread.forum_posts.first.id == self.id
 	end
 end

@@ -4,6 +4,7 @@ Sequel.migration do
 			primary_key :id
 			String :login, null: false
 			String :password_hash, length: 60, null: false
+			String :email, length: 255, null: false
 			String :remember_token, length: 64
 			DateTime :last_login
 		end

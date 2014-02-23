@@ -39,7 +39,6 @@ group :development do
 	gem "sqlite3"
   gem "rake", require: "rake/clean"
 	gem "pry"
-  #gem "wirble"
 	gem 'foreman'
 	gem 'shotgun'
 	gem 'thin'
@@ -54,9 +53,10 @@ group :test do
   gem "rspec"
   gem "rack-test", require: "rack/test"
   gem "rr", require: false
-  #gem "webrat"
 	gem "capybara"
 	gem "selenium-webdriver"
 	gem "watchr"
 	gem "rev"
+	gem "factory_girl", "~> 4.0"
+	gem "faker"
 end
