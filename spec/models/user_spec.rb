@@ -45,7 +45,7 @@ describe User do
 		 expect(@umember.password_hash).to_not eq(@password)
 	end
 
-	it "should return an instance of BCrypt::Password on read" do
+	it "#password should return an instance of BCrypt::Password" do
 		 expect(@umember.password).to be_an_instance_of(BCrypt::Password)
 	end
 

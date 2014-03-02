@@ -6,6 +6,7 @@ require 'rspec'
 require 'rack/test'
 require 'rr'
 require 'capybara/rspec'
+require 'active_support/core_ext/class/subclasses'
 require 'factory_girl'
 require 'faker'
 
@@ -27,14 +28,17 @@ RSpec.configure do |c|
 		Sequel::Migrator.apply(Application.db, './migrations')
 
 		# After migrating, reset all the models
-		NewsEntry.dataset = NewsEntry.dataset
-		User.dataset = User.dataset
-		Role.dataset = Role.dataset
-		Permission.dataset = Permission.dataset
-		Page.dataset = Page.dataset
-		PageVersion.dataset = PageVersion.dataset
-		ForumThread.dataset = ForumThread.dataset
-		ForumPost.dataset= ForumPost.dataset
+		Sequel::Model.subclasses.each do |model|
+			model.dataset = model.dataset
+		end
+		#NewsEntry.dataset = NewsEntry.dataset
+		#User.dataset = User.dataset
+		#Role.dataset = Role.dataset
+		#Permission.dataset = Permission.dataset
+		#Page.dataset = Page.dataset
+		#PageVersion.dataset = PageVersion.dataset
+		#ForumThread.dataset = ForumThread.dataset
+		#ForumPost.dataset= ForumPost.dataset
 
 		# Load and lint all fixture factories
 		FactoryGirl.find_definitions

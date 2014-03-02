@@ -9,7 +9,7 @@ class Application < Sinatra::Base
 
 			unless session[:user].can?(perm)
 				logger.warning "User #{session[:user].id} attempted to access restricted path #{request.path_info}, but does not have the required permission token."
-				halt 403
+				raise NotAllowed, "User lacks required permission token."
 			end
 		end
 

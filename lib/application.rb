@@ -7,31 +7,31 @@ class Application < Sinatra::Base
   register Sinatra::ConfigFile
 	register Sinatra::Partial
 
-  enable :logging
-  set :app_file, __FILE__
-  set :root, File.expand_path(File.join(File.dirname(__FILE__), ".."))
-  set :views, Proc.new { File.join(root, "templates") }
+	configure do
+		enable :logging
+		set :app_file, __FILE__
+		set :root, File.expand_path(File.join(File.dirname(__FILE__), ".."))
+		set :views, Proc.new { File.join(root, "templates") }
 
-  set :haml, :format => :html5
-	set :db, 0
-  config_file "config/application.yaml"
-	disable :static
+		set :haml, :format => :html5
+		set :db, 0
+		config_file "config/application.yaml"
+		disable :static
+	end
 
-  #configure :development do
-    #set :logger, Logger.new(STDOUT)
-    #logger.level = Logger::DEBUG
-  #end
+	not_found do
+		haml :'pages/errors/404', layout: :errors
+	end
 
-	#configure :test do
-		#set :logger, Logger.new(STDOUT)
-		#logger.level = Logger::ERROR
-	#end
+	error NotAllowed do
+		haml :'pages/error/403', layoyt: :errors
+	end
+end
 
-  #configure :production do
-    #set :logfile, "logs/sinatra.log"
-    #set :logger, Logger.new(logfile 'weekly')
-    #logger.level = Logger::INFO
-  #end
+class NotAllowed < StandardError;
+	def http_status
+		403
+	end
 end
 
 require_relative 'models/all'
