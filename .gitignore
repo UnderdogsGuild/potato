@@ -6,3 +6,4 @@ potato.sublime-workspace
 .sass-cache
 *_master.css
 *.log
+bin/*
