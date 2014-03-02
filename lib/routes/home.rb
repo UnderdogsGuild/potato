@@ -32,9 +32,4 @@ class Application < Sinatra::Base
 	get '/tmp/view_thread' do
 		haml :'views/view_thread'
 	end
-
-	not_found do
-		haml :'pages/errors/404', :layout => :'errors'
-	end
-
 end

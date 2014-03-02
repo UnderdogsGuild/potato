@@ -11,7 +11,7 @@ end
 namespace :db do
     require 'sequel'
     Sequel.extension :migration
-    migration_dir = "migrations"
+    migration_dir = "lib/models/migrations"
 
     task :environment, [:env]do |cmd, args|
 			@@env = args[:env] || "development"

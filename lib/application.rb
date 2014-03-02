@@ -1,11 +1,26 @@
 require 'bundler/setup'
-Bundler.require
+#Bundler.require
+require 'sinatra/base'
+require 'sinatra/namespace'
+require 'sinatra/partial'
+require 'sinatra/config_file'
+require 'rack/contrib'
+require 'stringex'
+require 'rdiscount'
+require 'haml'
+require 'sass'
 
 class Application < Sinatra::Base
   use Rack::Session::Cookie, secret: '2-oWcq(|Yo@ZV)VBdX]<.MEl0JtH.$RVAyX2gyl[Nl{bPRWD/$:./}P', expire_after: (2 * 60 * 60)
   register Sinatra::Namespace
   register Sinatra::ConfigFile
 	register Sinatra::Partial
+
+	class NotAllowedError < StandardError;
+		def http_status
+			403
+		end
+	end
 
 	configure do
 		enable :logging
@@ -23,16 +38,11 @@ class Application < Sinatra::Base
 		haml :'pages/errors/404', layout: :errors
 	end
 
-	error NotAllowed do
-		haml :'pages/error/403', layoyt: :errors
+	error NotAllowedError do
+		haml :'pages/error/403', layout: :errors
 	end
 end
 
-class NotAllowed < StandardError;
-	def http_status
-		403
-	end
-end
 
 require_relative 'models/all'
 require_relative 'routes/all'

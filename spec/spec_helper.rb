@@ -25,7 +25,7 @@ RSpec.configure do |c|
 	
 	c.before(:suite) do
 		# Get our brand new in-memory DB up
-		Sequel::Migrator.apply(Application.db, './migrations')
+		Sequel::Migrator.apply(Application.db, './lib/models/migrations')
 
 		# After migrating, reset all the models
 		Sequel::Model.subclasses.each do |model|

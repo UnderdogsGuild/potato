@@ -1,3 +1,11 @@
+require 'sequel'
+
+if Application.environment == :development || Application.environment == :test
+	require 'sqlite3'
+else
+	require 'mysql2'
+end
+
 ##
 # Configure DB connection
 unless ENV['DB_URI'].nil?
@@ -6,14 +14,10 @@ else
   uri = Application.database
 end
 
-##
-# There should just be a valid adapter name for this instead.
-#opts = opts["adapter"] == "sqlite-in-memory" ? "sqlite3::memory:" : opts
-
 Application.db = Sequel.connect(uri)
 
 ##
 # Require all ruby files on or under this level.
 Dir[File.join( File.dirname(__FILE__), "**", "*.rb")].each do |f|
-	require_relative f
+	require_relative f unless f.include? "/migrations/"
 end
