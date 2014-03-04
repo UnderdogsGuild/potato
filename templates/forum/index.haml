@@ -14,20 +14,27 @@
 					Views
 				%th.uk-width-1-10
 					Replies
-			- @threads.each do |t|
-				%tr
-					%td
-						%a{:href => t.url}
-							= t.title
-						%span.uk-comment-meta.ud-rpost-meta
-							By #{t.author.login}
-					%td
-						%a{:href => '#'}
-							%img.ud-avatar-25px{:src => t.posts.last.author.gravatar_url}
-							= t.posts.last.author.login
-					%td
-						= t.views
-					%td.uk-hidden-small
-						= t.posts.count - 1
+			%tbody
+				- if @threads
+					- @threads.each do |t|
+						%tr.thread{ 'class' => (t.officer ? "officer" : nil) }
+							%td
+								%a{:href => t.url}
+									= t.title
+								%span.uk-comment-meta.ud-rpost-meta
+									By #{t.author}
+							%td
+								- last = t.posts.last
+								%a{:href => last.author.url}
+									%img.ud-avatar-25px{:src => last.author.gravatar_url}
+									= last.author
+							%td
+								= t.views
+							%td.uk-hidden-small
+								= t.posts.count - 1
+				- else
+					%tr.nothreads
+						%td{colspan: 4}
+							I'm afraid there are no threads for you *sadface*.
 		%a.uk-button.uk-button-large.uk-button-primary.uk-width-1-1{:href => '#'}
 			Load More

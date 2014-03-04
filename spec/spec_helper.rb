@@ -1,7 +1,6 @@
 ENV['RACK_ENV'] ||= "test"
 
 require 'bundler/setup'
-require 'application'
 require 'rspec'
 require 'rack/test'
 require 'rr'
@@ -10,6 +9,7 @@ require 'active_support/core_ext/class/subclasses'
 require 'factory_girl'
 require 'faker'
 
+require 'application'
 
 Capybara.app = Application
 
@@ -22,7 +22,7 @@ RSpec.configure do |c|
 	c.expect_with :rspec do |x|
 		x.syntax = :expect
 	end
-	
+
 	c.before(:suite) do
 		# Get our brand new in-memory DB up
 		Sequel::Migrator.apply(Application.db, './lib/models/migrations')
@@ -31,14 +31,6 @@ RSpec.configure do |c|
 		Sequel::Model.subclasses.each do |model|
 			model.dataset = model.dataset
 		end
-		#NewsEntry.dataset = NewsEntry.dataset
-		#User.dataset = User.dataset
-		#Role.dataset = Role.dataset
-		#Permission.dataset = Permission.dataset
-		#Page.dataset = Page.dataset
-		#PageVersion.dataset = PageVersion.dataset
-		#ForumThread.dataset = ForumThread.dataset
-		#ForumPost.dataset= ForumPost.dataset
 
 		# Load and lint all fixture factories
 		FactoryGirl.find_definitions

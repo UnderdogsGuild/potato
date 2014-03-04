@@ -1,146 +1,141 @@
 /Navbar
 %nav.uk-navbar.uk-navbar-attached{'data-uk-sticky' => true}
-    %a.uk-navbar-toggle.uk-visible-small{:href => '#mobile-offcanvas', 'data-uk-offcanvas' => true}
-    %a.uk-navbar-brand.uk-visible-small{:href => '/'}
-        %img.ud-navbar-logo{'src' => '/img/logos/logo.png', 'alt' => 'Underdogs Logo'}
-    %ul.uk-navbar-nav.uk-hidden-small
-        /Active Element
-        %li.uk-active
-            %a.uk-navbar-nav-subtitle{:href => '/'}
-                Home
-                %div
-                    Once an Underdog...
-        %li.uk-parent{'data-uk-dropdown' => true}
-            %a.uk-navbar-nav-subtitle{:href => '#'}
-                News &amp; Events
-                %div
-                    Do Stuff!
-            %div.uk-dropdown.uk-dropdown-navbar
-                %ul.uk-nav.uk-nav-navbar
-                    %li
-                        %a{:href => '#'}
-                            News
-                    %li.uk-nav-header
-                        Events
-                    %li
-                        %a{:href => '#'}
-                            Special Events
-                    %li
-                        %a{:href => '#'}
-                            Stream Events
-        %li.uk-parent{'data-uk-dropdown' => true}
-            %a.uk-navbar-nav-subtitle{:href => '#'}
-                Community
-                %div
-                    Get Together
-            %div.uk-dropdown.uk-dropdown-navbar
-                %ul.uk-nav.uk-nav-navbar
-                    %li.uk-nav-header
-                        Underdogs
-                    %li
-                        %a{:href => '/community/underdogs/forum'}
-                            Forum
-                    %li
-                        %a
-                            Members
-                    %li.uk-nav-header
-                        Linkshells
-                    %li
-                        %a{:href => '/community/linkshells/doomfinders'}
-                            DoomFinders
-        %li.uk-parent{'data-uk-dropdown' => true}
-            %a.uk-navbar-nav-subtitle{:href => '#'}
-                Servers
-                %div
-                    VoIP &amp; Games
-            %div.uk-dropdown.uk-dropdown-navbar
-                %ul.uk-nav.uk-nav-navbar
-                    %li.uk-nav-header
-                        Utilities and VoIP
-                    %li
-                        %a{:href => '#'}
-                            TeamSpeak
-                    %li
-                        %a{:href => '#'}
-                            Private VPN
-                    %li.uk-nav-header
-                        Game Servers
-                    %li
-                        %a
-                            Starbound
-                    %li
-                        %a
-                            Minecraft
-                    %li
-                        %a
-                            Killing Floor
-        %li.uk-parent{'data-uk-dropdown' => true}
-            %a.uk-navbar-nav-subtitle{:href => '#'}
-                Wiki
-                %div
-                    Planning
-            %div.uk-dropdown.uk-dropdown-navbar
-                %ul.uk-nav.uk-nav-navbar
-                    %li.uk-nav-header
-                        Sections
-                    %li
-                        %a{:href => '#'}
-                            Event Plans
-                    %li
-                        %a{:href => '#'}
-                            Raid Information
-                    %li
-                        %a{:href => '#'}
-                            Roster Information
-                    %li.uk-nav-header
-                        Special
-                    %li
-                        %a{:href => '#'}
-                            Recent Edits
-                    %li
-                        %a{:href => '#'}
-                            Create a New Page
-    %div.uk-navbar-flip
-        %ul.uk-navbar-nav
-            -# And this is how you check for an active user. This is probably the only place on the entire site
-            -# where you would want to check for the existence of a user, instead of a specific permission token.
-            -# In all other instances, use the helper method:
-            -# $ can? :do_stuff
-            -# which will check with the active user.
-            - if session[:user].nil?
-                %li.uk-parent{'data-uk-dropdown' => '{mode\'click\'}'}
-                    %a{:href => '#'}
-                        Login
-                    %div.uk-dropdown.uk-dropdown-width-1.uk-dropdown-navbar
-                        %div.uk-grid
-                            %div.uk-width-1-1
-                                %form.uk-form{action: '/login', method: "POST"}
-                                    %fieldset
-                                        %legend
-                                            Sign In
-                                        %div.uk-form-row
-                                            %input{'type' => 'text', 'placeholder' => 'UnderdogsID', 'name' => 'username'}
-                                        %div.uk-form-row
-                                            %input{'type' => 'password', 'placeholder' => 'Password', 'name' => 'password'}
-                                        %div.uk-form-row
-                                            %input{'type' => 'checkbox', 'name' => 'remember'}
-                                                Remember Me
-                                        %div.uk-form-row
-                                            %button.uk-button{'type' => 'submit', name: "action", value: "login"}
-                                                Login!
-                                            %button.uk-button{'type' => 'submit', name: "action", value: "register"}
-                                                Join Us!
-                                        %div.uk-form-row
-                                            %a{:href => '#'}
-                                                Forget your password?
-            - else
-                -# Probably want to replace this with a dropdown with options/info/stuff for the active user.
-                %li
-                    %a.uk-navbar-nav-subtitle{href: '/logout'}
-                        Welcome, #{session[:user].login}!
-                        %div
-                            Click here to log out.
-            %li
-                %a{:href => '#status-offcanvas', 'data-uk-offcanvas' => true}
-                    %i.uk-icon-cog.uk-icon-medium
+	%a.uk-navbar-toggle.uk-visible-small{:href => '#mobile-offcanvas', 'data-uk-offcanvas' => true}
+	%a.uk-navbar-brand.uk-visible-small{:href => '/'}
+		%img.ud-navbar-logo{'src' => '/img/logos/logo.png', 'alt' => 'Underdogs Logo'}
+	%ul.uk-navbar-nav.uk-hidden-small
+		/Active Element
+		%li.uk-active
+			%a.uk-navbar-nav-subtitle{:href => '/'}
+				Home
+				%div
+					Once an Underdog...
+		%li.uk-parent{'data-uk-dropdown' => true}
+			%a.uk-navbar-nav-subtitle{:href => '#'}
+				News &amp; Events
+				%div
+					Do Stuff!
+			%div.uk-dropdown.uk-dropdown-navbar
+				%ul.uk-nav.uk-nav-navbar
+					%li
+						%a{:href => '#'}
+							News
+					%li.uk-nav-header
+						Events
+					%li
+						%a{:href => '#'}
+							Special Events
+					%li
+						%a{:href => '#'}
+							Stream Events
+		%li.uk-parent{'data-uk-dropdown' => true}
+			%a.uk-navbar-nav-subtitle{:href => '#'}
+				Community
+				%div
+					Get Together
+			%div.uk-dropdown.uk-dropdown-navbar
+				%ul.uk-nav.uk-nav-navbar
+					%li.uk-nav-header
+						Underdogs
+					%li
+						%a{:href => '/community/underdogs/forum'}
+							Forum
+					%li
+						%a
+							Members
+					%li.uk-nav-header
+						Linkshells
+					%li
+						%a{:href => '/community/linkshells/doomfinders'}
+							DoomFinders
+		%li.uk-parent{'data-uk-dropdown' => true}
+			%a.uk-navbar-nav-subtitle{:href => '#'}
+				Servers
+				%div
+					VoIP &amp; Games
+			%div.uk-dropdown.uk-dropdown-navbar
+				%ul.uk-nav.uk-nav-navbar
+					%li.uk-nav-header
+						Utilities and VoIP
+					%li
+						%a{:href => '#'}
+							TeamSpeak
+					%li
+						%a{:href => '#'}
+							Private VPN
+					%li.uk-nav-header
+						Game Servers
+					%li
+						%a
+							Starbound
+					%li
+						%a
+							Minecraft
+					%li
+						%a
+							Killing Floor
+		%li.uk-parent{'data-uk-dropdown' => true}
+			%a.uk-navbar-nav-subtitle{:href => '#'}
+				Wiki
+				%div
+					Planning
+			%div.uk-dropdown.uk-dropdown-navbar
+				%ul.uk-nav.uk-nav-navbar
+					%li.uk-nav-header
+						Sections
+					%li
+						%a{:href => '#'}
+							Event Plans
+					%li
+						%a{:href => '#'}
+							Raid Information
+					%li
+						%a{:href => '#'}
+							Roster Information
+					%li.uk-nav-header
+						Special
+					%li
+						%a{:href => '#'}
+							Recent Edits
+					%li
+						%a{:href => '#'}
+							Create a New Page
+	%div.uk-navbar-flip
+		%ul.uk-navbar-nav
+			- unless user
+				%li.uk-parent{'data-uk-dropdown' => '{mode\'click\'}'}
+					%a{:href => '#'}
+						Login
+					%div.uk-dropdown.uk-dropdown-width-1.uk-dropdown-navbar
+						%div.uk-grid
+							%div.uk-width-1-1
+								%form.uk-form{action: '/login', method: "POST"}
+									%fieldset
+										%legend
+											Sign In
+										%div.uk-form-row
+											%input{'type' => 'text', 'placeholder' => 'UnderdogsID', 'name' => 'username'}
+										%div.uk-form-row
+											%input{'type' => 'password', 'placeholder' => 'Password', 'name' => 'password'}
+										%div.uk-form-row
+											%input{'type' => 'checkbox', 'name' => 'remember'}
+												Remember Me
+										%div.uk-form-row
+											%button.uk-button{'type' => 'submit', name: "action", value: "login"}
+												Login!
+											%button.uk-button{'type' => 'submit', name: "action", value: "register"}
+												Join Us!
+										%div.uk-form-row
+											%a{:href => '#'}
+												Forget your password?
+			- else
+				-# Probably want to replace this with a dropdown with options/info/stuff for the active user.
+				%li
+					%a.uk-navbar-nav-subtitle{href: '/logout'}
+						Welcome, #{user}!
+						%div
+							Click here to log out.
+			%li
+				%a{:href => '#status-offcanvas', 'data-uk-offcanvas' => true}
+					%i.uk-icon-cog.uk-icon-medium
 /End Navbar

@@ -2,12 +2,15 @@ FactoryGirl.define do
 	factory :forum_thread, class: ForumThread do
 		title { Faker::Lorem.sentence }
 		views { 3000 + rand(2000) }
+		officer { [true, false, false].sample }
 
 		ignore do
 			post_count { 7 + rand(15) }
+			author nil
 		end
 
 		after(:create) do |ft, evaluator|
+			create(:forum_post, author: evaluator.author) if evaluator.author
 			create_list(:forum_post, evaluator.post_count, forum_thread: ft)
 		end
 

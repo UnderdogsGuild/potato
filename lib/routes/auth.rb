@@ -4,28 +4,26 @@ class Application < Sinatra::Base
 
 	##
 	# Check for the remember-me token cookie
+	# and log the user in after security checks.
 	before do
 		if token = request.cookies["remember"]
-			logger.debug "Found permanent session token in cookie: #{token}"
-			user = User[remember_token: token]
-			if user and user.can?(:log_in)
-				logger.debug "Found associated user #{user.id} from token #{token}. Configuring session."
-				session[:user] = user
+			u = User[remember_token: token]
+
+			if u and u.can?(:log_in)
+				session[:user] = u.id
 			else
-				logger.debug "Session token #{token} rejected. Clearing cookie."
 				response.delete_cookie "remember"
 			end
-		else
-			logger.debug "Permanent session token not found in cookie."
+
 		end
 	end
 
-	get '/login' do
+	get '/login/?' do
 		session[:go_back] ||= request.referrer
 		haml :'views/login'
 	end
 	
-	post '/login' do
+	post '/login/?' do
 		if params[:action] == "login"
 			authenticate!
 		elsif params[:action] == "register"
@@ -35,11 +33,14 @@ class Application < Sinatra::Base
 		end
 	end
 
-	get '/logout' do
-		logger.debug "Clearing session for user #{session[:user].id}."
+	get '/logout/?' do
 		require_permission :log_in
+		logger.debug "Clearing session for user #{user.id}."
 		session.delete(:user)
 		response.delete_cookie "remember"
 		redirect to('/')
+	end
+
+	get '/recover/?' do
 	end
 end

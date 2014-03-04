@@ -1,43 +1,45 @@
+require 'active_support/core_ext/numeric/time'
+
 class Application < Sinatra::Base
 	helpers do
+		def user
+			session.has_key?(:user) ? User[id: session[:user]] : nil
+		end
+
+		def authorize(perm)
+			user ? user.can?(perm) : false
+		end
+
 		def require_permission(perm)
-			if session[:user].nil?
+			unless user
 				#logger.debug "No user found at restricted route	check point. Saving path, redirecting to auth challenge."
 				session[:go_back] = request.path_info
 				redirect to('/login')
 			end
 
-			unless session[:user].can?(perm)
+			unless authorize(perm)
 				#logger.warning "User #{session[:user].id} attempted to access restricted path #{request.path_info}, but does not have the required permission token."
 				raise NotAllowedError, "User lacks required permission token."
 			end
 		end
 
-		def can?(perm)
-			session[:user].can?(perm)
-		end
-
 		def authenticate!
-			if user =	User[login: params['username']]
-				if user.can?(:log_in)
-					if user.login? params['password']
+			if u = User[login: params['username']]
+				if u.can?(:log_in)
+					if u.login? params['password']
 
 						if params['remember']
 							#logger.debug "Setting up permanent session for user #{user.login}"
 							rand = SecureRandom.hex(32)
-							user.update remember_token: rand
+							u.update remember_token: rand
 							response.set_cookie "remember",
 								{value: rand, expires: (Time.now + 365*24*60*60)}
 						end
 
 						#logger.debug "User #{user.login} authenticated. Configuring session."
-						session[:user] = user
+						session[:user] = u.id
 
-						if session.has_key?(:go_back)
-							redirect session.delete(:go_back)
-						else
-							redirect '/'
-						end
+						redirect session.has_key?(:go_back) ? session.delete(:go_back) : '/'
 
 					else
 						#logger.debug "User #{user.login} provided wrong password."

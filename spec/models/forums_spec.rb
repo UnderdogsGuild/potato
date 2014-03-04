@@ -6,8 +6,8 @@ describe "Forum" do
 
 	describe ForumThread do
 		before :each do
-			@user = build(:user)
-			@officer = build(:user)
+			@user = create(:user)
+			@officer = create(:user)
 		end
 
 		it "Shows officer threads to officers" do
@@ -20,6 +20,12 @@ describe "Forum" do
 			mock(@user).can?(:view_forum_threads) { true }
 			mock(@user).can?(:view_officer_threads) { false }
 			expect(ForumThread.visible_for(@user)).to_not include(@othread)
+		end
+
+		it "can build a list of threads for a user" do
+			stub(@user).can?(:create_forum_thread) { true }
+			create_list(:forum_thread, 5, author: @user)
+			expect(@user.threads.count).to eq(5)
 		end
 	end
 

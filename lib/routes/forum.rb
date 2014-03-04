@@ -1,11 +1,17 @@
+require 'json'
+
 class Application < Sinatra::Base
 	namespace '/community/underdogs/forum' do
 		get '/?' do
-			puts session[:user]._perms.inspect
-			#require_permission :view_forum_threads
-			@threads = ForumThread.visible_for session[:user]
-
-			haml :'forum/index'
+				require_permission :view_forum_threads
+				@threads = ForumThread.visible_for user
+				if request.xhr?
+					content_type :json
+					@threads = @threads.filter(id > params[:from]).limit(params[:count])
+					@threads.to_json
+				else
+					haml :'forum/index'
+				end
 		end
 
 		get '/:id-*/?' do
@@ -27,14 +33,13 @@ class Application < Sinatra::Base
 			require_permission :create_officer_threads if params[:thread][:officer]
 
 			@thread = ForumThread.new
-			@thread.author = session[:user]
 			@thread.title = params[:thread][:title]
 			@thread.officer = params[:thread][:officer]
 
 			if @thread.valid?
 				@thread.save
 				@post = ForumPost.new
-				@post.author = session[:user]
+				@post.author = user
 				@post.forum_thread = @thread
 				@post.content = params[:thread][:content]
 

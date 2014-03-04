@@ -3,7 +3,7 @@
 	=haml :'tmpl/breadcrumbs'
 	%div.uk-grid.ud-mainpage
 		%div.uk-width-large-3-4.uk-width-medium-3-4
-			%form.uk-form.uk-form-horizontal{'action' => '/login', 'method' => 'POST'}
+			%form.uk-form.uk-form-horizontal{action: '/login', method: 'POST'}
 				%fieldset
 					%legend
 						Login with Your UnderdogsID
@@ -46,9 +46,9 @@
 								Remember Me
 					%div.uk-form-row
 						%div.uk-form-controls
-							%button.uk-button.uk-button-primary{'type' => 'submit', 'name' => 'action', 'value' => 'login'}
+							%button.uk-button.uk-button-primary{type: 'submit', name: 'action', value: 'login'}
 								Login!
-							%button.uk-button.uk-button-success{'type' => 'submit', 'name' => 'action', 'value' => 'register'}
+							%button.uk-button.uk-button-success{type: 'submit', name: 'action', value: 'register'}
 								Join Us!
 					%div.uk-form-row
 						%div.uk-form-controls

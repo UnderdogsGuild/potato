@@ -14,7 +14,7 @@ class Application < Sinatra::Base
   use Rack::Session::Cookie, secret: '2-oWcq(|Yo@ZV)VBdX]<.MEl0JtH.$RVAyX2gyl[Nl{bPRWD/$:./}P', expire_after: (2 * 60 * 60)
   register Sinatra::Namespace
   register Sinatra::ConfigFile
-	register Sinatra::Partial
+	#register Sinatra::Partial
 
 	class NotAllowedError < StandardError;
 		def http_status
