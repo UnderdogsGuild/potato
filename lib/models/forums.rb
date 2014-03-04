@@ -6,7 +6,7 @@ class ForumThread < Sequel::Model
 		if user.can? :view_officer_threads
 			return self.all
 		else
-			return self[officer: false]
+			return self.where(officer: false)
 		end
 	end
 end

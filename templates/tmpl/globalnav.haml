@@ -114,21 +114,21 @@
                     %div.uk-dropdown.uk-dropdown-width-1.uk-dropdown-navbar
                         %div.uk-grid
                             %div.uk-width-1-1
-                                %form.uk-form{action: '/login'}
+                                %form.uk-form{action: '/login', method: "POST"}
                                     %fieldset
                                         %legend
                                             Sign In
                                         %div.uk-form-row
-                                            %input{'type' => 'text', 'placeholder' => 'UnderdogsID', 'name' => 'login'}
+                                            %input{'type' => 'text', 'placeholder' => 'UnderdogsID', 'name' => 'username'}
                                         %div.uk-form-row
                                             %input{'type' => 'password', 'placeholder' => 'Password', 'name' => 'password'}
                                         %div.uk-form-row
                                             %input{'type' => 'checkbox', 'name' => 'remember'}
                                                 Remember Me
                                         %div.uk-form-row
-                                            %button.uk-button{'type' => 'submit', name: "action-login"}
+                                            %button.uk-button{'type' => 'submit', name: "action", value: "login"}
                                                 Login!
-                                            %button.uk-button{'type' => 'submit', name: "action-register"}
+                                            %button.uk-button{'type' => 'submit', name: "action", value: "register"}
                                                 Join Us!
                                         %div.uk-form-row
                                             %a{:href => '#'}
