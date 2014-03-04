@@ -1,4 +1,5 @@
 require 'bcrypt'
+require 'digest/md5'
 
 class User < Sequel::Model
 	include BCrypt
@@ -6,6 +7,10 @@ class User < Sequel::Model
 	many_to_many :roles
 	many_to_many :permissions
 	one_to_many :news, class: :NewsEntry
+
+	def gravatar_url
+		@gravatar ||= "http://www.gravatar.com/avatar/#{Digest::MD5.hexdigest(self.email.downcase)}"
+	end
 
 	##
 	# Take care of password encoding and decoding
