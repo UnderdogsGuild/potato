@@ -16,7 +16,7 @@ namespace :db do
     task :environment, [:env]do |cmd, args|
 			@@env = args[:env] || "development"
 			Bundler.require
-     require 'models/all'
+			require 'models/all'
     end
 
 		task :shell => :environment do
@@ -24,6 +24,23 @@ namespace :db do
 			binding.pry
 			#ARGV.clear
 			#IRB.start
+		end
+
+		desc "Seed the database"
+		task :seed => "migrate:auto" do
+			require 'faker'
+			require 'factory_girl'
+
+			include FactoryGirl::Syntax::Methods
+			FactoryGirl.find_definitions
+
+			FactoryGirl.define do
+				to_create { |instance| instance.save }
+			end
+
+			u = create(:user, login: "user", password: "password", email: "me@mkaito.com")
+			u.add_role create(:role, label: "admin", root: true)
+			create_list(:forum_thread, 20)
 		end
 
     namespace :migrate do
