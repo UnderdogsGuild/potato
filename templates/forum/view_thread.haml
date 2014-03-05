@@ -15,16 +15,16 @@
 							%div.uk-text-center
 								%a{:href => p.author.url}
 									- if p.author.has_role? "topdog"
-										%img.ud-rank{'src' => '/img/rank-ico/td-ico.png', 'alt' => 'TD', 'data-uk-tooltip' => true, :title => 'Top Dog'}
+										%img.ud-rank.topdog{'src' => '/img/rank-ico/td-ico.png', 'alt' => 'TD', 'data-uk-tooltip' => true, :title => 'Top Dog'}
 
 									- elsif p.author.has_role? "watchdog"
-										%img.ud-rank{'src' => '/img/rank-ico/wd-ico.png', 'alt' => 'WD', 'data-uk-tooltip' => true, :title => 'Watch Dog'}
+										%img.ud-rank.watchdog{'src' => '/img/rank-ico/wd-ico.png', 'alt' => 'WD', 'data-uk-tooltip' => true, :title => 'Watch Dog'}
 
 									- else
-										%img.ud-rank{'src' => '/img/rank-ico/ud-ico.png', 'alt' => 'UD', 'data-uk-tooltip' => true, :title => 'Underdog'}
+										%img.ud-rank.underdog{'src' => '/img/rank-ico/ud-ico.png', 'alt' => 'UD', 'data-uk-tooltip' => true, :title => 'Underdog'}
 
 									- if p.author.has_role? "admin"
-										%img.ud-rank{'src' => '/img/rank-ico/sa-ico.png', 'alt' => 'SA', 'data-uk-tooltip' => true, :title => 'Server Administrator'}
+										%img.ud-rank.admin{'src' => '/img/rank-ico/sa-ico.png', 'alt' => 'SA', 'data-uk-tooltip' => true, :title => 'Server Administrator'}
 
 									#{p.author}
 						%td.ud-post-content
@@ -39,7 +39,7 @@
 					%a.uk-button{ :href => "#{p.url}/edit" }
 						Edit Post
 					- if authorize :moderate_forum
-						%div.uk-button-dropdown{'data-uk-dropdown' => true}
+						%div.moderate.uk-button-dropdown{'data-uk-dropdown' => true}
 							%div.uk-button.uk-button-danger
 								Moderate
 								%i.uk-icon-caret-down
