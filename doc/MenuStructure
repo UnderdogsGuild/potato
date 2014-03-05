@@ -1,0 +1,142 @@
+This is a tentative menu for the website. Feel free to make changes and edits!
+
+Entries prefixed with an m and a pipe (l|) should appear only to Members and following ranks.
+Entries prefixed with an o and a pipe (o|) should appear only to Officers and following ranks.
+Entries prefixed with an o and a pipe (t|) should appear only to Myra and following ranks.
+Entries prefixed with an o and a pipe (s|) should appear only to Server Administrators.
+No prefixes mean the page should be publicly visible.
+
+Global Navigation
+
+Home
+
+	News & Events
+
+		News
+
+		Events
+
+			Special Events
+
+			Derp Knights
+
+			Stream Events
+
+Community
+
+	Underdogs
+
+		Forum
+
+		Members
+
+	Linkshells
+
+		DoomFinders
+
+Servers
+
+	Utilities and VoIP
+
+		TeamSpeak
+
+		l|Private VPN
+
+	Game Servers
+
+		Starbound
+
+		Minecraft
+
+		Killing Floor
+
+Wiki
+
+	Sections
+
+		Event Plans
+
+		Raid Information
+
+		Roster Information
+	Special
+
+		Recent Edits
+
+		Create a New Page
+
+Cog Offcanvas
+
+Server Statuses
+
+	TeamSpeak
+
+	Starbound
+
+	Killing Floor
+
+	Minecraft
+
+	VPN
+
+l|Account
+
+	Change Your Account
+
+	Change Your Profile
+
+	Private Messages
+
+o|Moderate
+
+	Manage Bans
+
+	Manage Warnings
+
+	Edit User Profiles
+
+	Mass Delete Threads
+
+	Mass Archive Threads
+
+o|Content
+
+	Manage Pages
+
+	Homepage Slideshow
+
+	Manage Events
+
+o|Wiki
+
+	Edit Wiki Home
+
+	t|Disable/Enable Wiki
+
+	t|Mass Move/Delete Pages
+
+t|Administrate
+
+	General Settings
+
+	Social Icons
+
+	Legal Pages
+
+	Guild Rules
+
+	Disable Website
+
+	Mass Archive/Delete Pages
+
+s|Server
+
+	Environment & Load Average
+
+	Analytics
+
+	Database
+
+	Security
+
+	Email Settings
