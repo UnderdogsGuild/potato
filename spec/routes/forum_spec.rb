@@ -9,11 +9,11 @@ feature "/community/underdogs/forum" do
 		any_instance_of(Application) do |a|
 			stub(a).user { @user }
 		end
+		stub(@user).can?(:view_forum_threads) { true }
 	end
 
 	feature "index" do
 		scenario "shows a list of threads" do
-			stub(@user).can?(:view_forum_threads) { true }
 			stub(@user).can?(:view_officer_threads) { false }
 
 			visit "/community/underdogs/forum/"
@@ -22,12 +22,18 @@ feature "/community/underdogs/forum" do
 		end
 
 		scenario "shows officer threads to officers" do
-			stub(@user).can?(:view_forum_threads) { true }
 			stub(@user).can?(:view_officer_threads) { true }
 
 			visit "/community/underdogs/forum/"
 			expect(page).to have_selector("tr.thread", count: 4)
 			expect(page).to have_selector("tr.thread.officer", count: 2)
+		end
+	end
+
+	feature "thread view" do
+		scenario "finds an existing thread" do
+			@thread = ForumThread.first
+			visit @thread.url
 		end
 	end
 end

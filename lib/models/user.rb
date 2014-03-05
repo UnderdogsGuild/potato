@@ -93,6 +93,12 @@ class User < Sequel::Model
 		end
 		return false
 	end
+
+	def has_role?(r)
+		roles.collect do |role|
+			role.label
+		end.include?(r)
+	end
 end
 
 class Role < Sequel::Model

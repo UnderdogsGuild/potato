@@ -10,7 +10,7 @@ FactoryGirl.define do
 		end
 
 		after(:create) do |ft, evaluator|
-			create(:forum_post, author: evaluator.author) if evaluator.author
+			create(:forum_post, author: evaluator.author, forum_thread: ft) if evaluator.author
 			create_list(:forum_post, evaluator.post_count, forum_thread: ft)
 		end
 

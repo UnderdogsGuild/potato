@@ -11,19 +11,18 @@ describe "Forum" do
 		end
 
 		it "Shows officer threads to officers" do
-			mock(@officer).can?(:view_forum_threads) { true }
-			mock(@officer).can?(:view_officer_threads) { true }
+			stub(@officer).can?(:view_forum_threads) { true }
+			stub(@officer).can?(:view_officer_threads) { true }
 			expect(ForumThread.visible_for(@officer)).to include(@othread)
 		end
 
 		it "Hides officer threads from non-officers" do
-			mock(@user).can?(:view_forum_threads) { true }
-			mock(@user).can?(:view_officer_threads) { false }
+			stub(@user).can?(:view_forum_threads) { true }
+			stub(@user).can?(:view_officer_threads) { false }
 			expect(ForumThread.visible_for(@user)).to_not include(@othread)
 		end
 
 		it "can build a list of threads for a user" do
-			stub(@user).can?(:create_forum_thread) { true }
 			create_list(:forum_thread, 5, author: @user)
 			expect(@user.threads.count).to eq(5)
 		end

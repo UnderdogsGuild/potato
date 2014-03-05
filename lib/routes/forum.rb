@@ -14,21 +14,35 @@ class Application < Sinatra::Base
 				end
 		end
 
-		get '/:id-*/?' do
-			@thread = ForumThread[id: params[:id]]
+		get '/:thread/?' do
+			require_permission :view_forum_threads
+			@thread = ForumThread[id: params["thread"].to_i]
 			require_permission :view_officer_threads if @thread and @thread.officer
-			raise NotFound unless @thread
+			raise Sinatra::NotFound unless @thread
 
 			haml :'forum/view_thread'
 		end
 
+		post '/:thread/?' do
+			# Create a new post in thread :id
+		end
+
+		get '/:thread/edit/?' do
+			# Show  form to edit thread :id and first post
+		end
+
+		put '/:thread/:comment?' do
+			# Update comment :comment in thread :id
+		end
+
 		get '/new/?' do
+			# Show form to create new thread
 			require_permission :create_forum_threads
 
 			haml :'forum/new_thread'
 		end
 
-		post '/new/?' do
+		post '/?' do
 			require_permission :create_forum_threads
 			require_permission :create_officer_threads if params[:thread][:officer]
 
@@ -45,6 +59,7 @@ class Application < Sinatra::Base
 
 				if @post.valid?
 					@post.save
+					redirect @thread.url
 
 				else
 					haml :'forum/new_thread'
