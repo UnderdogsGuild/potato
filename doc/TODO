@@ -1,16 +1,37 @@
 * User profiles (Adalind)
+
 * Research searching (what?) (Adalind)
+
 * !!! Design a fancy-ass 403 error page (Faore)
+
 * Clean up and hasten tests (Adalind)
+
 * !! Design navbar-flip content dropdown for logged in users (Faore)
+
 * Clean up Post view (Faore)
+
 * !! Add missing options to forum view (Faore)
+
 * !! Hide certain options from the navbar (Faore)
+
 * Rework the cog menu (Faore)
+
 * Consider and work on design for a backend (Faore)
-* Modify mobile nav to be consistent with all the changes above, and fix its broken icon (Faore)
-* Learn some JQuery AJAX/JSON skills and apply them to make additional posts and threads appear on their pages (Faore)
+	Who needs a separate backend? Just integrate any relevant options in the main
+	interface via permission checks.
+
+* Modify mobile nav to be consistent with all the changes above, and fix its
+  broken icon (Faore)
+
+* Learn some JQuery AJAX/JSON skills and apply them to make additional posts
+  and threads appear on their pages (Faore)
+
 * Teach Faore how to login with a test account (Adalind)
-	I'm probably just doing something stupid but after running bundle exec rake db:migrate:auto, I still can't login.
-	From looking at the Rakefile, u = create(:user, login: "user", password: "password", email: "me@mkaito.com"),
-	I'm guessing should be able to login as 'user' with 'password'. But that doesn't seem to be the case.
+	I'm probably just doing something stupid but after running bundle exec rake
+	db:migrate:auto, I still can't login.  From looking at the Rakefile,
+	u = create(:user, login: "user", password: "password", email:
+	"me@mkaito.com"), I'm guessing should be able to login as 'user' with
+	'password'. But that doesn't seem to be the case.
+
+	bundle exec rake db:seed is the task you're looking for. It takes a while to
+	populate the database. Along the lines of 5-7 minutes on my machine
