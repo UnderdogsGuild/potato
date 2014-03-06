@@ -29,14 +29,12 @@
 						%a{:href => '#'}
 							Stream Events
 		%li.uk-parent{'data-uk-dropdown' => true}
-			%a.uk-navbar-nav-subtitle{:href => '#'}
+			%a.uk-navbar-nav-subtitle{:href => '/community/underdogs/forum'}
 				Community
 				%div
 					Get Together
 			%div.uk-dropdown.uk-dropdown-navbar
 				%ul.uk-nav.uk-nav-navbar
-					%li.uk-nav-header
-						Underdogs
 					%li
 						%a{:href => '/community/underdogs/forum'}
 							Forum
@@ -55,9 +53,10 @@
 					%li
 						%a{:href => '#'}
 							TeamSpeak
-					%li
-						%a{:href => '#'}
-							Private VPN
+					- if user
+						%li
+							%a{:href => '#'}
+								Private VPN
 					%li.uk-nav-header
 						Game Servers
 					%li
@@ -101,6 +100,7 @@
 				%li.uk-parent{'data-uk-dropdown' => '{mode\'click\'}'}
 					%a{:href => '#'}
 						Login
+						%i.uk-icon-caret-down
 					%div.uk-dropdown.uk-dropdown-width-1.uk-dropdown-navbar
 						%div.uk-grid
 							%div.uk-width-1-1
@@ -124,12 +124,16 @@
 											%a{:href => '#'}
 												Forget your password?
 			- else
-				-# Probably want to replace this with a dropdown with options/info/stuff for the active user.
-				%li
-					%a.uk-navbar-nav-subtitle{href: '/logout'}
-						Welcome, #{user}!
-						%div
-							Click here to log out.
+				%li.uk-parent{'data-uk-dropdown' => '{mode\'click\'}'}
+					%a{:href => '#'}
+						#{user}
+						%i.uk-icon-caret-down
+					%div.uk-dropdown.uk-dropdown-width-1.uk-dropdown-navbar
+						%div.uk-grid
+							%div.uk-width-1-2
+								Doom
+							%div.uk-width-1-2
+								And Stuff
 			%li
 				%a{:href => '#status-offcanvas', 'data-uk-offcanvas' => true}
 					%i.uk-icon-cog.uk-icon-medium

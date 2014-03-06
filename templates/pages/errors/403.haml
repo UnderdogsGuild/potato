@@ -1,18 +1,18 @@
 /Main Content
 %div.uk-vertical-align.uk-text-center
 	%div.uk-vertical-align-middle.ud-error-container.ud-container-center.uk-grid
-		%div.uk-width-1-3.uk-hidden-small.ud-sadface
-			?
+		%div.uk-width-1-3.uk-hidden-small.ud-errorlock
+			%i.uk-icon-lock
 		%div.uk-width-large-2-3.uk-width-medium-2-3.ud-error-info.uk-width-small-1-1.ud-mobile-padding
 			%h1.ud-error-text
-				Where is Page?
+				That's a nono!
 			%p.ud-error-text
-				We ran into a problem. We can't find whatever it is you're looking for. Chances are you're looking for things like unicorns. And everyone knows they don't exist.
+				It looks like you're trying to get somewhere you aren't suppossed to be in. Shoo!~
 			%a.uk-button.uk-button-danger{:href => '/'}
 				Run Home!
 			</a>
 			%p
-				If you believe this page should be here and somethings broken, tell our tech monkeys you got a 404 at
+				If you believe this page should be here and somethings broken, tell our tech monkeys you got a 403 at
 				=request.fullpath
 				\.
 /End Main Content

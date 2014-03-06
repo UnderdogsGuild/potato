@@ -32,4 +32,7 @@ class Application < Sinatra::Base
 	#get '/tmp/view_thread' do
 		#haml :'views/view_thread'
 	#end
+	get '/tmp/403' do
+		haml :'pages/errors/403', layout: :errors		
+	end
 end

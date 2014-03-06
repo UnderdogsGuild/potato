@@ -6,7 +6,7 @@ Entries prefixed with an o and a pipe (t|) should appear only to Myra and follow
 Entries prefixed with an o and a pipe (s|) should appear only to Server Administrators.
 No prefixes mean the page should be publicly visible.
 
-Global Navigation
+[Global Navigation]
 
 Home
 
@@ -18,21 +18,13 @@ Home
 
 			Special Events
 
-			Derp Knights
-
 			Stream Events
 
 Community
 
-	Underdogs
+	Forum
 
-		Forum
-
-		Members
-
-	Linkshells
-
-		DoomFinders
+	Members
 
 Servers
 
@@ -50,7 +42,7 @@ Servers
 
 		Killing Floor
 
-Wiki
+l|Wiki
 
 	Sections
 
@@ -59,13 +51,16 @@ Wiki
 		Raid Information
 
 		Roster Information
+
 	Special
 
 		Recent Edits
 
 		Create a New Page
 
-Cog Offcanvas
+
+
+[Cog Offcanvas]
 
 Server Statuses
 

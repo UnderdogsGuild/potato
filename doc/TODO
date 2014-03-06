@@ -1,14 +1,13 @@
 * User profiles (Adalind)
 * Research searching (what?) (Adalind)
-* !!! Design a fancy-ass 403 error page (Faore)
 * Clean up and hasten tests (Adalind)
-* !! Design navbar-flip content dropdown for logged in users (Faore)
+* !! Design navbar-flip content dropdown for logged in users (Faore) [In Progress]
 * Clean up Post view (Faore)
 * !! Add missing options to forum view (Faore)
 * !! Hide certain options from the navbar (Faore)
 * Rework the cog menu (Faore)
 * Consider and work on design for a backend (Faore)
-* Modify mobile nav to be consistent with all the changes above, and fix its broken icon (Faore)
+* Modify mobile nav to be consistent with all the changes above (Faore)
 * Learn some JQuery AJAX/JSON skills and apply them to make additional posts and threads appear on their pages (Faore)
 * Teach Faore how to login with a test account (Adalind)
 	I'm probably just doing something stupid but after running bundle exec rake db:migrate:auto, I still can't login.

@@ -1,5 +1,14 @@
 %div.ud-breadcrumb
 	%ul.uk-breadcrumb
+		/- Breadcrumb with a link
+		%li
+			%a{href: '/'}
+				Home
+		/- Breadcrumb that is disabled
+		%li
+			%span
+				Community
+		/- Current Breadcrumb
 		%li.uk-active
 			%span
-				Home
+				Forum

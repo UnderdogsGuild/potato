@@ -38,9 +38,9 @@ class Application < Sinatra::Base
 		haml :'pages/errors/404', layout: :errors
 	end
 
-	#error NotAllowedError do
-		#haml :'pages/error/403', layout: :errors
-	#end
+	error NotAllowedError do
+		haml :'pages/errors/403', layout: :errors
+	end
 end
 
 

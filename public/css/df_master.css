@@ -1,4 +1,3 @@
-@import url("http://fonts.googleapis.com/css?family=Oxygen:400,700,300");
 /*
 *
 *  ALL VARIABLES MUST BE DEFINED.
@@ -8,10 +7,11 @@
 /*Font Variables*/
 /* Other Vars */
 /* Google Font APIs */
+@import url("http://fonts.googleapis.com/css?family=Oxygen:400,700,300");
 /* Get all the StyleSheets */
 /*! UIkit 2.3.1 | http://www.getuikit.com | (c) 2014 YOOtheme | MIT License */
 /* ========================================================================
-   Component: Normalize
+	 Component: Normalize
  ========================================================================== */
 /* Base
  ========================================================================== */
@@ -183,7 +183,7 @@ pre,
 samp {
   font-size: 1em;
   /* 1 */
-  font-family: Oxygen, Arial, sans-serif; }
+  font-family: Consolas, Courier; }
 
 /* Forms
  ========================================================================== */
@@ -350,7 +350,7 @@ table {
   border-spacing: 0; }
 
 /* ========================================================================
-   Component: Base
+	 Component: Base
  ========================================================================== */
 /* Body
  ========================================================================== */
@@ -370,8 +370,8 @@ body {
 /* Only phones */
 @media (max-width: 767px) {
   /*
-     * Break strings if their length exceeds the width of their container
-     */
+  	 * Break strings if their length exceeds the width of their container
+  	 */
   body {
     word-wrap: break-word;
     -webkit-hyphens: auto;
@@ -656,7 +656,7 @@ iframe {
   @-ms-viewport {
     width: device-width; } }
 /* ========================================================================
-   Component: Grid
+	 Component: Grid
  ========================================================================== */
 /*
  * Micro clearfix
@@ -770,8 +770,8 @@ iframe {
 /* Only large screens */
 @media (min-width: 1220px) {
   /*
-     * Grid
-     */
+  	 * Grid
+  	 */
   /* Horizontal gutter */
   .uk-grid:not(.uk-grid-preserve) {
     margin-left: -35px; }
@@ -791,8 +791,8 @@ iframe {
     margin-top: 35px; }
 
   /*
-     * Modifier: `uk-grid-divider`
-     */
+  	 * Modifier: `uk-grid-divider`
+  	 */
   .uk-grid-divider:not(.uk-grid-preserve):not(:empty) {
     margin-left: -35px;
     margin-right: -35px; }
@@ -1021,8 +1021,8 @@ iframe {
     position: relative; }
 
   /*
-     * Push
-     */
+  	 * Push
+  	 */
   /* Halves */
   .uk-push-1-2,
   .uk-push-2-4,
@@ -1084,8 +1084,8 @@ iframe {
     left: 90%; }
 
   /*
-     * Pull
-     */
+  	 * Pull
+  	 */
   /* Halves */
   .uk-pull-1-2,
   .uk-pull-2-4,
@@ -1146,7 +1146,7 @@ iframe {
   .uk-pull-9-10 {
     left: -90%; } }
 /* ========================================================================
-   Component: Panel
+	 Component: Panel
  ========================================================================== */
 /*
  * 1. Needed for `a` elements
@@ -1275,7 +1275,7 @@ iframe {
   .uk-panel + .uk-panel-divider:before {
     top: -35px; } }
 /* ========================================================================
-   Component: Article
+	 Component: Article
  ========================================================================== */
 /*
  * Micro clearfix to make articles more robust
@@ -1337,7 +1337,7 @@ iframe {
   margin-top: 25px; }
 
 /* ========================================================================
-   Component: Comment
+	 Component: Comment
  ========================================================================== */
 /* Sub-object `uk-comment-header`
  ========================================================================== */
@@ -1405,7 +1405,7 @@ iframe {
 /* Modifier `uk-comment-primary`
  ========================================================================== */
 /* ========================================================================
-   Component: Nav
+	 Component: Nav
  ========================================================================== */
 .uk-nav,
 .uk-nav ul {
@@ -1697,7 +1697,7 @@ html:not(.uk-touch) .uk-nav-offcanvas ul a:hover {
   color: white; }
 
 /* ========================================================================
-   Component: Navbar
+	 Component: Navbar
  ========================================================================== */
 .uk-navbar {
   background: #eeeeee;
@@ -1869,7 +1869,7 @@ html:not(.uk-touch) .uk-nav-offcanvas ul a:hover {
  */
 .uk-navbar-toggle:after {
   content: "\f0c9";
-  font-family: Oxygen, Arial, sans-serif;
+  font-family: FontAwesome;
   /* 1 */
   vertical-align: middle; }
 
@@ -1895,7 +1895,7 @@ html:not(.uk-touch) .uk-nav-offcanvas ul a:hover {
   float: right; }
 
 /* ========================================================================
-   Component: Subnav
+	 Component: Subnav
  ========================================================================== */
 /*
  * 1. Remove default list style
@@ -1980,7 +1980,7 @@ html:not(.uk-touch) .uk-nav-offcanvas ul a:hover {
   color: white; }
 
 /* ========================================================================
-   Component: Breadcrumb
+	 Component: Breadcrumb
  ========================================================================== */
 /*
  * 1. Remove default list style
@@ -2018,7 +2018,7 @@ html:not(.uk-touch) .uk-nav-offcanvas ul a:hover {
   color: #999999; }
 
 /* ========================================================================
-   Component: Pagination
+	 Component: Pagination
  ========================================================================== */
 /*
  * 1. Remove default list style
@@ -2131,7 +2131,7 @@ html:not(.uk-touch) .uk-nav-offcanvas ul a:hover {
   text-align: right; }
 
 /* ========================================================================
-   Component: Tab
+	 Component: Tab
  ========================================================================== */
 .uk-tab {
   margin: 0;
@@ -2229,7 +2229,7 @@ html:not(.uk-touch) .uk-nav-offcanvas ul a:hover {
 
 .uk-tab-responsive > a:before {
   content: "\f0c9\00a0";
-  font-family: Oxygen, Arial, sans-serif; }
+  font-family: FontAwesome; }
 
 /* Only phones */
 @media (max-width: 767px) {
@@ -2366,8 +2366,8 @@ html:not(.uk-touch) .uk-nav-offcanvas ul a:hover {
     border-color: #dddddd; }
 
   /*
-     * Modifier: 'tab-left'
-     */
+  	 * Modifier: 'tab-left'
+  	 */
   .uk-tab-left {
     border-right: 1px solid #dddddd; }
 
@@ -2389,8 +2389,8 @@ html:not(.uk-touch) .uk-nav-offcanvas ul a:hover {
     border-right-color: transparent; }
 
   /*
-     * Modifier: 'tab-right'
-     */
+  	 * Modifier: 'tab-right'
+  	 */
   .uk-tab-right {
     border-left: 1px solid #dddddd; }
 
@@ -2411,7 +2411,7 @@ html:not(.uk-touch) .uk-nav-offcanvas ul a:hover {
   .uk-tab-right > li.uk-active > a {
     border-left-color: transparent; } }
 /* ========================================================================
-   Component: List
+	 Component: List
  ========================================================================== */
 .uk-list {
   padding: 0;
@@ -2446,7 +2446,7 @@ html:not(.uk-touch) .uk-nav-offcanvas ul a:hover {
   margin-top: 10px; }
 
 /* ========================================================================
-   Component: Description list
+	 Component: Description list
  ========================================================================== */
 /* Modifier: `uk-description-list-horizontal`
  ========================================================================== */
@@ -2479,7 +2479,7 @@ html:not(.uk-touch) .uk-nav-offcanvas ul a:hover {
   color: #999999; }
 
 /* ========================================================================
-   Component: Table
+	 Component: Table
  ========================================================================== */
 /*
  * Block element behavior
@@ -2544,7 +2544,7 @@ html:not(.uk-touch) .uk-nav-offcanvas ul a:hover {
   background: #f2fae3; }
 
 /* ========================================================================
-   Component: Form
+	 Component: Form
  ========================================================================== */
 /*
  * Remove margin from the last-child
@@ -2863,7 +2863,7 @@ select.uk-form-width-mini {
   padding-right: 30px !important; }
 
 /* ========================================================================
-   Component: Button
+	 Component: Button
  ========================================================================== */
 /*
  * 1. Required for `a` elements
@@ -3068,7 +3068,7 @@ select.uk-form-width-mini {
   position: relative; }
 
 /* ========================================================================
-   Component: Icon
+	 Component: Icon
  ========================================================================== */
 @font-face {
   font-family: FontAwesome;
@@ -4300,7 +4300,7 @@ select.uk-form-width-mini {
   content: "\f196"; }
 
 /* ========================================================================
-   Component: Close
+	 Component: Close
  ========================================================================== */
 /*
  * 1. Required for `button` elements and makes
@@ -4371,7 +4371,7 @@ select.uk-form-width-mini {
   opacity: 0.8; }
 
 /* ========================================================================
-   Component: Badge
+	 Component: Badge
  ========================================================================== */
 .uk-badge {
   display: inline-block;
@@ -4416,7 +4416,7 @@ select.uk-form-width-mini {
   background-color: #da314b; }
 
 /* ========================================================================
-   Component: Alert
+	 Component: Alert
  ========================================================================== */
 .uk-alert {
   margin-bottom: 15px;
@@ -4485,7 +4485,7 @@ select.uk-form-width-mini {
   margin: -10px -10px 0 0; }
 
 /* ========================================================================
-   Component: Thumbnail
+	 Component: Thumbnail
  ========================================================================== */
 /*
  * 1. Corrects max-width behavior (2.) if padding and border are used
@@ -4548,7 +4548,7 @@ a.uk-thumbnail:focus {
   width: 100%; }
 
 /* ========================================================================
-   Component: Overlay
+	 Component: Overlay
  ========================================================================== */
 /*
  * 1. Container width fits its content
@@ -4609,7 +4609,7 @@ a.uk-thumbnail:focus {
   margin-left: -25px;
   font-size: 50px;
   line-height: 1;
-  font-family: Oxygen, Arial, sans-serif;
+  font-family: FontAwesome;
   text-align: center;
   color: white; }
 
@@ -4696,7 +4696,7 @@ a.uk-thumbnail:focus {
   opacity: 1; }
 
 /* ========================================================================
-   Component: Progress
+	 Component: Progress
  ========================================================================== */
 /*
  * 1. Clearing
@@ -4788,7 +4788,7 @@ a.uk-thumbnail:focus {
     background-position: 30px 0; } }
 
 /* ========================================================================
-   Component: Search
+	 Component: Search
  ========================================================================== */
 /*
  * 1. Create position context for dropdowns
@@ -4812,7 +4812,7 @@ a.uk-thumbnail:focus {
   width: 30px;
   line-height: 30px;
   text-align: center;
-  font-family: Oxygen, Arial, sans-serif;
+  font-family: FontAwesome;
   font-size: 14px;
   color: rgba(0, 0, 0, 0.2); }
 
@@ -4905,7 +4905,7 @@ input.uk-search-field {
   animation: uk-spin 2s infinite linear; }
 
 /* ========================================================================
-   Component: Animation
+	 Component: Animation
  ========================================================================== */
 [class*='uk-animation-'] {
   -webkit-animation-duration: 0.5s;
@@ -5245,7 +5245,7 @@ input.uk-search-field {
     transform: rotate(359deg); } }
 
 /* ========================================================================
-   Component: Dropdown
+	 Component: Dropdown
  ========================================================================== */
 /*
  * 1. Hide by default
@@ -5328,8 +5328,8 @@ input.uk-search-field {
 /* Only tablets and desktops */
 @media (min-width: 768px) {
   /*
-     * Horizontal gutter
-     */
+  	 * Horizontal gutter
+  	 */
   .uk-dropdown:not(.uk-dropdown-stack) > .uk-grid {
     margin-left: -15px;
     margin-right: -15px; }
@@ -5339,14 +5339,14 @@ input.uk-search-field {
     padding-right: 15px; }
 
   /*
-     * Column divider
-     */
+  	 * Column divider
+  	 */
   .uk-dropdown:not(.uk-dropdown-stack) > .uk-grid > [class*='uk-width-']:nth-child(n+2) {
     border-left: 1px solid #dddddd; }
 
   /*
-     * Width multiplier for dropdown columns
-     */
+  	 * Width multiplier for dropdown columns
+  	 */
   .uk-dropdown-width-2:not(.uk-dropdown-stack) {
     width: 400px; }
 
@@ -5361,14 +5361,14 @@ input.uk-search-field {
 /* Only phones */
 @media (max-width: 767px) {
   /*
-     * Stack columns and take full width
-     */
+  	 * Stack columns and take full width
+  	 */
   .uk-dropdown > .uk-grid > [class*='uk-width-'] {
     width: 100%; }
 
   /*
-     * Vertical gutter
-     */
+  	 * Vertical gutter
+  	 */
   .uk-dropdown > .uk-grid > [class*='uk-width-']:nth-child(n+2) {
     margin-top: 15px; } }
 /*
@@ -5428,7 +5428,7 @@ input.uk-search-field {
   margin-right: -15px; }
 
 /* ========================================================================
-   Component: Modal
+	 Component: Modal
  ========================================================================== */
 /*
  * This is the modal overlay and modal dialog container
@@ -5499,8 +5499,8 @@ input.uk-search-field {
 /* Only phones */
 @media (max-width: 767px) {
   /*
-     * Fit in small screen
-     */
+  	 * Fit in small screen
+  	 */
   .uk-modal-dialog {
     top: 0;
     left: 0;
@@ -5563,7 +5563,7 @@ input.uk-search-field {
     top: -7px;
     right: -7px; } }
 /* ========================================================================
-   Component: Off-canvas
+	 Component: Off-canvas
  ========================================================================== */
 /*
  * This is the offcanvas overlay and bar container
@@ -5682,7 +5682,7 @@ input.uk-search-field {
   color: #777777; }
 
 /* ========================================================================
-   Component: Switcher
+	 Component: Switcher
  ========================================================================== */
 .uk-switcher {
   margin: 0;
@@ -5696,7 +5696,7 @@ input.uk-search-field {
   display: none; }
 
 /* ========================================================================
-   Component: Tooltip
+	 Component: Tooltip
  ========================================================================== */
 /*
  * 1. Hide by default
@@ -5813,7 +5813,7 @@ input.uk-search-field {
   border-right-color: #333333; }
 
 /* ========================================================================
-   Component: Text
+	 Component: Text
  ========================================================================== */
 /* Size modifiers
  ========================================================================== */
@@ -5888,7 +5888,7 @@ input.uk-search-field {
   hyphens: auto; }
 
 /* ========================================================================
-   Component: Utility
+	 Component: Utility
  ========================================================================== */
 /* Container
  ========================================================================== */
@@ -6231,7 +6231,7 @@ input.uk-search-field {
   visibility: visible !important; }
 
 /* ========================================================================
-   Component: Print
+	 Component: Print
  ========================================================================== */
 @media print {
   * {
@@ -6434,6 +6434,12 @@ img.ud-navbar-logo {
   font-size: 400px;
   color: #cc4e67;
   line-height: 100%; }
+
+.ud-errorlock {
+  font-size: 330px;
+  color: #cc4e67;
+  line-height: 100%;
+  padding-top: 55px; }
 
 .ud-error-text {
   color: #c6c6c6 !important; }
@@ -6711,7 +6717,7 @@ div.CodeMirror span.CodeMirror-nonmatchingbracket {
 
 /* STOP */
 /* The rest of this file contains styles related to the mechanics of
-   the editor. You probably shouldn't touch them. */
+	 the editor. You probably shouldn't touch them. */
 .CodeMirror {
   line-height: 1;
   position: relative;
@@ -6737,8 +6743,8 @@ div.CodeMirror span.CodeMirror-nonmatchingbracket {
   position: relative; }
 
 /* The fake, visible scrollbars. Used to force redraw during scrolling
-   before actuall scrolling happens, thus preventing shaking and
-   flickering artifacts. */
+	 before actuall scrolling happens, thus preventing shaking and
+	 flickering artifacts. */
 .CodeMirror-vscrollbar, .CodeMirror-hscrollbar, .CodeMirror-scrollbar-filler, .CodeMirror-gutter-filler {
   position: absolute;
   z-index: 6;
