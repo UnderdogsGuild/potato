@@ -1,8 +1,4 @@
-* User profiles (Adalind)
-
 * Research searching (what?) (Adalind)
-
-* Clean up and hasten tests (Adalind)
 
 * !! Design navbar-flip content dropdown for logged in users (Faore) [In Progress]
 
@@ -15,18 +11,19 @@
 * Rework the cog menu (Faore)
 
 * Consider and work on design for a backend (Faore)
-	Who needs a separate backend? Just integrate any relevant options in the main
-	interface via permission checks.
+	mkaito:
+		Who needs a separate backend? Just integrate any relevant options in the
+		main interface via permission checks.
 
-	Not seperate but I still have to figure out how to have to have content
-	presented, lol.	I don't want to scare Myra away with the control panel,
-	so I'll have to figure out howto make it seem less menacing. Not sure how much
-	to include on pages.
+	Faore:
+		Not seperate but I still have to figure out how to have to have content
+		presented, lol.	I don't want to scare Myra away with the control panel, so
+		I'll have to figure out howto make it seem less menacing. Not sure how much
+		to include on pages.
 
-* Modify mobile nav to be consistent with all the changes above (Faore)
-
-* Learn some JQuery AJAX/JSON skills and apply them to make additional posts and
-  threads appear on their pages (Faore)
+	mkaito:
+		It's a lot less menacing to edit things in-place instead of at a special
+		page for admins
 
 * Modify mobile nav to be consistent with all the changes above, and fix its
   broken icon (Faore)
@@ -34,12 +31,9 @@
 * Learn some JQuery AJAX/JSON skills and apply them to make additional posts
   and threads appear on their pages (Faore)
 
-* Teach Faore how to login with a test account (Adalind)
-	I'm probably just doing something stupid but after running bundle exec rake
-	db:migrate:auto, I still can't login.  From looking at the Rakefile,
-	u = create(:user, login: "user", password: "password", email:
-	"me@mkaito.com"), I'm guessing should be able to login as 'user' with
-	'password'. But that doesn't seem to be the case.
+* Hash passwords before form submission (Fore)
+	http://www.webtoolkit.info/javascript-sha256.html
 
-	bundle exec rake db:seed is the task you're looking for. It takes a while to
-	populate the database. Along the lines of 5-7 minutes on my machine
+* Forums
+** New thread
+** Edit post (and thread if post.is_op?)
