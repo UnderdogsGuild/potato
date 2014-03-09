@@ -8,19 +8,15 @@ require 'stringex'
 require 'rdiscount'
 require 'haml'
 require 'sass'
+require 'i18n'
 
 class Application < Sinatra::Base
-  use Rack::Session::EncryptedCookie, secret: '9a0aff2e4861436d5777c8d0a801994603a5faa4fd77f99ae4d0bc10b73ce5fa', expire_after: (2 * 60 * 60)
-  register Sinatra::Namespace
-  register Sinatra::ConfigFile
-
-	class NotAllowedError < StandardError
-		def http_status
-			403
-		end
-	end
 
 	configure do
+		register Sinatra::Namespace
+		register Sinatra::ConfigFile
+		::I18n.enforce_available_locales = true
+
 		enable :logging
 		set :app_file, __FILE__
 		set :root, File.expand_path(File.join(File.dirname(__FILE__), ".."))
@@ -32,9 +28,24 @@ class Application < Sinatra::Base
 		config_file "config/application.yaml"
 	end
 
+	configure :production do
+		use Rack::Session::EncryptedCookie, secret: '9a0aff2e4861436d5777c8d0a801994603a5faa4fd77f99ae4d0bc10b73ce5fa', expire_after: (2 * 60 * 60)
+	end
+
+	configure :test, :development do
+		use Rack::Session::Cookie, secret: '9a0aff2e4861436d5777c8d0a801994603a5faa4fd77f99ae4d0bc10b73ce5fa', expire_after: (2 * 60 * 60)
+	end
+
 	configure :test do
+		disable :logging
 		enable :static
 		set :public_folder, Proc.new { File.join(root, "public") }
+	end
+
+	class NotAllowedError < StandardError
+		def http_status
+			403
+		end
 	end
 
 	##

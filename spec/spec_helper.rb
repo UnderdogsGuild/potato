@@ -12,9 +12,16 @@ require 'faker'
 
 require 'application'
 
+module SpecHelpers
+	def app
+		Application
+	end
+end
+
 RSpec.configure do |c|
 	c.include Rack::Test::Methods
 	c.include FactoryGirl::Syntax::Methods
+	c.include SpecHelpers
 
 	c.expect_with :rspec do |x|
 		x.syntax = :expect
@@ -22,6 +29,9 @@ RSpec.configure do |c|
 
 	c.before :suite do
 		Capybara.app = Application
+		Capybara.register_driver :poltergeist do |app|
+			Capybara::Poltergeist::Driver.new(app, { phantomjs_logger: nil })
+		end
 		Capybara.javascript_driver = :poltergeist
 
 		Sequel.extension :migration

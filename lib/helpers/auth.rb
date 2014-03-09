@@ -34,8 +34,8 @@ class Application < Sinatra::Base
 		# this session.
 		def get_csrf_token
 			token = SecureRandom.hex(32)
-			session[:csrf_tokens] = [] unless session.has_key?(:csrf_tokens)
-			session[:csrf_tokens] << token
+			session[:csrf] ||= []
+			session[:csrf] << token
 			token
 		end
 
@@ -43,17 +43,17 @@ class Application < Sinatra::Base
 		# See if we have a token in the request, and validate it with the set of
 		# accepted tokens. Once a token is used, it is consumed.
 		def require_valid_csrf_token
-			unless session[:csrf_tokens].include? params[:potato]
+			unless session[:csrf] and session[:csrf].include? params[:potato]
 				raise NotAllowedError, "Invalid session token"
 			else
-				session[:csrf_tokens].delete params[:potato]
+				session[:csrf].delete params[:potato]
 			end
 		end
 
 		##
 		# HTML helper
 		def csrf_token_field
-			"<input type='hidden' name='potato' value='#{get_csrf_token}' />"
+			"<input type='hidden' name='potato' value='#{get_csrf_token}'>"
 		end
 
 		##
@@ -81,7 +81,7 @@ class Application < Sinatra::Base
 
 						# See if we have to send him back to where he came from; otherwise,
 						# just send him to the frontpage.
-						redirect session.has_key?(:go_back) ? session.delete(:go_back) : '/'
+						redirect session[:go_back] ? to(session.delete(:go_back)) : to('/')
 
 					else
 						@error = :password

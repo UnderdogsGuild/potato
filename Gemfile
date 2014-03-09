@@ -48,4 +48,6 @@ group :test do
 	gem "poltergeist"
 	gem "factory_girl", "~> 4.0"
 	gem "faker"
+	gem "guard"
+	gem "guard-rspec"
 end

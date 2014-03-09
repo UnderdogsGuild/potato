@@ -31,8 +31,24 @@
 * Learn some JQuery AJAX/JSON skills and apply them to make additional posts
   and threads appear on their pages (Faore)
 
-* Hash passwords before form submission (Fore)
-	http://www.webtoolkit.info/javascript-sha256.html
+* Hash passwords before form submission (Faore)
+	mkaito:
+		What bitlength should we use for SHA2? Here are to reference
+		implementations in Javascript, one for 256 bits, and one for 512 bits. Both
+		are reasonably fast, and Ruby supports both. All other things equal, how
+		about we just go for the higher one?
+
+		http://www.webtoolkit.info/javascript-sha256.html
+		http://www.happycode.info/javascript-sha-512/
+
+		Alternatively, check out this JS library that supports all SHA algos:
+		https://github.com/Caligatio/jsSHA
+
+		I'd like to propose adding a password guideline where appropiate, as little
+		help blurb. I want it to literally say "whatever you want", and show
+		a tooltip on hover that shows some examples with crazy shit like control
+		characters, chinese characters, and all that stuff that most sites would
+		bark at you for.
 
 * Forums
 ** New thread
