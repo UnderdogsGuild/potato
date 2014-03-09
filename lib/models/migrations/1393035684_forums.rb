@@ -13,7 +13,7 @@ Sequel.migration do
 			foreign_key :author_id, :users
 			foreign_key :forum_thread_id, :forum_threads
 			DateTime :posted_at, default: Sequel::CURRENT_TIMESTAMP
-			DateTime :updated_at, default: Sequel::CURRENT_TIMESTAMP
+			DateTime :updated_at
 			String :content, null: false, text: true
 		end
 	end

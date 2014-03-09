@@ -1,9 +1,9 @@
 require 'bundler/setup'
-#Bundler.require
 require 'sinatra/base'
 require 'sinatra/namespace'
 require 'sinatra/partial'
 require 'sinatra/config_file'
+require 'encrypted_cookie'
 require 'rack/contrib'
 require 'stringex'
 require 'rdiscount'
@@ -11,12 +11,12 @@ require 'haml'
 require 'sass'
 
 class Application < Sinatra::Base
-  use Rack::Session::Cookie, secret: '2-oWcq(|Yo@ZV)VBdX]<.MEl0JtH.$RVAyX2gyl[Nl{bPRWD/$:./}P', expire_after: (2 * 60 * 60)
+  use Rack::Session::EncryptedCookie, secret: '9a0aff2e4861436d5777c8d0a801994603a5faa4fd77f99ae4d0bc10b73ce5fa', expire_after: (2 * 60 * 60)
   register Sinatra::Namespace
   register Sinatra::ConfigFile
 	#register Sinatra::Partial
 
-	class NotAllowedError < StandardError;
+	class NotAllowedError < StandardError
 		def http_status
 			403
 		end
@@ -30,16 +30,26 @@ class Application < Sinatra::Base
 
 		set :haml, :format => :html5
 		set :db, 0
-		config_file "config/application.yaml"
 		disable :static
+		config_file "config/application.yaml"
 	end
 
-	not_found do
-		haml :'pages/errors/404', layout: :errors
+	configure :test do
+		enable :static
+		set :public_folder, Proc.new { File.join(root, "public") }
 	end
 
-	error NotAllowedError do
-		haml :'pages/errors/403', layout: :errors
+	##
+	# Error pages
+	not_found do; haml :'pages/errors/404', layout: :errors; end
+	error NotAllowedError do; haml :'pages/errors/403', layout: :errors; end
+
+	##
+	# All requests except GET requests will require a valid csrf
+	before do
+		unless request.request_method == "GET"
+			require_valid_csrf_token
+		end
 	end
 end
 

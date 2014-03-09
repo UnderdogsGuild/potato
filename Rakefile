@@ -30,6 +30,12 @@ namespace :db do
 		task :seed => "migrate:auto" do
 			require 'faker'
 			require 'factory_girl'
+			require 'active_support/core_ext/class/subclasses'
+
+			# After migrating, reset all the models
+			Sequel::Model.subclasses.each do |model|
+				model.dataset = model.dataset
+			end
 
 			include FactoryGirl::Syntax::Methods
 			FactoryGirl.find_definitions

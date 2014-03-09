@@ -1,5 +1,5 @@
 describe User do
-	before :each do
+	before :all do
 		@password = Faker::Internet.password
 		@umember = create(:user, password: @password)
 		@uroot = create(:user)

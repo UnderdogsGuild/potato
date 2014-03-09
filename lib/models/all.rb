@@ -1,10 +1,10 @@
 require 'sequel'
 
-if Application.environment == :development || Application.environment == :test
-	require 'sqlite3'
-else
+# if Application.environment == :development || Application.environment == :test
+# 	require 'sqlite3'
+# else
 	require 'mysql2'
-end
+# end
 
 ##
 # Configure DB connection

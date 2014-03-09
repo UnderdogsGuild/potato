@@ -1,4 +1,4 @@
-feature 'Authentication' do
+feature 'Authentication', js: true do
 	background :all do
 		@uactive = create :user, login: "active", password: "doomimpending"
 		@uinactive = create :user, login: "inactive", password: "alreadydoomed"
@@ -30,7 +30,7 @@ feature 'Authentication' do
 		#expect(page).to_not have_text("Login Sign In Remember Me Login!")
 
 		# Make sure the system recognizes us now
-		expect(page).to have_text("Welcome, active!")
+		expect(page).to have_selector(".user-active")
 	end
 
 	scenario "logging out" do

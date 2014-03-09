@@ -113,6 +113,7 @@
 										%div.uk-form-row
 											%input{'type' => 'password', 'placeholder' => 'Password', 'name' => 'password'}
 										%div.uk-form-row
+											= csrf_token_field
 											%input{'type' => 'checkbox', 'name' => 'remember'}
 												Remember Me
 										%div.uk-form-row
@@ -124,9 +125,9 @@
 											%a{:href => '#'}
 												Forget your password?
 			- else
-				%li.uk-parent{'data-uk-dropdown' => '{mode\'click\'}'}
+				%li.user-active.uk-parent{'data-uk-dropdown' => '{mode\'click\'}'}
 					%a{:href => '#'}
-						#{user}
+						= random_salutation
 						%i.uk-icon-caret-down
 					%div.uk-dropdown.uk-dropdown-width-1.uk-dropdown-navbar
 						%div.uk-grid

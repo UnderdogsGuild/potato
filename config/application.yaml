@@ -1,7 +1,7 @@
 ---
 database:
-  development: 'sqlite://development.db'
-  test: 'sqlite:/'
+  development: 'mysql2://underdogs:undercats@localhost/underdogs'
+  test: 'mysql2://underdogs:undercats@localhost/underdogs_test'
   production: 'mysql2://foo:bar@localhost/underdogs'
 
 # Production values are read from execution environment, to avoid placing

@@ -9,18 +9,6 @@ class Application < Sinatra::Base
 		#haml :'pages/community/linkshells/doomfinders'
 	#end
 
-	#get '/community/underdogs/forum' do
-		#haml :'pages/community/underdogs/forum'
-	#end
-
-	get '/tmp/login' do
-		haml :'views/login'
-	end
-
-	#get '/tmp/new_thread' do
-		#haml :'views/new_thread'
-	#end
-
 	get '/donate/success' do
 		haml :'pages/donate/success'
 	end
@@ -29,9 +17,6 @@ class Application < Sinatra::Base
 		haml :'pages/donate/cancel'
 	end
 
-	#get '/tmp/view_thread' do
-		#haml :'views/view_thread'
-	#end
 	get '/tmp/403' do
 		haml :'pages/errors/403', layout: :errors		
 	end

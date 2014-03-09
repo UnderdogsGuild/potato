@@ -12,6 +12,7 @@ gem "sinatra-config-file", require: "sinatra/config_file"
 gem "rack-contrib", require: "rack/contrib"
 gem "sinatra-r18n", require: "sinatra/r18n"
 gem "sinatra-partial", require: "sinatra/partial"
+gem "encrypted_cookie"
 
 # Tools
 #gem "logger"
@@ -36,7 +37,7 @@ gem "sass"
 #gem 'coffee-filter'
 
 group :development do
-	gem "sqlite3"
+	# gem "sqlite3"
   gem "rake", require: "rake/clean"
 	gem "pry"
 	gem 'foreman'
@@ -45,16 +46,16 @@ group :development do
 	gem 'rb-inotify', '~> 0.9'
 end
 
-group :production do
+# group :production do
   gem "mysql2"
-end
+# end
 
 group :test do
   gem "rspec"
   gem "rack-test", require: "rack/test"
   gem "rr", require: false
 	gem "capybara"
-	gem "selenium-webdriver"
+	gem "poltergeist"
 	gem "watchr"
 	gem "rev"
 	gem "factory_girl", "~> 4.0"

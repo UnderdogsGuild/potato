@@ -42,6 +42,7 @@
 						%label.uk-form-label
 							Remember You?
 						%div.uk-form-controls
+							= csrf_token_field
 							%input{'type' => 'checkbox', 'name' => 'remember'}
 								Remember Me
 					%div.uk-form-row

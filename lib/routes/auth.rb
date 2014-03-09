@@ -11,10 +11,11 @@ class Application < Sinatra::Base
 
 			if u and u.can?(:log_in)
 				session[:user] = u.id
+
 			else
 				response.delete_cookie "remember"
-			end
 
+			end
 		end
 	end
 
@@ -26,21 +27,26 @@ class Application < Sinatra::Base
 	post '/login/?' do
 		if params[:action] == "login"
 			authenticate!
+
 		elsif params[:action] == "register"
 			register!
+
 		else
 			haml :'views/login'
+
 		end
 	end
 
 	get '/logout/?' do
 		require_permission :log_in
 		logger.debug "Clearing session for user #{user.id}."
-		session.delete(:user)
+
+		session.clear
 		response.delete_cookie "remember"
 		redirect to('/')
 	end
 
 	get '/recover/?' do
+		# TODO: Implement password recovery
 	end
 end
