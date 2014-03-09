@@ -1,7 +1,6 @@
 require 'bundler/setup'
 require 'sinatra/base'
 require 'sinatra/namespace'
-require 'sinatra/partial'
 require 'sinatra/config_file'
 require 'encrypted_cookie'
 require 'rack/contrib'
@@ -14,7 +13,6 @@ class Application < Sinatra::Base
   use Rack::Session::EncryptedCookie, secret: '9a0aff2e4861436d5777c8d0a801994603a5faa4fd77f99ae4d0bc10b73ce5fa', expire_after: (2 * 60 * 60)
   register Sinatra::Namespace
   register Sinatra::ConfigFile
-	#register Sinatra::Partial
 
 	class NotAllowedError < StandardError
 		def http_status
