@@ -16,14 +16,6 @@ describe "Auth routes" do
 	end
 
 	describe "csrf tokens" do
-		it "should set the session key" do
-			get '/', {}, 'rack.session' => { user: @user.id }
-			get '/'
-
-			expect(last_request.env['rack.session'][:user]).to eq(@user.id)
-			expect(last_response).to be_ok
-		end
-
 		it "should be inserted in the login form" do
 			get '/login'
 
