@@ -50,6 +50,12 @@
 		characters, chinese characters, and all that stuff that most sites would
 		bark at you for.
 
+	Faore:
+		I'm just going ahead with the 512 if there's no difference like you say.
+		Hashing is done. The hashed password is sent to the application as
+		password=512randomslapsonakeyboard. The plain_password field is also sent to
+		the server but the value is always null since it is emptied before sumission.
+
 * Forums
 ** New thread
 ** Edit post (and thread if post.is_op?)
