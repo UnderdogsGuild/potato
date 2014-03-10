@@ -594,8 +594,10 @@ $.fn.cycle.API = {
 // default logger
 $.fn.cycle.log = function log() {
     /*global console:true */
-    if (window.console && console.log)
-        console.log('[cycle2] ' + Array.prototype.join.call(arguments, ' ') );
+
+    // Fucking noise
+    // if (window.console && console.log)
+    //     console.log('[cycle2] ' + Array.prototype.join.call(arguments, ' ') );
 };
 
 $.fn.cycle.version = function() { return 'Cycle2: ' + version; };
@@ -10377,13 +10379,4 @@ function SHA512(str) {
  
     return binb2hex(binarray);
  
-}
-
-/*Custom JS*/
-var authManager = {
-	authSubmit: function(hashfield, passfield) {
-		hashfield.val(SHA512(passfield.val()));
-		passfield.val("");
-		console.log(hashfield.val());
-	},
 }

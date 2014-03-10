@@ -1,7 +1,10 @@
 feature 'Authentication', js: true do
 	background :all do
-		@uactive = create :user, login: "active", password: "doomimpending"
-		@uinactive = create :user, login: "inactive", password: "alreadydoomed"
+		@uactivepass = Digest::SHA2.new(512).update("doomimpending").to_s
+		@uinactivepass = Digest::SHA2.new(512).update("alreadydoomed").to_s
+
+		@uactive = create :user, login: "active", password: @uactivepass
+		@uinactive = create :user, login: "inactive", password: @uinactivepass
 
 		@plogin = create :permission, label: "log_in"
 		@rmember = create :role, label: "Member"
@@ -19,7 +22,7 @@ feature 'Authentication', js: true do
 		# Fill the login form and go for it
 		within ".ud-mainpage form" do
 			fill_in 'username', with: "active"
-			fill_in 'password', with: 'doomimpending'
+			fill_in 'plain_password', with: 'doomimpending'
 			#check "remember"
 			click_button 'Login!'
 		end
@@ -37,7 +40,7 @@ feature 'Authentication', js: true do
 		visit '/login'
 		within ".ud-mainpage form" do
 			fill_in 'username', with: "active"
-			fill_in 'password', with: 'doomimpending'
+			fill_in 'plain_password', with: @uactivepass
 			check "remember"
 			click_button 'Login!'
 		end
@@ -49,7 +52,7 @@ feature 'Authentication', js: true do
 		visit '/login'
 		within ".ud-mainpage form" do
 			fill_in 'username', with: "inactive"
-			fill_in 'password', with: 'alreadydoomed'
+			fill_in 'plain_password', with: @uinactivepass
 			check "remember"
 			click_button 'Login!'
 		end
@@ -60,7 +63,7 @@ feature 'Authentication', js: true do
 		visit '/login'
 		within ".ud-mainpage form" do
 			fill_in 'username', with: "nonexistant"
-			fill_in 'password', with: 'supersecret'
+			fill_in 'plain_password', with: 'supersecret'
 			check "remember"
 			click_button 'Login!'
 		end
@@ -71,7 +74,7 @@ feature 'Authentication', js: true do
 		visit '/login'
 		within ".ud-mainpage form" do
 			fill_in 'username', with: "active"
-			fill_in 'password', with: 'notmypassword'
+			fill_in 'plain_password', with: 'notmypassword'
 			check "remember"
 			click_button 'Login!'
 		end
