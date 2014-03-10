@@ -109,6 +109,34 @@
     the right place in the server. I'll make sure only production stuff is
     deployed (ie, no tests, no sass stuff, no coffeescript or whatever).
 
-* Forums
-** New thread
-** Edit post (and thread if post.is_op?)
+* Profiles
+  mkaito:
+    I actually came up with a good idea for an actual profile: documenting what
+    games someone plays. For example, note that someone plays FFXIV and what
+    their character names are. That way, it's easy to join fellow guildies in
+    new games. I'm not sure whether this would warrant a full blown profile
+    page, but it's worth discussing.
+
+* "Public" "Beta"
+  mkaito:
+    Once the forums are ready, we should create a "stable" branch, and deploy.
+    Remove all the filler stuff we have on the page, clean everything up, and
+    only show what is functional. To begin with, this will probably mean that
+    the frontpage will *be* the forums. That and logging in. Nothing else.
+
+    We should try to keep things stable in this branch. When something is ready
+    to be merged and deployed, I'll clean things up in another branch and merge
+    when ready. That way, we can develop and deploy things in an incremental
+    fashion, and keep all the filler stuff in the development branches.
+
+    I was thinking we could incorporate a little "Feedback" form. Something
+    like a little plus sign in the lower right corner of the browser window.
+    Click it, a textarea opens, people type in their thoughts, and we receive
+    them, along with some metadata (their username, the page they were
+    viewing). Maybe it should just send an email to one of us, maybe make
+    a little section on the site for us to see their feedback like a mailbox.
+    Your choice.
+
+    This also means that it's time to document things. As we clean the
+    interface up, we should make sure that things are as self documenting as
+    possible, and add extra documentation where necessary.
