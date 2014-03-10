@@ -56,6 +56,12 @@
 		password=512randomslapsonakeyboard. The plain_password field is also sent to
 		the server but the value is always null since it is emptied before sumission.
 
+	mkaito:
+		Nope, didn't work. Interaction tests fail with "Unable to find field
+		"password"", and a manual run in the browser finds that no hashing happens.
+		It sends an empty `password` field, and the plain password in the
+		`plain_password` field.
+
 * Forums
 ** New thread
 ** Edit post (and thread if post.is_op?)
