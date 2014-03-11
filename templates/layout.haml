@@ -70,11 +70,9 @@
 	/End Google Analytics
 	- unless user
 		:javascript
-			$("form#navlogin").submit(function() {
-				authManager.authSubmit($("input#nav_hashed_password"), $("input#nav_plain_password"));
-			});
-	- if request.path_info.start_with?('/login')
-		:javascript
-			$("form#loginpage").submit(function() {
-				authManager.authSubmit($("input#main_hashed_password"), $("input#main_plain_password"));
+			$("form").submit(function() {
+				var plainfield = $(this).find("input[name='plain_password']");
+				var hashfield = $(this).find("input[name='password']");
+				hashfield.val(SHA512(plainfield.val()));
+				plainfield.val("");
 			});
