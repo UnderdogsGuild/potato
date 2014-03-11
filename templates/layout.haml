@@ -6,10 +6,11 @@
 	=haml :'tmpl/globalmeta'
 	/Mobile Device Support
 	%meta{'name' => 'viewport', 'content' => 'width=device-width, user-scalable=no'}
-	%link{'rel' => 'shortcut icon', 'href' => '/img/meta/favicon.ico'}
-	%link{'rel' => 'apple-touch-icon', 'href' => '/img/meta/apple-touch-icon.png'}
+	/%link{'rel' => 'shortcut icon', 'href' => '/img/meta/favicon.ico'}
+	/%link{'rel' => 'apple-touch-icon', 'href' => '/img/meta/apple-touch-icon.png'}
 	/End Mobile Device Support
 	%link{'rel' => 'stylesheet', :href => '/site.css', :type => 'text/css'}
+	%script{src: '/site.js'}
 %body
 	%noscript
 		%div.nojs
@@ -74,11 +75,44 @@
 	/Feedback and Bug Reports
 	%div.fb-hide
 		%div#feedback-form
-			%form#loginpage.uk-form.uk-form-horizontal{action: '/login', method: 'POST'}
-				%fieldset
-					%legend
-						Give Us Feedback About This Page!
-					%div.uk-form-row
-						%div.uk-form-controls
-							%input{'type' => 'text', 'placeholder' => 'UnderdogsID', 'name' => 'username'}
-	%script{src: '/site.js'}
+			%div#feedback-content
+				%form.uk-form{action: '/feedback', method: 'POST'}
+					%fieldset.uk-form-horizontal
+						%legend
+							Give Us Feedback About This Page!
+						%div.uk-form-row
+							%label.uk-form-label{for:'username'}
+								UnderdogsID
+							%div.uk-form-controls
+								%input.uk-width-1-1{'type' => 'text', 'value' => user, 'name' => 'username', 'disabled' => true}
+						%div.uk-form-row
+							%label.uk-form-label{for:'location'}
+								Location
+							%div.uk-form-controls
+								%input.uk-width-1-1{'type' => 'text', 'value' => request.fullpath, 'name' => 'location', 'disabled' => true}
+						%div.uk-form-row
+							%label.uk-form-label{'for' => 'category'}
+								Feedback Type
+							%div.uk-form-controls
+								%select.uk-width-1-1{'name' => 'category'}
+									%option
+										Feedback/Suggestion
+									%option
+										Bug Report
+						%div.uk-form-row
+							%label.uk-form-label{'for' => 'feedback'}
+								Feedback
+							%div.uk-form-controls
+								%textarea.uk-width-1-1{'name' => 'feedback', 'placeholder' => 'Not enough Tonberries!', 'style' => 'resize:none;'}
+						%div.uk-form-row
+							%label.uk-form-label
+								All Done?
+							%div.uk-form-controls
+								%button.uk-button.uk-button-success{'type' => 'submit'}
+									Send Feedback
+	%a.uk-button.uk-button-success.fb-open{:href => '#feedback-form', 'style' => 'position:fixed; bottom:0; right: 0;'}
+		%i.uk-icon.uk-icon-plus.uk-icon-spin
+	:javascript
+		$(document).ready(function(){
+			$(".fb-open").colorbox({inline:true, width:"600px"});
+		});

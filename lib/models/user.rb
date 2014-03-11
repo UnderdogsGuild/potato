@@ -11,7 +11,7 @@ class User < Sequel::Model
 	alias_method :posts, :forum_posts
 
 	def gravatar_url
-		@gravatar ||= "http://www.gravatar.com/avatar/#{Digest::MD5.hexdigest(self.email.downcase)}?s=25"
+		@gravatar ||= "http://www.gravatar.com/avatar/#{Digest::MD5.hexdigest(self.email.downcase)}"
 	end
 
 	##

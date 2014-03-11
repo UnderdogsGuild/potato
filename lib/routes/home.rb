@@ -20,4 +20,16 @@ class Application < Sinatra::Base
 	get '/tmp/403' do
 		haml :'pages/errors/403', layout: :errors		
 	end
+
+	get '/tmp/new_post'
+		haml :'forum/new_post'
+	end
+
+	get '/tmp/new_thread'
+		haml :'forum/new_thread'
+	end
+
+	get '/tmp/edit_post'
+		haml :'forum/edit_post'
+	end
 end

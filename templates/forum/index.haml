@@ -4,6 +4,9 @@
 %div.ud-mainpage-bg.uk-container.uk-container-center
 	=haml :'tmpl/breadcrumbs'
 	%div.ud-mainpage
+		%div.ud-clearfix
+			%a.uk-button.uk-button-primary.uk-float-right{:href => '#'}
+				New Thread
 		%table.uk-table.uk-table-hover.uk-table-striped
 			%thead
 				%th.uk-width-6-10
@@ -26,7 +29,7 @@
 							%td
 								- last = t.posts.last
 								%a{:href => last.author.url}
-									%img.ud-avatar-25px{:src => last.author.gravatar_url}
+									%img.ud-avatar-25px{:src => last.author.gravatar_url + '?s=25'}
 									= last.author
 							%td
 								= t.views

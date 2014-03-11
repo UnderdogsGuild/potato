@@ -28,6 +28,7 @@ jsfiles = FileList[
   'lib/js/sticky.js',
   'lib/js/timepicker.js',
   'lib/js/sha512.js',
+  'lib/js/jquery.colorbox.js',
   'lib/js/tooltips.js',
   'lib/js/application.js'
 ]
@@ -39,7 +40,7 @@ end
 
 desc "Minify CSS files"
 file 'public/site.css' do |t|
-  `sass -t compressed lib/sass/ud_master.scss #{t.name}`
+  `sass -C -t compressed lib/sass/ud_master.scss #{t.name}`
 end
 
 desc "Minify Javascript and CSS files"
