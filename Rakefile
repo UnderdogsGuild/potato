@@ -1,9 +1,49 @@
 require 'rspec/core/rake_task'
 require 'bundler/setup'
 
+desc "Run all specs"
 RSpec::Core::RakeTask.new(:spec) do |spec|
 	spec.ruby_opts = '-I. -r spec/spec_helper'
 end
+
+task :default => :spec
+
+# Order is important!
+jsfiles = FileList[
+  'lib/js/jquery.js',
+  'lib/js/uikit.js',
+  'lib/js/jquery.cycle2.js',
+  'lib/js/codemirror.js',
+  'lib/js/markdown.js',
+  'lib/js/overlay.js',
+  'lib/js/xml.js',
+  'lib/js/gfm.js',
+  'lib/js/marked.js',
+  'lib/js/markdownarea.js',
+  'lib/js/form-file.js',
+  'lib/js/form-password.js',
+  'lib/js/notify.js',
+  'lib/js/overlay.js',
+  'lib/js/sortable.js',
+  'lib/js/sticky.js',
+  'lib/js/timepicker.js',
+  'lib/js/sha512.js',
+  'lib/js/tooltips.js',
+  'lib/js/application.js'
+]
+
+desc "Minify Javascript files"
+file 'public/site.js' => jsfiles do |t|
+  `uglifyjs #{t.prerequisites.join(" ")} -o #{t.name}`
+end
+
+desc "Minify CSS files"
+file 'public/site.css' do |t|
+  `sass -t compressed lib/sass/ud_master.scss #{t.name}`
+end
+
+desc "Minify Javascript and CSS files"
+task :minify => ['public/site.js', 'public/site.css']
 
 ##
 # Blatantly copied from:
@@ -22,8 +62,6 @@ namespace :db do
 	task :shell => :environment do
 		require 'pry'
 		binding.pry
-		#ARGV.clear
-		#IRB.start
 	end
 
 	desc "Seed the database"
