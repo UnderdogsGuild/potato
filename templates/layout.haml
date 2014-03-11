@@ -1,5 +1,3 @@
--if !@sass_pallet
--   @sass_pallet='/css/ud_master.css' end
 !!!html5
 %head
 	%title
@@ -11,10 +9,7 @@
 	%link{'rel' => 'shortcut icon', 'href' => '/img/meta/favicon.ico'}
 	%link{'rel' => 'apple-touch-icon', 'href' => '/img/meta/apple-touch-icon.png'}
 	/End Mobile Device Support
-	/Stylesheets
-	%link{'rel' => 'stylesheet', :href => @sass_pallet, :type => 'text/css'}
-	/End Stylesheets
-	=haml :'tmpl/js'
+	%link{'rel' => 'stylesheet', :href => '/site.css', :type => 'text/css'}
 %body
 	%noscript
 		%div.nojs
@@ -86,3 +81,4 @@
 					%div.uk-form-row
 						%div.uk-form-controls
 							%input{'type' => 'text', 'placeholder' => 'UnderdogsID', 'name' => 'username'}
+	%script{src: '/site.js'}
