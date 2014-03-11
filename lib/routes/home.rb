@@ -21,15 +21,15 @@ class Application < Sinatra::Base
 		haml :'pages/errors/403', layout: :errors		
 	end
 
-	get '/tmp/new_post'
+	get '/tmp/new_post' do
 		haml :'forum/new_post'
 	end
 
-	get '/tmp/new_thread'
+	get '/tmp/new_thread' do
 		haml :'forum/new_thread'
 	end
 
-	get '/tmp/edit_post'
+	get '/tmp/edit_post' do
 		haml :'forum/edit_post'
 	end
 end
