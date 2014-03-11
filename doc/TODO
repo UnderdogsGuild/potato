@@ -161,3 +161,10 @@
 * Design a simple registration form (Faore)
 
 * Design a simple feedback button. (Faore)
+
+* IRC + Webchat
+  IRC itself is simple but effective. The clients, however, tend to be techy.
+  We can alleviate that with a webchat popup on the site that interfaces with
+  some IRC. Running a non-federated IRC server is pretty much trivial.
+  I haven't looked at webchat things in ages. I wonder if there's anything
+  worthy out there.
