@@ -76,3 +76,13 @@
 				hashfield.val(SHA512(plainfield.val()));
 				plainfield.val("");
 			});
+	/Feedback and Bug Reports
+	%div.fb-hide
+		%div#feedback-form
+			%form#loginpage.uk-form.uk-form-horizontal{action: '/login', method: 'POST'}
+				%fieldset
+					%legend
+						Give Us Feedback About This Page!
+					%div.uk-form-row
+						%div.uk-form-controls
+							%input{'type' => 'text', 'placeholder' => 'UnderdogsID', 'name' => 'username'}
