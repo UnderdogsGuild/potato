@@ -64,14 +64,16 @@
       
       ReferenceError: authManager is not defined
 
-  mkaito:
-    Nevermind, refactored your JS a little. Works now.
+    mkaito:
+        Nevermind, refactored your JS a little. Works now.
 
-    You will have to reseed the database.
+        You will have to reseed the database.
 
-    Just so you know, I've removed the console.log bullshit from cycle2,
-    because it was cluttering my test output big time.
+        Just so you know, I've removed the console.log bullshit from cycle2,
+        because it was cluttering my test output big time.
 
+    Faore:
+        Alright, I'll make sure to add the tooltips.
 * Uncompress all Javascript for development (Faore)
   mkaito:
     That super.js is about as unwieldy as it gets. I'd like us to use
@@ -90,6 +92,13 @@
     and testing, with a file watcher, and do a one-time compile in compressed
     format for deployment. This approach falls a little flat if you're using
     non-SASS stuff, though. Will have to investigate.
+
+  Faore:
+    Alright. I've seperated the JS files, and updated some of the scripts and
+    cleaned up some CSS. Super.js is no longer being used. If we're going to
+    do the beta we'll need to have that rake task to minify JS going before then.
+    Uncompressed, the JS will make load times between 5-14 seconds depending
+    on location during my tests.
 
 * Deployment, compiling, and stuff (mkaito)
   mkaito:
@@ -140,3 +149,15 @@
     This also means that it's time to document things. As we clean the
     interface up, we should make sure that things are as self documenting as
     possible, and add extra documentation where necessary.
+
+ Faore:
+    Alright, will do. I'll get to work on a feedback form soonish here. Talked to
+    Myra about having a beta and having everyone use it when its ready. I also
+    warned her that it would be very barebones to start. For the beta I'll be
+    employing CloudFlare for caching, not CloudFront so no changes to the app will
+    be necissary. That, and the cache can be purged in ~60 seconds. I'll focus on
+    the most crucial pages for the beta.
+
+* Design a simple registration form (Faore)
+
+* Design a simple feedback button. (Faore)

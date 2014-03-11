@@ -22,10 +22,13 @@ $navbar-height:40px;
 @import url("http://fonts.googleapis.com/css?family=Oxygen:400,700,300");
 /* Get all the StyleSheets */
 @import "_ud_uikit.scss";
-@import "_additional.scss";
 @import "_nojs.scss";
 @import "_codemirror.scss";
-@import "_markdownarea.min.scss";
-@import "_datepicker.min.scss";
-@import "_form-file.min.scss";
-@import "_notify.min.scss";
+@import "_markdownarea.scss";
+@import "_datepicker.scss";
+@import "_form-file.scss";
+@import "_form-password.scss";
+@import "_notify.scss";
+@import "_sticky.scss";
+@import "_sortable.scss";
+@import "_additional.scss";

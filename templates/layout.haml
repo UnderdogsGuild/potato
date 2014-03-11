@@ -14,20 +14,7 @@
 	/Stylesheets
 	%link{'rel' => 'stylesheet', :href => @sass_pallet, :type => 'text/css'}
 	/End Stylesheets
-	%script{'src' => '/js/super.js'}
-	%script{'src' => 'http://xivdb.com/tooltips.js'}
-		:javascript 
-			var xivdb_tooltips =
-			{
-				'language' : 'EN',
-				'convertQuotes' : true,
-				'frameShadow' : false,
-				'compact' : false,
-				'statsOnly' : false,
-				'replaceName' : true,
-				'colorName' : true,
-				'showIcon' : true,
-			}
+	=haml :'tmpl/js'
 %body
 	%noscript
 		%div.nojs
@@ -83,9 +70,11 @@
 	/End Google Analytics
 	- unless user
 		:javascript
-			$( "form" ).submit(function() {
-				var plainfield = $( this ).find( "input[name='plain_password']" )
-				var hashfield = $( this ).find( "input[name='password']" )
-				hashfield.val( SHA512( plainfield.val() ));
-				plainfield.val( "" );
+			$("form#navlogin").submit(function() {
+				authManager.authSubmit($("input#nav_hashed_password"), $("input#nav_plain_password"));
+			});
+	- if request.path_info.start_with?('/login')
+		:javascript
+			$("form#loginpage").submit(function() {
+				authManager.authSubmit($("input#main_hashed_password"), $("input#main_plain_password"));
 			});
