@@ -1,0 +1,40 @@
+/Use for editng either a post or a thread-starting post.
+%div.ud-pagetitle.uk-container.uk-container-center
+	%h1.ud-pagetitle
+		Edit Post
+%div.ud-mainpage-bg.uk-container.uk-container-center
+	=haml :'tmpl/breadcrumbs'
+	%div.uk-grid.ud-mainpage.uk-grid-divider{'data-uk-grid-margin' => true}
+		%div.uk-width-1-1
+			%form.uk-form{'action' => '#', 'method' => 'POST'}
+				%fieldset.uk-form-horizontal
+					%legend
+						Editing a Post in SomeThread
+					- if true
+						/ This should only appear if a thread starter is being edited.
+						%div.uk-form-row
+							%label.uk-form-label{'for' => 'thread_title'}
+								Thread Title
+							%div.uk-form-controls
+								%input.uk-width-1-1{'type' => 'text', 'name' => 'thread_title', 'placeholder' => 'What\'s this thread about?'}
+					=haml :'tmpl/fancy_editor'
+					- unless user.has_role? "underdog"
+						/ This should only appear if the user is not an underdog, and if the post being edited is a thread starter.
+						%fieldset.uk-form-horizontal
+							%legend
+								And Lastly
+							%div.uk-form-row
+								%label.uk-form-label{'for' => 'permissions'}
+									Who can see this thread?
+								%div.uk-form-controls
+									%select{'name' => 'permissions'}
+										%option
+											Underdogs
+										%option
+											Watchdogs
+				%fieldset.uk-container
+					%div.uk-form-controls.uk-grid
+						%button.uk-button-large.uk-button.uk-width-1-1.uk-width-medium-1-2.uk-width-large-3-4.uk-button-success{'type' => 'submit'}
+							Edit Post
+						%button.uk-button-large.uk-button.uk-hidden-small.uk-width-medium-1-2.uk-width-large-1-4.uk-button-danger{'type' => 'reset'}
+							I Screwed Up

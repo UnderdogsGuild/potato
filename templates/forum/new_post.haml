@@ -1,6 +1,6 @@
 %div.ud-pagetitle.uk-container.uk-container-center
 	%h1.ud-pagetitle
-		New Thread
+		New Post
 %div.ud-mainpage-bg.uk-container.uk-container-center
 	=haml :'tmpl/breadcrumbs'
 	%div.uk-grid.ud-mainpage.uk-grid-divider{'data-uk-grid-margin' => true}
@@ -8,29 +8,11 @@
 			%form.uk-form{'action' => '#', 'method' => 'POST'}
 				%fieldset.uk-form-horizontal
 					%legend
-						Lets Put Some Stuff in Your Thread
-					%div.uk-form-row
-						%label.uk-form-label{'for' => 'thread_title'}
-							Thread Title
-						%div.uk-form-controls
-							%input.uk-width-1-1{'type' => 'text', 'name' => 'thread_title', 'placeholder' => 'What\'s this thread about?'}
+						Replying to SomeThead
 					=haml :'tmpl/fancy_editor'
-				- unless user.has_role? "underdog"
-					%fieldset.uk-form-horizontal
-						%legend
-							And Lastly
-						%div.uk-form-row
-							%label.uk-form-label{'for' => 'permissions'}
-								Who can see this thread?
-							%div.uk-form-controls
-								%select{'name' => 'permissions'}
-									%option
-										Underdogs
-									%option
-										Watchdogs
 				%fieldset.uk-container
 					%div.uk-form-controls.uk-grid
 						%button.uk-button-large.uk-button.uk-width-1-1.uk-width-medium-1-2.uk-width-large-3-4.uk-button-success{'type' => 'submit'}
-							Create Thread
+							Reply
 						%button.uk-button-large.uk-button.uk-hidden-small.uk-width-medium-1-2.uk-width-large-1-4.uk-button-danger{'type' => 'reset'}
 							I Screwed Up
