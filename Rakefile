@@ -39,12 +39,16 @@ file 'public/site.js' => jsfiles do |t|
 end
 
 desc "Minify CSS files"
-file 'public/site.css' do |t|
+file 'public/site.css' => FileList["lib/sass/*"] do |t|
   `sass -C -t compressed lib/sass/ud_master.scss #{t.name}`
 end
 
 desc "Minify Javascript and CSS files"
 task :minify => ['public/site.js', 'public/site.css']
+
+task :minclean do
+  `rm public/site.js public/site.css`
+end
 
 ##
 # Blatantly copied from:
