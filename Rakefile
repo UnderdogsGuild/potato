@@ -6,6 +6,7 @@ RSpec::Core::RakeTask.new(:spec) do |spec|
 	spec.ruby_opts = '-I. -r spec/spec_helper'
 end
 
+task :spec => :minify
 task :default => :spec
 
 # Order is important!
