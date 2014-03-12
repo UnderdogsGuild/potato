@@ -3,7 +3,8 @@ require 'bundler/setup'
 
 desc "Run all specs"
 RSpec::Core::RakeTask.new(:spec) do |spec|
-	spec.ruby_opts = '-I. -r spec/spec_helper'
+	spec.ruby_opts = '-Ilib:spec -r spec_helper'
+  spec.rspec_opts = '--order random --format documentation --color'
 end
 
 task :spec => :minify
