@@ -1,11 +1,17 @@
-feature "/community/underdogs/forum" do
+feature "When using the forums" do
 	background :all do
 		@user = create :user, login: "user", password: "password"
 		create_list :forum_thread, 2, post_count: 2, officer: false
 		create_list :officer_thread, 2, post_count: 2
 	end
 
-	before :each do
+  after :all do
+    ForumThread.each { |t| t.remove_all_forum_posts; t.destroy }
+    User.each { |u| u.remove_all_forum_posts; u.destroy}
+    ForumPost.each { |p| p.destroy }
+  end
+
+	background :each do
 		any_instance_of(Application) do |a|
 			stub(a).user { @user }
 		end
@@ -13,7 +19,7 @@ feature "/community/underdogs/forum" do
 		stub(@user).can?(:view_forum_threads) { true }
 	end
 
-	feature "index" do
+	feature "the index page" do
 		scenario "shows a list of threads" do
 			visit "/community/underdogs/forum/"
 			expect(page).to have_selector("tr.thread", count: 2)
@@ -26,7 +32,7 @@ feature "/community/underdogs/forum" do
 		end
 	end
 
-	feature "thread view" do
+	feature "the single thread view" do
 		scenario "finds an existing thread and displays all its posts" do
 			@thread = ForumThread.first
 			visit @thread.url
@@ -38,14 +44,14 @@ feature "/community/underdogs/forum" do
 			scenario "are not displayed for non-moderators" do
 				@thread = ForumThread.first
 				visit @thread.url
-				expect(page).to_not have_selector(".moderate")
+				expect(page).to_not have_selector(".uk-button", text: "Delete")
 			end
 
 			scenario "are displayed for moderators" do
 				stub(@user).can?(:moderate_forum) { true }
 				@thread = ForumThread.first
 				visit @thread.url
-				expect(page).to have_selector(".moderate", count: @thread.posts.count)
+				expect(page).to have_selector(".uk-button", text: "Delete", count: @thread.posts.count)
 			end
 		end
 

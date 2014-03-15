@@ -13,6 +13,12 @@ describe User do
 		@uroot.add_role( create(:role, label: "admins", root: true) )
 	end
 
+	after :all do
+		Permission.each { |p| p.remove_all_roles; p.remove_all_users; p.destroy }
+		Role.each { |r| r.remove_all_users; r.remove_all_permissions; r.destroy }
+		User.each { |u| u.remove_all_roles; u.remove_all_permissions; u.destroy }
+	end
+
 	it "associates roles to users" do
 		expect(@umember.roles).to_not be_empty
 	end

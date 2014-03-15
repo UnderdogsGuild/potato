@@ -7,12 +7,20 @@ describe "Auth routes" do
 		@csrf_token = SecureRandom.hex(32)
 		@user = create :user, password: @password
 
-		unless @user.can? :log_in
-			@plogin = create :permission, label: "log_in"
-			@rmember = create :role, label: "member"
-			@rmember.add_permission @plogin unless @rmember.permissions.include? @plogin
-			@user.add_role @rmember unless @user.roles.include? @rmember
-		end
+		@plogin = create :permission, label: "log_in"
+		@rmember = create :role, label: "member"
+		@rmember.add_permission @plogin unless @rmember.permissions.include? @plogin
+		@user.add_role @rmember unless @user.roles.include? @rmember
+	end
+
+	after :all do
+		@user.remove_all_roles
+		@rmember.remove_all_permissions
+		@plogin.remove_all_roles
+
+		@plogin.destroy
+		@rmember.destroy
+		@user.destroy
 	end
 
 	describe "csrf tokens" do

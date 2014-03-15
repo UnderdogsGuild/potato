@@ -4,14 +4,14 @@ require 'bundler/setup'
 desc "Run all specs"
 RSpec::Core::RakeTask.new(:spec) do |spec|
 	spec.ruby_opts = '-Ilib:spec -r spec_helper'
-  spec.rspec_opts = '--order random --format documentation --color'
+  spec.rspec_opts = '--order random --format progress --color'
 end
 
 task :spec => :minify
 task :default => :spec
 
 # Order is important!
-jsfiles = FileList[
+jsfiles = [
   'lib/js/jquery.js',
   'lib/js/uikit.js',
   'lib/js/jquery.cycle2.js',
@@ -60,7 +60,7 @@ namespace :db do
 	Sequel.extension :migration
 	migration_dir = "lib/models/migrations"
 
-	task :environment, [:env]do |cmd, args|
+	task :environment, [:env] do |cmd, args|
 		@@env = args[:env] || "development"
 		Bundler.require
 		require 'models/all'
