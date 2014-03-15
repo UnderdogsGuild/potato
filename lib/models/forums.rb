@@ -1,6 +1,13 @@
 class ForumThread < Sequel::Model
+  plugin :validation_helpers
+
 	one_to_many :forum_posts, class: :ForumPost
 	alias_method :posts, :forum_posts
+
+  def validate
+    super
+    validates_presence :title
+  end
 
 	def self.visible_for(user)
 		return [] unless user.can? :view_forum_threads

@@ -23,24 +23,24 @@ class Application < Sinatra::Base
 			haml :'forum/view_thread'
 		end
 
-		post '/:thread/?' do
-			# Create a new post in thread :id
-		end
+		# post '/:thread/?' do
+		# 	# Create a new post in thread :id
+		# end
 
-		get '/:thread/edit/?' do
-			# Show  form to edit thread :id and first post
-		end
+		# get '/:thread/edit/?' do
+		# 	# Show  form to edit thread :id and first post
+		# end
 
-		put '/:thread/:comment?' do
-			# Update comment :comment in thread :id
-		end
+		# put '/:thread/:comment?' do
+		# 	# Update comment :comment in thread :id
+		# end
 
-		get '/new/?' do
-			# Show form to create new thread
-			require_permission :create_forum_threads
+		# get '/new/?' do
+		# 	# Show form to create new thread
+		# 	require_permission :create_forum_threads
 
-			haml :'forum/new_thread'
-		end
+		# 	haml :'forum/new_thread'
+		# end
 
 		post '/?' do
 			require_permission :create_forum_threads
@@ -59,7 +59,7 @@ class Application < Sinatra::Base
 
 				if @post.valid?
 					@post.save
-					redirect @thread.url
+					redirect to(@thread.url)
 
 				else
 					haml :'forum/new_thread'

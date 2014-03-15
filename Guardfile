@@ -1,7 +1,7 @@
 # A sample Guardfile
 # More info at https://github.com/guard/guard#readme
 
-guard :rspec, cmd: 'bundle exec ruby -I. -r spec/spec_helper -S rspec --color --format progress --order random', all_on_start: true, all_after_pass: true do
+guard :rspec, cmd: 'bundle exec ruby -I. -r spec/spec_helper -S rspec --color --format progress --order random', all_on_start: true, all_after_pass: false do
   watch(%r{^spec/.+_spec\.rb$})
 	watch('lib/application.rb') { "spec" }
   watch(%r{^lib/(.+)\.rb$})     { |m| "spec/#{m[1]}_spec.rb" }
