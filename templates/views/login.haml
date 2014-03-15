@@ -8,11 +8,11 @@
 					%legend
 						Login with Your UnderdogsID
 					- if [:password, :notfound].include? @error
-						%div.uk-alert.uk-alert-warning{'data-uk-alert' => true}
+						%div.wrongpass.uk-alert.uk-alert-warning{'data-uk-alert' => true}
 							%a.uk-alert-close.uk-close{:href => ''}
 							The UnderdogsID and password you entered are incorrect.
 					- if @error == :permission
-						%div.uk-alert.uk-alert-danger.uk-alert-large{'data-uk-alert' => true}
+						%div.banned.uk-alert.uk-alert-danger.uk-alert-large{'data-uk-alert' => true}
 							%a.uk-alert-close.uk-close{:href => ''}
 							%h2
 								Oh no...We Have Just a Little Problem
@@ -37,13 +37,12 @@
 						%label.uk-form-label
 							Password
 						%div.uk-form-controls
-							%input#main_plain_password{'type' => 'password', 'placeholder' => 'Password', 'name' => 'plain_password'}
+							%input{'type' => 'password', 'placeholder' => 'Password', 'name' => 'password'}
 					%div.uk-form-row
 						%label.uk-form-label
 							Remember You?
 						%div.uk-form-controls
 							= csrf_token_field
-							%input#main_hashed_password{:type => 'hidden', :name => 'password', :value => ''}
 							%input{'type' => 'checkbox', 'name' => 'remember'}
 								Remember Me
 					%div.uk-form-row

@@ -111,10 +111,9 @@
 										%div.uk-form-row
 											%input{'type' => 'text', 'placeholder' => 'UnderdogsID', 'name' => 'username'}
 										%div.uk-form-row
-											%input#nav_plain_password{'type' => 'password', 'placeholder' => 'Password', 'name' => 'plain_password'}
+											%input{'type' => 'password', 'placeholder' => 'Password', 'name' => 'password'}
 										%div.uk-form-row
 											= csrf_token_field
-											%input#nav_hashed_password{:type => 'hidden', :name => 'password', :value => ''}
 											%input{'type' => 'checkbox', 'name' => 'remember'}
 												Remember Me
 										%div.uk-form-row
