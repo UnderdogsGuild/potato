@@ -1,116 +1,129 @@
 describe '/community/underdogs/forum/' do
 
-  let(:base) { "/community/underdogs/forum/" }
+	let(:user) { create :user, login: "user", password: "password" }
+	let(:thread) { create :forum_thread }
+	let(:othread) { create :officer_thread }
 
-  let(:thread_attribs) do
-    {
-      title: "Foo",
-      content: "Lorem Ipsum Bullshit Est"
-    }
-  end
+	let(:csrf) { SecureRandom.hex(32) }
 
-  before :all do
-    @user = create :user, login: "user", password: "password"
-    create_list :forum_thread, 2, post_count: 2, officer: false
-    create_list :officer_thread, 2, post_count: 2
+	let(:base_path) { "/community/underdogs/forum/" }
 
-		@csrf = SecureRandom.hex(32)
-  end
+	let(:thread_attribs) do
+		{
+			title: "Foo",
+			content: "Lorem Ipsum Bullshit Est"
+		}
+	end
 
-  after :all do
-    ForumThread.each { |t| t.remove_all_forum_posts; t.destroy }
-    User.each { |u| u.remove_all_forum_posts; u.destroy}
-    ForumPost.each { |p| p.destroy }
-  end
+	let!(:previous_thread_count) { ForumThread.count }
+	let(:new_thread_count) { ForumThread.count }
 
-  before :each do
-    any_instance_of(Application) do |a|
-      stub(a).user { @user }
-    end
-    stub(@user).can? { false }
-    stub(@user).can?(:view_forum_threads) { true }
-    stub(@user).can?(:log_in) { true }
-  end
+	before do
+		any_instance_of(Application) { |a| stub(a).user { user } }
+		stub(user).can? { false }
+		stub(user).can?(:view_forum_threads) { true }
+	end
 
-  context "creating a new thead" do
-    context "without the required permission" do
+	describe "creating a new thead" do
+		context "without the required permission" do
 
-      before :each do
-        @count = ForumThread.count
-        stub(@user).can?(:create_forum_threads) { false }
-      end
+			before do
+				stub(user).can?(:create_forum_threads) { false }
 
-      it "fails" do
-        post "#{base}",
-          { thread: thread_attribs, potato: @csrf },
-          { 'rack.session' => { csrf: [@csrf] } }
+				post "#{base_path}",
+					{ thread: thread_attribs, potato: csrf },
+					{ 'rack.session' => { csrf: [csrf] } }
+			end
 
-        expect(last_response).to be_forbidden
-        expect(ForumThread.count).to eq(@count)
-      end
+			it "returns 403" do
+				expect(last_response).to be_forbidden
+			end
 
-      context "for officers" do
-        it "fails" do
-          @count = ForumThread.count
-          stub(@user).can?(:create_forum_threads) { true }
-          stub(@user).can?(:create_officer_threads) { false }
+			it "doesn't create a new thread" do
+				expect(new_thread_count).to eq(previous_thread_count)
+			end
 
-          post "#{base}",
-            { thread: thread_attribs.update(officer: true), potato: @csrf },
-            { 'rack.session' => { csrf: [@csrf] } }
+			context "for officers" do
 
-          expect(last_response).to be_forbidden
-          expect(ForumThread.count).to eq(@count)
-        end
-      end
+				before do
+					stub(user).can?(:create_forum_threads) { true }
+					stub(user).can?(:create_officer_threads) { false }
 
-    end
+					post base_path,
+						{ thread: thread_attribs.update(officer: true), potato: csrf },
+						{ 'rack.session' => { csrf: [csrf] } }
+				end
 
-    context "with the required permission" do
+				it "returns 403" do
+					expect(last_response).to be_forbidden
+				end
 
-      before :each do
-        @count = ForumThread.count
-        mock(@user).can?(:create_forum_threads) { true }
-      end
+				it "doesn't create a new thread" do
+					expect(new_thread_count).to eq(previous_thread_count)
+				end
 
-      it "succeeds" do
-        post "#{base}",
-          { thread: thread_attribs, potato: @csrf },
-          { 'rack.session' => { csrf: [@csrf] } }
+			end
+		end
 
-        expect(last_response).to_not be_forbidden
-        expect(last_response).to be_redirect
-        expect(ForumThread.count).to eq((@count + 1))
-      end
+		context "with the required permission" do
 
-      context "with invalid thread data" do
+			before do
+				mock(user).can?(:create_forum_threads) { true }
+			end
 
-        it "fails" do
-          post "#{base}",
-            { thread: thread_attribs.update(title: nil), potato: @csrf },
-            { 'rack.session' => { csrf: [@csrf] } }
+			context "and valid data" do
 
-          expect(last_response).to be_ok
-          expect(ForumThread.count).to eq(@count)
-        end
+				before do
+					post base_path,
+						{ thread: thread_attribs, potato: csrf },
+						{ 'rack.session' => { csrf: [csrf] } }
+				end
 
-      end
+				it "doesn't return 403" do
+					expect(last_response).to_not be_forbidden
+				end
 
-    end
-  end
+				it "redirects" do
+					expect(last_response).to be_redirect
+				end
 
-  context "replying to a thread" do
-  end
+				it "creates a new thread" do
+					expect(new_thread_count).to eq(previous_thread_count + 1)
+				end
 
-  context "editing an existing thread" do
-  end
+			end
 
-  context "editing a single post" do
-  end
+			context "but invalid data" do
 
-  context "deleting a thread" do
-  end
+				before do
+					post base_path,
+						{ thread: thread_attribs.update(content: nil), potato: csrf },
+						{ 'rack.session' => { csrf: [csrf] } }
+				end
 
-  context "deleting a single post" do
-  end
+				it "returns 200" do
+					expect(last_response).to be_ok
+				end
+
+				it "doesn't create a new thread" do
+					expect(new_thread_count).to eq(previous_thread_count)
+				end
+
+			end
+
+		end
+
+	end
+
+	describe "adding a new post to a thread" do
+	end
+
+	describe "editing a post" do
+	end
+
+	describe "deleting a thread" do
+	end
+
+	describe "deleting a post" do
+	end
 end
