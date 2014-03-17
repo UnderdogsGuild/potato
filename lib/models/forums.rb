@@ -52,9 +52,16 @@ class ForumThread < Sequel::Model
 end
 
 class ForumPost < Sequel::Model
+  plugin :validation_helpers
+
 	many_to_one :author, key: :author_id, class: :User
 	many_to_one :forum_thread, class: :ForumThread
 	alias_method :thread, :forum_thread
+
+  def validate
+    super
+    validates_presence :content
+  end
 
 	def before_save
 		set(updated_at: Time.now)
