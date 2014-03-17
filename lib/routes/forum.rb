@@ -46,26 +46,20 @@ class Application < Sinatra::Base
 			require_permission :create_forum_threads
 			require_permission :create_officer_threads if params[:thread][:officer]
 
-			@thread = ForumThread.new
-			@thread.title = params[:thread][:title]
-			@thread.officer = params[:thread][:officer]
+			begin
+				@thread = ForumThread.create(
+					title: params[:thread][:title],
+					officer: params[:thread][:officer])
 
-			if @thread.valid?
-				@thread.save
-				@post = ForumPost.new
-				@post.author = user
-				@post.forum_thread = @thread
-				@post.content = params[:thread][:content]
+				@thread.add_forum_post(
+					author: user,
+					forum_thread: @thread,
+					content: params[:thread][:content])
 
-				if @post.valid?
-					@post.save
-					redirect to(@thread.url)
+				redirect to(@thread.url)
 
-				else
-					haml :'forum/new_thread'
-				end
-
-			else
+			rescue Sequel::ValidationFailed
+				@thread.destroy
 				haml :'forum/new_thread'
 			end
 
