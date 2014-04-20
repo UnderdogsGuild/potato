@@ -7,8 +7,7 @@ class User < Sequel::Model
 	many_to_many :roles
 	many_to_many :permissions
 	one_to_many :news, class: :NewsEntry
-	one_to_many :forum_posts, key: :author_id
-	alias_method :posts, :forum_posts
+	one_to_many :posts, key: :author_id
 
 	def gravatar_url
 		@gravatar ||= "http://www.gravatar.com/avatar/#{Digest::MD5.hexdigest(self.email.downcase)}"
@@ -44,9 +43,10 @@ class User < Sequel::Model
 	##
 	# Return all threads started by user
 	def threads
-		@threads ||= posts.collect do |p|
-			p.thread if p.is_thread_opener?
-		end
+		[]
+		# @threads ||= posts.collect do |p|
+		# 	p.thread if p.is_thread_opener?
+		# end
 	end
 
 	##
