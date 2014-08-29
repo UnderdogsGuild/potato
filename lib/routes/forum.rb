@@ -3,21 +3,37 @@ require 'json'
 class Application < Sinatra::Base
 	namespace '/community/underdogs/forum' do
 		get '/?' do
-				require_permission :view_forum_threads
-				@threads = ForumThread.visible_for user
-				if request.xhr?
-					content_type :json
-					@threads = @threads.filter(id > params[:from]).limit(params[:count])
-					@threads.to_json
-				else
-					haml :'forum/index'
-				end
+			ensure_user_can :view_forum_threads
+			@forums = Forum.visible_for user
+
+			if request.xhr?
+				content_type :json
+				@threads = @threads.filter(id > params[:from]).limit(params[:count])
+				@threads.to_json
+			else
+				haml :'forum/index'
+			end
 		end
 
-		get '/:thread/?' do
-			require_permission :view_forum_threads
+		get '/:forum/?' do
+			ensure_user_can :view_forum_threads
+			@forum = Forum[id: params["forum"].to_i]
+			ensure_user_can :view_officer_threads if @forum and @forum.officer
+			raise Sinatra::NotFound unless @forum
+
+			if request.xhr?
+				content_type :json
+				@threads = @threads.filter(id > params[:from]).limit(params[:count])
+				@threads.to_json
+			else
+				haml :'forum/view_forum'
+			end
+		end
+
+		get '/:forum/:thread/?' do
+			ensure_user_can :view_forum_threads
 			@thread = ForumThread[id: params["thread"].to_i]
-			require_permission :view_officer_threads if @thread and @thread.officer
+			ensure_user_can :view_officer_threads if @thread and @thread.forum.officer
 			raise Sinatra::NotFound unless @thread
 
 			haml :'forum/view_thread'
@@ -37,17 +53,20 @@ class Application < Sinatra::Base
 
 		# get '/new/?' do
 		# 	# Show form to create new thread
-		# 	require_permission :create_forum_threads
+		# 	ensure_user_can :create_forum_threads
 
 		# 	haml :'forum/new_thread'
 		# end
 
-		post '/?' do
-			require_permission :create_forum_threads
-			require_permission :create_officer_threads if params[:thread][:officer]
+		post '/:forum/?' do
+			ensure_user_can :create_forum_threads
+			@forum = Forum[id: params["forum"].to_i]
+			ensure_user_can :create_officer_threads if @forum and @forum.officer
+			raise Sinatra::NotFound unless @forum
 
 			begin
 				@thread = ForumThread.create(
+					forum: @forum,
 					title: params[:thread][:title],
 					officer: params[:thread][:officer])
 

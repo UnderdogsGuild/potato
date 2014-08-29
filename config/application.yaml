@@ -1,7 +1,7 @@
 ---
 database:
-  development: 'mysql2://underdogs:undercats@localhost/underdogs'
-  test: 'mysql2://underdogs:undercats@localhost/underdogs_test'
+  development: 'mysql2://underdogs@localhost/underdogs'
+  test: 'mysql2://underdogs@localhost/underdogs_test'
   production: 'mysql2://foo:bar@localhost/underdogs'
 ---
 

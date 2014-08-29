@@ -28,6 +28,9 @@ gem "sequel"
 # Templating
 gem "haml"
 gem "sass"
+# gem "bourbon"
+# gem "neat"
+# gem "bitters"
 
 group :development do
 	gem "rake"
@@ -35,7 +38,7 @@ group :development do
 	gem 'foreman'
 	gem 'shotgun'
 	gem 'thin'
-	gem 'rb-inotify', '~> 0.9'
+	gem 'rb-inotify'
 end
 
 gem "mysql2"
@@ -43,10 +46,10 @@ gem "mysql2"
 group :test do
 	gem "rspec"
 	gem "rack-test"
-	gem "rr"
+	gem "rr", require: false
 	gem "capybara"
 	gem "poltergeist"
-	gem "factory_girl", "~> 4.0"
+	gem "factory_girl"
 	gem "faker"
 	gem "guard"
 	gem "guard-rspec"

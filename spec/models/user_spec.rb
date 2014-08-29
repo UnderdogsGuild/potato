@@ -36,15 +36,15 @@ describe User do
 	end
 
 	it "can verify permissions on users" do
-		expect(@umember.can?(:log_in)).to be_true
-		expect(@umember.can?(:read_newspaper)).to be_false
+		expect(@umember.can?(:log_in)).to be_truthy
+		expect(@umember.can?(:read_newspaper)).to be_falsey
 	end
 
 	it "should recognize root's power" do
-		expect(@umember._is_root?).to be_false
-		expect(@uroot._is_root?).to be_true
-		expect(@umember.can?(:create_apes)).to be_false
-		expect(@uroot.can?(:create_apes)).to be_true
+		expect(@umember._is_root?).to be_falsey
+		expect(@uroot._is_root?).to be_truthy
+		expect(@umember.can?(:create_apes)).to be_falsey
+		expect(@uroot.can?(:create_apes)).to be_truthy
 	end
 
 	it "should hash the password field" do

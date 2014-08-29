@@ -18,7 +18,7 @@ class Application < Sinatra::Base
 		# Route helper. Makes sure there is an active user that has the required
 		# perm token. Save the current URL, so we can send them back after they log
 		# in.
-		def require_permission(perm)
+		def ensure_user_can(perm)
 			unless user
 				session[:go_back] = request.path_info
 				redirect to('/login')

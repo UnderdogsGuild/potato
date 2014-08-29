@@ -38,7 +38,7 @@ class Application < Sinatra::Base
 	end
 
 	get '/logout/?' do
-		require_permission :log_in
+		ensure_user_can :log_in
 		logger.debug "Clearing session for user #{user.id}."
 
 		session.clear

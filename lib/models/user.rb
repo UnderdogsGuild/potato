@@ -7,7 +7,8 @@ class User < Sequel::Model
 	many_to_many :roles
 	many_to_many :permissions
 	one_to_many :news, class: :NewsEntry
-	one_to_many :posts, key: :author_id
+	one_to_many :forum_posts
+	alias_method :posts, :forum_posts
 
 	def gravatar_url
 		@gravatar ||= "http://www.gravatar.com/avatar/#{Digest::MD5.hexdigest(self.email.downcase)}"

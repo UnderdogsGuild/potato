@@ -2,7 +2,8 @@
 
 # 	let(:user) { create :user, login: "user", password: "password" }
 # 	let(:thread) { create :forum_thread }
-# 	let(:othread) { create :officer_thread }
+# 	let(:forum) { create :forum }
+# 	# let(:othread) { create :officer_thread }
 
 # 	let(:csrf) { SecureRandom.hex(32) }
 
@@ -11,7 +12,8 @@
 # 	let(:thread_attribs) do
 # 		{
 # 			title: "Foo",
-# 			content: "Lorem Ipsum Bullshit Est"
+# 			content: "Lorem Ipsum Bullshit Est",
+# 			forum: forum
 # 		}
 # 	end
 
@@ -19,9 +21,11 @@
 # 	let(:new_thread_count) { ForumThread.count }
 
 # 	before do
-# 		any_instance_of(Application) { |a| stub(a).user { user } }
-# 		stub(user).can? { false }
+# 		instance_of(Application) do |a|
+# 			stub(a).user { user }
+# 		end
 # 		stub(user).can?(:view_forum_threads) { true }
+# 		stub(user).can? { false }
 # 	end
 
 # 	describe "creating a new thead" do

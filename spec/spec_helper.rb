@@ -22,10 +22,13 @@ RSpec.configure do |c|
 	c.include Rack::Test::Methods
 	c.include FactoryGirl::Syntax::Methods
 	c.include SpecHelpers
+	c.mock_with :rr
 
 	c.expect_with :rspec do |x|
 		x.syntax = :expect
 	end
+	
+	migdir = File.expand_path(File.join(Application.root, 'lib', 'models', 'migrations'))
 
 	c.before :suite do
 		Capybara.app = Application
@@ -36,9 +39,9 @@ RSpec.configure do |c|
 
 		Sequel.extension :migration
 
-		# Get our brand new in-memory DB up
-		Sequel::Migrator.run(Application.db, './lib/models/migrations', target: 0)
-		Sequel::Migrator.run(Application.db, './lib/models/migrations')
+		# Get our DB up to speed
+		Sequel::Migrator.run(Application.db, migdir, target: 0)
+		Sequel::Migrator.run(Application.db, migdir)
 
 		# After migrating, reset all the models
 		Sequel::Model.subclasses.each do |model|
@@ -52,24 +55,16 @@ RSpec.configure do |c|
 			to_create { |instance| instance.save }
 		end
 
-		Application.db.transaction(rollback: :always) do
-			FactoryGirl.lint
-		end
+		# Application.db.transaction(rollback: :always) do
+		# 	FactoryGirl.lint
+		# end
 	end
-
-	# c.before :each  do
-	# 	DatabaseCleaner.start
-	# end
-
-	# c.after :each do
-	# 	DatabaseCleaner.clean
-	# end
 
   c.around(:each) do |example|
     Application.db.transaction(:rollback=>:always){example.run}
   end
 
-	c.after :suite do
-		Sequel::Migrator.run(Application.db, './lib/models/migrations', target: 0)
-	end
+	# c.after :suite do
+	# 	Sequel::Migrator.run(Application.db, migdir, target: 0)
+	# end
 end

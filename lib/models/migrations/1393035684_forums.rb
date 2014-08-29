@@ -1,14 +1,38 @@
 Sequel.migration do
 	change do
-		create_table(:posts) do
-			primary_key :post_id
-			foreign_key :author_id, :users
-      foreign_key :parent_id, :posts
-			DateTime :posted_at, default: Sequel::CURRENT_TIMESTAMP
-			DateTime :updated_at
-      Boolean :officer_only
-			String :content, null: false, text: true
-      String :title
+
+		create_table(:forums) do
+			primary_key :id
+
+			String :name
+			String :description
+			Boolean :officer, default: false
 		end
+
+		create_table(:forum_threads) do
+			primary_key :id
+			foreign_key :forum_id, :forums, on_delete: :cascade
+
+			String :title
+			Integer :views
+		end
+
+		create_table(:forum_posts) do
+			primary_key :id
+			foreign_key :user_id, :users
+			foreign_key :forum_thread_id, :forum_threads, on_delete: :cascade
+
+			String :content, null: false, text: true
+			DateTime :created_at, default: Sequel::CURRENT_TIMESTAMP
+			DateTime :updated_at
+		end
+
+		create_table(:thread_visits) do
+			primary_key :id
+			foreign_key :user_id, :users, on_delete: :cascade
+			foreign_key :forum_thread_id, :forum_threads, on_delete: :cascade
+			DateTime :when, default: Sequel::CURRENT_TIMESTAMP
+		end
+
 	end
 end
