@@ -1,0 +1,229 @@
+* Research searching (what?) (Adalind)
+
+* !! Design navbar-flip content dropdown for logged in users (Faore)
+	Faore:
+		Done enough for beta.
+
+* Clean up Post view (Faore)
+
+* !! Add missing options to forum view (Faore)
+	Faore:
+		Done.
+
+* Hide certain options from the navbar (Faore)
+	Faore:
+		Not required for beta
+
+* Rework the cog menu (Faore)
+	Faore:
+		Done
+
+* Consider and work on design for a backend (Faore)
+	mkaito:
+		Who needs a separate backend? Just integrate any relevant options in the
+		main interface via permission checks.
+
+	Faore:
+		Not seperate but I still have to figure out how to have to have content
+		presented, lol.	I don't want to scare Myra away with the control panel, so
+		I'll have to figure out howto make it seem less menacing. Not sure how much
+		to include on pages.
+
+	mkaito:
+		It's a lot less menacing to edit things in-place instead of at a special
+		page for admins
+
+* Modify mobile nav to be consistent with all the changes above, and fix its
+  broken icon (Faore)
+  	Faore:
+  		Done.
+
+* Learn some JQuery AJAX/JSON skills and apply them to make additional posts
+  and threads appear on their pages (Faore)
+	Faore:
+		I'm going to hold off on this for a bit while I work on other things. In the
+		meantime, does the app return JSON anywhere yet? For the beginning of the
+		beta, we can just return all the posts. There won't be too many. Especially
+		since things important enough to be a "sticky" will be at the wiki or on its
+		own page.
+
+* Hash passwords before form submission (Faore)
+	mkaito:
+		What bitlength should we use for SHA2? Here are to reference
+		implementations in Javascript, one for 256 bits, and one for 512 bits. Both
+		are reasonably fast, and Ruby supports both. All other things equal, how
+		about we just go for the higher one?
+
+		http://www.webtoolkit.info/javascript-sha256.html
+		http://www.happycode.info/javascript-sha-512/
+
+		Alternatively, check out this JS library that supports all SHA algos:
+		https://github.com/Caligatio/jsSHA
+
+		I'd like to propose adding a password guideline where appropiate, as little
+		help blurb. I want it to literally say "whatever you want", and show
+		a tooltip on hover that shows some examples with crazy shit like control
+		characters, chinese characters, and all that stuff that most sites would
+		bark at you for.
+
+	Faore:
+		I'm just going ahead with the 512 if there's no difference like you say.
+		Hashing is done. The hashed password is sent to the application as
+		password=512randomslapsonakeyboard. The plain_password field is also sent to
+		the server but the value is always null since it is emptied before sumission.
+
+	mkaito:
+		Nope, didn't work. Interaction tests fail with "Unable to find field
+		"password"", and a manual run in the browser finds that no hashing happens.
+		It sends an empty `password` field, and the plain password in the
+		`plain_password` field. Firebug console:
+	  
+	  ReferenceError: authManager is not defined
+
+	mkaito:
+		Nevermind, refactored your JS a little. Works now.
+
+		You will have to reseed the database.
+
+		Just so you know, I've removed the console.log bullshit from cycle2,
+		because it was cluttering my test output big time.
+
+	Faore:
+		Alright, I'll make sure to add the tooltips.
+
+	Faore:
+		Fixed authentication. Function was being called twice because it wasn't removed
+		from layout.haml when it was added to application.js
+
+  mkaito:
+    That would explain my issues from last night. I refactored the JS further,
+    and then found that nothing worked. Wrecked my head over it for a while,
+    but was too tired.
+
+* Uncompress all Javascript for development (Faore)
+  mkaito:
+    That super.js is about as unwieldy as it gets. I'd like us to use
+    uncompressed versions of everything during development and testing, and
+    compile/compress/minify things for production, on deploy.
+
+    You can access the current environment via `settings.environment`, which
+    will be one of :test, :development, or :production. You should check for
+    these in the layout, and place script tags accordingly. I'll write some
+    rake tasks to fix up JS for production. I'm not sure what happens with CSS,
+    but we can do the same thing. SASS can output things in a compressed format
+    by itself, but if you are loading non-SASS files (maybe some uikit stuff),
+    that will need to be handled separately.
+
+    I would generally have SASS output in extended format during development
+    and testing, with a file watcher, and do a one-time compile in compressed
+    format for deployment. This approach falls a little flat if you're using
+    non-SASS stuff, though. Will have to investigate.
+
+  Faore:
+    Alright. I've seperated the JS files, and updated some of the scripts and
+    cleaned up some CSS. Super.js is no longer being used. If we're going to do
+    the beta we'll need to have that rake task to minify JS going before then.
+    Uncompressed, the JS will make load times between 5-14 seconds depending on
+    location during my tests.
+
+* Deployment, compiling, and stuff (mkaito)
+  mkaito:
+    As for deployment itself, I was thinking about not doing it automatically
+    via git hooks. The main reason is that we should run tests prior to every
+    deployment, and the testing environment takes a lot more crap than the app
+    actually needs in production, and there's no need for all of that to live
+    on the server. Compressing javascript just adds another tool to the list.
+
+    The main offenders on the list would probably be PhantomJS and whatever we
+    use to minify Javascript (I was thinking Google Closure Compiler).
+
+    I'll write rake tasks for deployment as well, so you can `bundle exec rake
+    deploy` and it will do the right thing. 
+
+    I think I'll use either Vlad, or roll a manual rsync dance to get things to
+    the right place in the server. I'll make sure only production stuff is
+    deployed (ie, no tests, no sass stuff, no coffeescript or whatever).
+
+* Profiles
+  mkaito:
+    I actually came up with a good idea for an actual profile: documenting what
+    games someone plays. For example, note that someone plays FFXIV and what
+    their character names are. That way, it's easy to join fellow guildies in
+    new games. I'm not sure whether this would warrant a full blown profile
+    page, but it's worth discussing.
+
+* "Public" "Beta"
+  mkaito:
+    Once the forums are ready, we should create a "stable" branch, and deploy.
+    Remove all the filler stuff we have on the page, clean everything up, and
+    only show what is functional. To begin with, this will probably mean that
+    the frontpage will *be* the forums. That and logging in. Nothing else.
+
+    We should try to keep things stable in this branch. When something is ready
+    to be merged and deployed, I'll clean things up in another branch and merge
+    when ready. That way, we can develop and deploy things in an incremental
+    fashion, and keep all the filler stuff in the development branches.
+
+    I was thinking we could incorporate a little "Feedback" form. Something
+    like a little plus sign in the lower right corner of the browser window.
+    Click it, a textarea opens, people type in their thoughts, and we receive
+    them, along with some metadata (their username, the page they were
+    viewing). Maybe it should just send an email to one of us, maybe make
+    a little section on the site for us to see their feedback like a mailbox.
+    Your choice.
+
+    This also means that it's time to document things. As we clean the
+    interface up, we should make sure that things are as self documenting as
+    possible, and add extra documentation where necessary.
+
+  Faore:
+    Alright, will do. I'll get to work on a feedback form soonish here. Talked
+    to Myra about having a beta and having everyone use it when its ready.
+    I also warned her that it would be very barebones to start. For the beta
+    I'll be employing CloudFlare for caching, not CloudFront so no changes to
+    the app will be necissary. That, and the cache can be purged in ~60
+    seconds. I'll focus on the most crucial pages for the beta.
+
+  Faore:
+  	I've created the stable branch with a bunch of stuff removed and pushed it.
+
+  mkaito:
+    I wonder how we can handle testing in the stable branch... If we only
+    remove stuff from the templates, and don't move routes, they should just
+    work, but if we change routes (for example, move the forums to /), they'll
+    break.
+
+* Design a simple registration form (Faore)
+	Faore:
+		Next on my todo list. The end product will only last through the beta until
+		we can do applications instead.
+
+  mkaito:
+    I guess we will do a specialized workflow for applications. I'm thinking
+    a not-terribly-complicated form that submits an application to be reviewed
+    by officers. A user account is created on the site automatically when the
+    application is accepted, and a random password emailed to the appliant.
+
+    More interesting is how to handle the application. Remember those "special
+    forum threads" I mentioned a while back? Those visible to everyone except
+    one person? Those were used for application discussion back at my old
+    guild. We could have the application be first only visible to officers. An
+    officer could then "push" it to the forums, where all members can discuss
+    it. If all goes well, the application would then be approved, and the
+    thread stays open, visible to everyone except the appliant. That way,
+    members can discuss over the new guy. After a reasonable amount of time,
+    officers can then take the thread down, making it disappear from the
+    forums, but stay in the application archive for reference.
+
+    Ideas?
+
+* Design a simple feedback button. (Faore)
+	Faore:
+		Done and ready to be rigged up.
+
+* IRC + Webchat
+  IRC itself is simple but effective. The clients, however, tend to be techy.
+  We can alleviate that with a webchat popup on the site that interfaces with
+  some IRC. Running a non-federated IRC server is pretty much trivial.
+  I haven't looked at webchat things in ages. I wonder if there's anything
+  worthy out there.
