@@ -1,0 +1,164 @@
+# Hack the potato
+
+This is project codename "potato", as named by Remeliez. Most code-y things are
+written by Adalind, and most design-y things are crafted by Faore, but there is
+a lot of cross over. You can always check git blame if you're curious.
+
+The backend is written entirely in Ruby, using Sinatra and Sequel. Tests are
+written in RSpec, and mocks use RR. More specific details below, in their
+pertinent sections.
+
+## Getting started
+
+First of all, you will need a ruby deployment and the bundler gem. I use
+[rbenv](https://github.com/sstephenson/rbenv) to manage my Ruby, and the potato
+tree contains a `.ruby–version` file that rbenv will use to set the active
+version inside the tree. Check the rbenv documentation for installation
+instructions, then check the `.ruby-version` file to see what version potato is
+running on, install it, and then install the bundler gem for the active
+version.
+
+Next, you will want to make sure your gem bundle is up to date. You do that
+with `bundle install --without=production`. Bundler will remember the option
+for future incantations of `bundle install`. In fact, `install` is the default
+action, so `bundle` will do just fine. Do not run `bundle update` unless you
+know what you are doing. At least until I can get around to set specific
+versions in the `Gemfile`. Until then, the `Gemfile.lock` is what determines
+the versions you get, and `bundle update` overrides the lock.
+
+Make sure the database settings in `config/application.yaml` point at something
+usable, and then run `bundle exec rake db:seed`. This will run any necessary
+migrations (erasing any existing data, in case you run it again), and then
+populate the development database with random data, so you have something to
+look at when you start the development server.
+
+Speaking of the development server, you start it with `foreman start web`. This
+will start `shotgun` with the `thin` adapter for the app, and the webrick
+adapter for static files on port 9292.
+
+## Your editor settings
+
+If you use vim, I recommend using
+[dirsettings](https://github.com/mantiz/vim-plugin-dirsettings). There's a
+`.vimrc` at the top of the potato tree that will set you up with indentation
+settings. If you use a different editor, set it to using tabs for indentation,
+especially in `haml` files, where mixing tabs and spaces will mess you up
+really fast. Tab width is 4 for haml, and 2 for everything else. Don't ask why…
+I don't know myself. It just ended up that way.
+
+## Workflow
+
+A gem called `guard` can monitor the filesystem, watch for changes, and run
+specific actions depending on what happened. Right now, it is set up to run
+unit tests whenever something changes. Most ruby files are watched, but not all
+of them. You can always run the entire test suite by hitting enter at the guard
+prompt.
+
+To run tests once, use the `spec` Rake task, like `bundle exec rake spec`. I
+have a shell alias `ber="bundle exec rake"`, because that's just too much
+typing.
+
+Everything should have tests. If it doesn't have tests, it's broken. We don't
+want broken code, do we now?
+
+## Components
+
+I (Adalind) decided against using an integrated framework, such as Rails, for
+mostly personal reasons. I stand by my decission, but we can argue about the
+pros and cons of big ass frameworks until the end of the world and not reach an
+agreement. I think my little pseudo-framework, which I call "Singerbones", is
+pretty nifty. The name came about because it started as a "skeleton" for a
+"sinatra" app. Get it? Hurr durr. I love cheesy stupid names. Sorry.
+
+### Sinatra
+
+Sinatra is a lightweight routing DSL on top of Rack. It's very fast, small, and
+easy to use, yet very flexible. Sinatra sees usage mostly as auxiliary
+webservice handler in Rails apps, where booting the entire stack is not
+convenient or downright overkill. Most people don't realize how well sinatra
+scales, especially if you take the time to set up a good framework around its
+modular app style.
+
+Sinatra handles the routing, most evidently, as well as helper methods, and
+simply being glue between everything else.
+
+Sinatra code lives in `lib/application.rb`, the root file which configures
+everything else, and specific routes live in namespaced files in `lib/routes`.
+Route files generally contain a single URL namespace, but routes may be grouped
+logically if convenient.
+
+Helper methods live grouped by logical topic in `lib/helpers`, and are loaded
+automatically by sinatra. Testing helpers is tricky, so keep them simple,
+because I'm just not testing them at all right now. Bad, I know, but I hate
+hacky crap, and until I figure out a clean way to test them, just keep them
+simple.
+
+### Sequel
+
+Ruby and databases? Surely, you'd be using ActiveRecord! Well, no. Even Rails
+lovers have a thing for hating AR, and I don't find it attractive. Singerbones
+originally used DataMapper, but since it died (beware rewrites!) I had to
+switch to something else. Sequel was the evident choice. I wish I had kicked DM
+out the window much earlier. Sequel is awesome!
+
+Sequel handles everything pertaining to data persistence, including
+data-specific business logic. All Sequel code lives in `lib/models`.
+`lib/models/all.rb` configures the database connection and loads all models, so
+it is convenient to require for an interactive database shell.
+
+### Testing
+
+Testing is a deep ass rabbit hole. You've been warned.
+
+Tests are written using RSpec 3 and RR for mocks. Because I prefer RR over
+RSpec mock syntax.
+
+#### Organization
+
+The application is tested in 3 different ways: models, routes, and interface.
+
+Models try to isolate the data business logic from everything else, to make
+sure relations and custom logic works as expected. These tests are mostly for
+data consistency and filtering.
+
+Routes call the raw Rack API, faking all kinds of requests, feasable or not, to
+make sure the application responds correctly to correct and incorrect input in
+a variety of contexts. This is where most of the auth tests happen. Try to not
+litter the templates with test-specific stuff. I know it's nice to have a
+conveniently placed HTML id/class to check responses, but clean and semantic
+markup is a thing, and I really put a lot of value on it.
+
+Interface tests use a phantom browser to simulate what a user would do when
+using the site. Click on stuff, fill out forms, see what happens, and compare
+to your expectations. This makes sure that UI elements actually work as
+expected, that there are interface elements for every necessary backend action,
+and makes it possible to test how Javascript interacts with the backend and the
+interface. These tests are inherently full-stack, so they double as integration
+tests.
+
+### Implementing a feature
+
+I generally start with model tests, to make sure the data I'm working with is
+solid, then move on to write and test the necessary routes, and then work on
+the interface to make sure everything is accessible.
+
+I recommend working in a git topic branch off master, rebasing often. It's good
+practice to namespace your branches with your username, like `mkaito/feature`,
+for me (mkaito), working on "feature".
+
+Working in a branch has a number of benefits. First, if you need to go back to
+whatever is live and fix a bug, you can just check out master and create
+another branch for the fix, without affecting your feature branch, or having to
+figure out whether your work in progress is ripe for deployment. After fixing
+the bug, rebase your feature branch so you get the fix too.
+
+Second, if your explorative work doesn't pan out, you can just shelf the
+branch, or delete it, and it's all fine, without having to figure out how to
+undo anything.
+
+### What to work on
+
+`doc/TODO` contains a tentative list of things that need to be worked on. You
+can also grep/ack for "TODO:\|FIXME:" for inline tasks. Feel free to add your
+ideas here, if they are to be worked on. You might want to discuss them with
+someone else on the team before doing that, though.
