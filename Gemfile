@@ -8,7 +8,7 @@ gem "application", "0.0", path: "."
 gem "sinatra"
 gem "sinatra-namespace"
 gem "sinatra-config-file"
-# gem "rack-flash"
+gem "rack-flash"
 gem "rack-contrib"
 gem "sinatra-r18n"
 # gem "sinatra-partial"
@@ -22,15 +22,16 @@ gem "unicorn"
 # gem "tmail"
 # gem "i18n"
 
-# DB: Adapters included in groups below
+# Database stuff
 gem "sequel"
+gem "mysql2"
 
 # Templating
 gem "haml"
 gem "sass"
-# gem "bourbon"
-# gem "neat"
-# gem "bitters"
+gem "bourbon"
+gem "neat"
+gem "bitters"
 
 group :development do
 	gem "rake"
@@ -39,18 +40,17 @@ group :development do
 	gem 'shotgun'
 	gem 'thin'
 	gem 'rb-inotify'
+	gem "guard"
+	gem "guard-sass"
 end
-
-gem "mysql2"
 
 group :test do
 	gem "rspec"
 	gem "rack-test"
-	gem "rr", require: false
+	gem "rr"
 	gem "capybara"
 	gem "poltergeist"
 	gem "factory_girl"
 	gem "faker"
-	gem "guard"
 	gem "guard-rspec"
 end

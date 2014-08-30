@@ -1,7 +1,7 @@
 # A sample Guardfile
 # More info at https://github.com/guard/guard#readme
 
-guard :rspec, cmd: 'bundle exec ruby -I. -r spec/spec_helper -S rspec --color --format progress --order random', all_on_start: true, all_after_pass: false do
+guard :rspec, cmd: 'bundle exec ruby -I. -r spec/spec_helper -S rspec --color --format progress --order random', all_on_start: false, all_after_pass: false do
   watch(%r{^spec/.+_spec\.rb$})
 	watch('lib/application.rb') { "spec" }
   watch(%r{^lib/(.+)\.rb$})     { |m| "spec/#{m[1]}_spec.rb" }
@@ -23,3 +23,4 @@ guard :rspec, cmd: 'bundle exec ruby -I. -r spec/spec_helper -S rspec --color --
   # watch(%r{^spec/acceptance/steps/(.+)_steps\.rb$})   { |m| Dir[File.join("**/#{m[1]}.feature")][0] || 'spec/acceptance' }
 end
 
+guard 'sass', input: 'lib/sass', output: 'public/css', all_on_start: true, style: :extended

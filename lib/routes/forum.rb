@@ -6,28 +6,28 @@ class Application < Sinatra::Base
 			ensure_user_can :view_forum_threads
 			@forums = Forum.visible_for user
 
-			if request.xhr?
-				content_type :json
-				@threads = @threads.filter(id > params[:from]).limit(params[:count])
-				@threads.to_json
-			else
+			# if request.xhr?
+			# 	content_type :json
+			# 	@threads = @threads.filter(id > params[:from]).limit(params[:count])
+			# 	@threads.to_json
+			# else
 				haml :'forum/index'
-			end
+			# end
 		end
 
 		get '/:forum/?' do
 			ensure_user_can :view_forum_threads
-			@forum = Forum[id: params["forum"].to_i]
+			@forum = Forum[slug: params["forum"]]
 			ensure_user_can :view_officer_threads if @forum and @forum.officer
 			raise Sinatra::NotFound unless @forum
 
-			if request.xhr?
-				content_type :json
-				@threads = @threads.filter(id > params[:from]).limit(params[:count])
-				@threads.to_json
-			else
+			# if request.xhr?
+			# 	content_type :json
+			# 	@threads = @forum.threads.filter(id > params[:from]).limit(params[:count])
+			# 	@threads.to_json
+			# else
 				haml :'forum/view_forum'
-			end
+			# end
 		end
 
 		get '/:forum/:thread/?' do

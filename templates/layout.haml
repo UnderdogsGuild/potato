@@ -9,7 +9,8 @@
 	/%link{'rel' => 'shortcut icon', 'href' => '/img/meta/favicon.ico'}
 	/%link{'rel' => 'apple-touch-icon', 'href' => '/img/meta/apple-touch-icon.png'}
 	/End Mobile Device Support
-	%link{'rel' => 'stylesheet', :href => '/site.css', :type => 'text/css'}
+	%link{'rel' => 'stylesheet', :href => '/css/application.css', :type => 'text/css'}
+
 %body
 	%noscript
 		%div.nojs
@@ -24,6 +25,7 @@
 					site without it. It just won't work. So enable your JS and
 					reload the page! It'll be well worth it. No viruses; no
 					ads; just our website.
+
 	=haml :'tmpl/offcanvas'
 	=haml :'tmpl/mobilenav'
 	/Main Page
@@ -39,8 +41,11 @@
 	%div.uk-container.uk-container-center.ud-banner
 		%div#ud-hbanner.uk-hidden-small
 		=haml :'tmpl/globalnav'
+
 	=yield
+
 	=haml :'tmpl/globalfooter'
+
 	/Feedback and Bug Reports
 	%div.fb-hide
 		%div#feedback-form
@@ -81,4 +86,5 @@
 									Send Feedback
 	%a.uk-button.uk-button-success.fb-open{:href => '#feedback-form', 'style' => 'position:fixed; bottom:0; right: 0;'}
 		%i.uk-icon.uk-icon-plus.uk-icon-spin
-	%script{src: '/site.js'}
+
+	%script{src: '/js/application.min.js'}

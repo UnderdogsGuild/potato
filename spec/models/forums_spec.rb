@@ -33,6 +33,12 @@ describe "Forum models" do
 			expect(forum).to be_valid
 		end
 
+		describe "#slug" do
+			it "defaults to the slugified version of the name" do
+				expect(@forum.slug).to eq(@forum.name.to_url)
+			end
+		end
+
 		describe "::visible_for(user)" do
 			it "returns officer forums for officer users" do
 				mock(@user).can?(:view_forum_threads) { true }

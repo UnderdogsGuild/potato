@@ -43,7 +43,8 @@ describe "Auth routes" do
 		it "should be accepted" do
 			get '/login'
 			post '/login',
-				{ username: @user.login, password: @password, action: "login", remember: true, potato: @csrf_token },
+				{ username: @user.login, password: @password,
+					action: "login", remember: true, potato: @csrf_token },
 				{ 'rack.session' => { csrf: [@csrf_token] } }
 
 			follow_redirect!

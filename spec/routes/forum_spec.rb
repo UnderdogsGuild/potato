@@ -1,3 +1,73 @@
+describe '/community/underdogs/forum/' do
+	let(:forum_path) { "/community/underdogs/forum" }
+	let(:csrf) { SecureRandom.hex(32) }
+
+	before :all do
+		@user = create :user
+
+		@forum = create :forum
+		@thread = @forum.threads.first
+		@post = @thread.posts.first
+
+		@officer_forum = create :forum, officer: true
+		@officer_thread = @officer_forum.threads.first
+		@officer_post = @officer_thread.posts.first
+	end
+
+	after :all do
+		Forum.each { |f| f.destroy }
+
+		Permission.each { |p| p.remove_all_users; p.remove_all_roles; p.destroy }
+		Role.each { |r| r.remove_all_users; r.remove_all_permissions; r.destroy }
+		User.each { |u| u.remove_all_roles; u.remove_all_permissions; u.destroy }
+	end
+
+	before :each do
+		any_instance_of(Application) { |a| stub(a).user { @user } }
+		stub(@user).can? { false }
+	end
+
+	describe 'forum index' do
+		describe "for a registered user" do
+			before :each do
+				stub(@user).can?(:view_forum_threads) { true }
+				get forum_path
+			end
+
+			it "does not return an error" do
+				expect(last_response).to be_ok
+			end
+		end # for a registered user
+
+		describe "for a guest" do
+			before :each do
+				@user = nil
+				get forum_path
+			end
+
+			it "returns a redirect" do
+				expect(last_response).to be_redirect
+			end
+
+			it "redirects to the login page" do
+				expect(last_response.location).to eq("http://example.org/login")
+			end
+		end # for a guest
+	end # forum index
+
+	describe "/forum" do
+		describe "for a registered user" do
+			before :each do
+				stub(@user).can?(:view_forum_threads) { true }
+				get @forum.url
+			end
+
+			it "does not return an error" do
+				expect(last_response).to be_ok
+			end
+		end
+	end
+end
 # describe '/community/underdogs/forum/' do
 
 # 	let(:user) { create :user, login: "user", password: "password" }

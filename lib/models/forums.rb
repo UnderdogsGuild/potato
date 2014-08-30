@@ -10,8 +10,13 @@ class Forum < Sequel::Model
 		validates_presence :description
 	end
 
+	def before_save
+		self.slug ||= self.name.to_url
+		super
+	end
+
 	def url
-		"/community/underdogs/forum/#{name.to_url}"
+		"/community/underdogs/forum/#{self.slug}"
 	end
 
 	def self.visible_for(user)

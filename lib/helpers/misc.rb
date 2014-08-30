@@ -4,7 +4,8 @@ class Application < Sinatra::Base
 			[
 				"Welcome, #{user}!",
 				"Sup, #{user}?",
-				"Aloha, #{user}!"
+				"Aloha, #{user}!",
+				"こんにちは, #{user}！"
 			].sample
 		end
 	end

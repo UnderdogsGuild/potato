@@ -36,17 +36,17 @@ jsfiles = [
 ]
 
 desc "Minify Javascript files"
-file 'public/site.js' => jsfiles do |t|
+file 'public/js/application.min.js' => jsfiles do |t|
   `uglifyjs #{t.prerequisites.join(" ")} -o #{t.name}`
 end
 
 desc "Minify CSS files"
-file 'public/site.css' => FileList["lib/sass/*"] do |t|
-  `sass -C -t compressed lib/sass/ud_master.scss #{t.name}`
+file 'public/css/application.css' => FileList["lib/sass/**/*.scss"] do |t|
+  `sass -t compressed lib/sass/application.scss #{t.name}`
 end
 
 desc "Minify Javascript and CSS files"
-task :minify => ['public/site.js', 'public/site.css']
+task :minify => ['public/site.min.js', 'public/site.css']
 
 task :minclean do
   `rm public/site.js public/site.css`

@@ -1,3 +1,5 @@
 * Forum routes
 * Port templates from laravel for forum
 * Rake task to import data from laravel
+* 304 forum ids to forum slugs
+	/forums/3 -> 304 -> /forums/general-discussion

@@ -5,6 +5,7 @@ Sequel.migration do
 			primary_key :id
 
 			String :name
+			String :slug
 			String :description
 			Boolean :officer, default: false
 		end

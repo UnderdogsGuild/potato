@@ -3,7 +3,7 @@ class String
   #
   # @param bare Boolean Omit wrapping paragraph tags in output
   def to_html(bare = false)
-    return nil if self.nil? or bare.nil?
+    return nil if self.nil?
     rd = RDiscount.new(self, :generate_toc, :smart)
     html = rd.to_html
     html.gsub! "{:toc}", rd.toc_content if rd.generate_toc
