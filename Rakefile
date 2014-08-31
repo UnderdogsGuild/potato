@@ -7,7 +7,7 @@ RSpec::Core::RakeTask.new(:spec) do |spec|
   spec.rspec_opts = '--order random --format progress --color'
 end
 
-task :spec => :minify
+# task :spec => :minify
 task :default => :spec
 
 # Order is important!
@@ -41,12 +41,12 @@ file 'public/js/application.min.js' => jsfiles do |t|
 end
 
 desc "Minify CSS files"
-file 'public/css/application.css' => FileList["lib/sass/**/*.scss"] do |t|
-  `sass -t compressed lib/sass/application.scss #{t.name}`
+file 'public/css/app.min.css' => FileList["lib/sass/**/*.scss"] do |t|
+  `sass -t compressed lib/sass/app.scss #{t.name}`
 end
 
 desc "Minify Javascript and CSS files"
-task :minify => ['public/site.min.js', 'public/site.css']
+task :minify => ['public/js/application.min.js', 'public/css/application.min.css']
 
 task :minclean do
   `rm public/site.js public/site.css`
