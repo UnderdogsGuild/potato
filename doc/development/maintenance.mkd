@@ -1,0 +1,18 @@
+A gem called [turnout](https://github.com/biola/turnout) handles taking the
+entire app down for maintenance.  Note that it only affects requests that go
+through the rack server; so if something else handles static files (images,
+css, javascript), those will still be served.
+
+Rake commands are used to manage turnout, but remember to add `bundle exec`
+before `rake`, or shit won't work. For example, where the docs say you should
+`rake maintenance:start`, you actually need to `bundle exec rake
+maintenance:start`. Maintenance is ended with `bundle exec rake
+maintenance:end`.
+
+Maintenance is detected via the existence of a file `tmp/maintenance.yml`,
+which is created by the rake task above. You can just `touch` the file, and it
+will put the app in maintenance without further configuration, if you are in a
+hurry.
+
+The rake task can take a number of arguments to configure the maintenance
+messages. Read the turnout docs for further information.

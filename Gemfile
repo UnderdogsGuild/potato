@@ -19,6 +19,7 @@ gem "stringex"
 gem "bcrypt"
 gem "rdiscount"
 gem "unicorn"
+gem "turnout"
 # gem "tmail"
 # gem "i18n"
 

@@ -6,6 +6,7 @@ require 'encrypted_cookie'
 require 'rack/contrib'
 require 'stringex'
 require 'rdiscount'
+require 'rack/turnout'
 require 'haml'
 require 'sass'
 require 'i18n'
@@ -16,6 +17,8 @@ class Application < Sinatra::Base
 		register Sinatra::Namespace
 		register Sinatra::ConfigFile
 		::I18n.enforce_available_locales = true
+
+		use Rack::Turnout
 
 		enable :logging
 		set :app_file, __FILE__

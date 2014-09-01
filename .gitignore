@@ -10,3 +10,4 @@ bin/*
 public/site.css
 public/site.js
 mkaito.session.vim
+tmp/*
