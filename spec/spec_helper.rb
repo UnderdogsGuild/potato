@@ -9,6 +9,7 @@ require 'capybara/poltergeist'
 require 'active_support/core_ext/class/subclasses'
 require 'factory_girl'
 require 'faker'
+require 'timecop'
 
 require 'application'
 

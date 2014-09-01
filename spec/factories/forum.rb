@@ -1,29 +1,11 @@
 FactoryGirl.define do
 
-	factory :forum do
-		name { Faker::Lorem.word }
-		description { Faker::Lorem.sentence }
-
-		ignore do
-			thread_count 1
-		end
-
-		after(:create) do |f, evaluator|
-			create_list(:forum_thread, evaluator.thread_count, forum: f)
-		end
-
-		factory :officer_forum do
-			officer true
-		end
-	end
-
 	factory :forum_thread do
 		title { Faker::Lorem.sentence }
-		views { 3000 + rand(2000) }
-		forum
+		views { 3000 + rand(20000) }
 
 		ignore do
-			post_count 1
+			post_count 2
 			author nil
 		end
 
@@ -32,15 +14,23 @@ FactoryGirl.define do
 			create_list(:forum_post, evaluator.post_count, forum_thread: ft)
 		end
 
-		factory :huge_thread do
-			post_count { 100 + rand(250) }
+		factory :officer_thread do
+			officer true
+		end
+
+		factory :deleted_thread do
+			deleted true
 		end
 	end
 
 	factory :forum_post do
 		user
 		forum_thread
-		content { Faker::Lorem.paragraphs(3).join("\n\n") }
+		content { Faker::Lorem.paragraphs( ( 1 + rand(3) )).join("\n\n") }
+
+		factory :deleted_post do
+			deleted true
+		end
 	end
 
 end

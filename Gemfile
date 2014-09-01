@@ -52,5 +52,6 @@ group :test do
 	gem "poltergeist"
 	gem "factory_girl"
 	gem "faker"
+	gem "timecop"
 	gem "guard-rspec"
 end
