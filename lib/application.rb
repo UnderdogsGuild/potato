@@ -18,8 +18,6 @@ class Application < Sinatra::Base
 		register Sinatra::ConfigFile
 		::I18n.enforce_available_locales = true
 
-		use Rack::Turnout
-
 		enable :logging
 		set :app_file, __FILE__
 		set :root, File.expand_path(File.join(File.dirname(__FILE__), ".."))
@@ -35,6 +33,10 @@ class Application < Sinatra::Base
 		use Rack::Session::EncryptedCookie,
 			secret: '9a0aff2e4861436d5777c8d0a801994603a5faa4fd77f99ae4d0bc10b73ce5fa',
 			expire_after: (2 * 60 * 60)
+	end
+
+	configure :productiion, :development do
+		use Rack::Turnout
 	end
 
 	configure :test, :development do
