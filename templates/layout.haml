@@ -1,90 +1,10 @@
 !!!html5
-%head
-	%title
-		Underdogs Guild
-	%meta{'charset' => 'utf-8'}
-	=haml :'tmpl/globalmeta'
-	/Mobile Device Support
-	%meta{'name' => 'viewport', 'content' => 'width=device-width, user-scalable=no'}
-	/%link{'rel' => 'shortcut icon', 'href' => '/img/meta/favicon.ico'}
-	/%link{'rel' => 'apple-touch-icon', 'href' => '/img/meta/apple-touch-icon.png'}
-	/End Mobile Device Support
-	%link{'rel' => 'stylesheet', :href => '/css/application.css', :type => 'text/css'}
+%html
+	%head
+		%meta{:charset => 'utf-8'}
+		%title
+			Underdogs Guild
+		%link{:rel => 'stylesheet', :type => 'text/css', :href => 'css/app.min.css'}
+	%body
+		=yield
 
-%body
-	%noscript
-		%div.nojs
-			%div
-				%h1
-					Oh no! You murdered the JavaScript!
-				%p
-					Hi there person! You seem to have disabled JavaScript.
-					While that is perfectly understandable, we designed this
-					entire site using JavaScript to enhance it and make
-					development easier. Unfortunately, you can't browse the
-					site without it. It just won't work. So enable your JS and
-					reload the page! It'll be well worth it. No viruses; no
-					ads; just our website.
-
-	=haml :'tmpl/offcanvas'
-	=haml :'tmpl/mobilenav'
-	/Main Page
-	%div.uk-grid
-		/Notice Section
-		%div.uk-width-1-1
-			%div.uk-alert.uk-alert-danger{'data-uk-alert' => true}
-				%a.uk-alert-close.uk-close{:href => ''}
-				%p
-					The Underdogs Website will undergo maintenance at some
-					point in time. In the meantime enjoy the eyecandy?
-		/End Notice Section
-	%div.uk-container.uk-container-center.ud-banner
-		%div#ud-hbanner.uk-hidden-small
-		=haml :'tmpl/globalnav'
-
-	=yield
-
-	=haml :'tmpl/globalfooter'
-
-	/Feedback and Bug Reports
-	%div.fb-hide
-		%div#feedback-form
-			%div#feedback-content
-				%form.uk-form{action: '/feedback', method: 'POST'}
-					%fieldset.uk-form-horizontal
-						%legend
-							Give Us Feedback About This Page!
-						%div.uk-form-row
-							%label.uk-form-label{for:'username'}
-								UnderdogsID
-							%div.uk-form-controls
-								%input.uk-width-1-1{'type' => 'text', 'value' => user, 'name' => 'username', 'disabled' => true}
-						%div.uk-form-row
-							%label.uk-form-label{for:'location'}
-								Location
-							%div.uk-form-controls
-								%input.uk-width-1-1{'type' => 'text', 'value' => request.fullpath, 'name' => 'location', 'disabled' => true}
-						%div.uk-form-row
-							%label.uk-form-label{'for' => 'category'}
-								Feedback Type
-							%div.uk-form-controls
-								%select.uk-width-1-1{'name' => 'category'}
-									%option
-										Feedback/Suggestion
-									%option
-										Bug Report
-						%div.uk-form-row
-							%label.uk-form-label{'for' => 'feedback'}
-								Feedback
-							%div.uk-form-controls
-								%textarea.uk-width-1-1{'name' => 'feedback', 'placeholder' => 'Not enough Tonberries!', 'style' => 'resize:none;'}
-						%div.uk-form-row
-							%label.uk-form-label
-								All Done?
-							%div.uk-form-controls
-								%button.uk-button.uk-button-success{'type' => 'submit'}
-									Send Feedback
-	%a.uk-button.uk-button-success.fb-open{:href => '#feedback-form', 'style' => 'position:fixed; bottom:0; right: 0;'}
-		%i.uk-icon.uk-icon-plus.uk-icon-spin
-
-	%script{src: '/js/application.min.js'}

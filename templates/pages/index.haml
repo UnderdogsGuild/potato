@@ -1,96 +1,138 @@
-/Slideshow
-%div.ud-slideshow-inner.uk-container.uk-container-center
-	%div.cycle-slideshow{'data-cycle-fx' => 'scrollHorz', 'data-cycle-pause-on-hover' => 'true', 'data-cylce-timeout' => '10000'}
-		%div.cycle-prev
-		%div.cycle-next
-		%div.cycle-overlay
-		%img{'src' => '/img/slides/starter/slide_guildphoto.jpg', 'alt' => 'Guild Photo!', 'data-cycle-title' => 'Guild Photo!', 'data-cycle-desc' => 'Here\'s our most recent guild photo! Thanks to all who came.'}
-		%img{'src' => '/img/slides/starter/slide_coil.png', 'alt' => 'Coil-Ready!', 'data-cycle-title' => 'Coil-Ready!', 'data-cycle-desc' => 'Members of Underdogs equipped and ready to take on Coil.'}
-		%img{'src' => '/img/slides/starter/slide_praetorium.png', 'alt' => 'Draco Streams the Praetorium!', 'data-cycle-title' => 'Draco Streams the Praetorium!', 'data-cycle-desc' => 'Watch it now on <a href=\'http://www.youtube.com/watch?v=U9NDvhmHbbA\'>YouTube</a>.'}
-		%img{'src' => '/img/slides/starter/slide_starbound.png', 'alt' => 'Starbound!', 'data-cycle-title' => 'Starbound!', 'data-cycle-desc' => 'The new Starbound Server is ready to be played on! <a href=\'#\'>Check it out.</a>'}
-		%div#progress
-/End Slideshow
-/Main Content
-%div.ud-mainpage-bg.uk-container.uk-container-center
-	=haml :'tmpl/breadcrumbs'
-	%div.uk-grid.uk-grid-divider.ud-mainpage{'data-uk-grid-margin' => true}
-		%div.uk-width-large-1-5.uk-visible-large
-			%h2
-				Recent Posts
-			%div.ud-rpost-cont
-				%h6.ud-rpost-title.uk-text-truncate
-					Home Sweet Home
-				%p.uk-comment-meta.ud-rpost-meta
-					By Mirakell. Last post by mkaito.
-			%div.ud-rpost-cont
-				%h6.ud-rpost-title.uk-text-truncate
-					FC actions rotation
-				%p.uk-comment-meta.ud-rpost-meta
-					By Valestrix. Last post by mkaito.
-			%div.ud-rpost-cont
-				%h6.ud-rpost-title.uk-text-truncate
-					Guild Meeting After Holidays - When are you free!?
-				%p.uk-comment-meta.ud-rpost-meta
-					By Mirakell. Last post by silentshadeu.
-		%div.uk-width-large-2-5.uk-width-medium-1-2
-			%h2
-				Upcoming Events
-			%article.uk-article
-				%h3.uk-article-title
-					Derp Knights
-				%p.uk-article-meta
-					By
-					%img.ud-rank{'src' => '/img/rank-ico/td-ico.png', 'alt' => 'TD', 'data-uk-tooltip' => true, :title => 'Top Dog'}
-					Mirakell on January 31, 2014.
-				%p
-					Neque porro quisquam est, qui dolorem ipsum quia 
-					%a{:href => 'http://xivdb.com/?item/1955/Artemis-Bow'}
-						dolor
-					sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?
-				%a.uk-button.ud-readmore.uk-buttonmini.uk-button-primary{:href => '#'}
-					Read More
-			%article.uk-article
-				%h3.uk-article-title
-					Herp Nites
-				%p.uk-article-meta
-					By
-					%img.ud-rank{'src' => '/img/rank-ico/td-ico.png', 'alt' => 'TD', 'data-uk-tooltip' => true, :title => 'Top Dog'}
-					Mirakell on January 31, 2014.
-				%p
-					Aenean pharetra a purus vitae dictum. Curabitur placerat pellentesque nisl in facilisis. Nam vehicula, sapien ut tristique elementum, sapien eros tristique nisi, a lobortis eros nibh ut libero. Praesent at ipsum ultrices, rutrum quam non, consequat sem. Mauris accumsan vitae felis eget scelerisque. Integer volutpat est eu commodo placerat. Proin gravida, metus et placerat interdum, turpis elit varius dui, quis tincidunt leo enim id eros. Etiam convallis pharetra velit at cursus. Aliquam consequat mauris non lacus scelerisque, quis fermentum enim condimentum. Cras fermentum est in tortor cursus cursus.
-				%a.uk-button.ud-readmore.uk-buttonmini.uk-button-primary{:href => '#'}
-					Read More
-		%div.uk-width-large-2-5.uk-width-medium-1-2
-			%h2
-				Recent News
-			%article.uk-article
-				%h3.uk-article-title
-					New Website Up and Running
-				%p.uk-article-meta
-					By
-					%img.ud-rank{'src' => '/img/rank-ico/sa-ico.png', 'alt' => 'SA', 'data-uk-tooltip' => true, :title => 'Server Administrator'}
-					%img.ud-rank{'src' => '/img/rank-ico/wd-ico.png', 'alt' => 'WD', 'data-uk-tooltip' => true, :title => 'Watchdog'}
-					Faore on January 31, 2014.
-				%p
-					Rawr. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.
-				%a.uk-button.ud-readmore.uk-buttonmini.uk-button-primary{:href => '#'}
-					Read More
-			%article.uk-article
-				%h3.uk-article-title
-					Enjin Blown Up
-				%p.uk-article-meta
-					By
-					%img.ud-rank{'src' => '/img/rank-ico/sa-ico.png', 'alt' => 'SA', 'data-uk-tooltip' => true, :title => 'Server Administrator'}
-					%img.ud-rank{'src' => '/img/rank-ico/wd-ico.png', 'alt' => 'WD', 'data-uk-tooltip' => true, :title => 'Watchdog'}
-					Faore on January 31, 2014.
-				%p
-					Kaboom. Nunc felis quam, posuere nec elementum nec, tempor in elit. Praesent sed ultrices tortor. Sed eu felis consectetur, interdum lorem sit amet, pretium erat. Phasellus eu orci risus. Quisque quis porttitor mi. Aliquam pellentesque felis ut fermentum eleifend. Mauris pretium aliquet lorem, in consequat odio. Suspendisse id augue eu nisi malesuada tincidunt sit amet vitae risus. Cras blandit magna eros. Nulla lacinia dapibus dui, ac sollicitudin massa commodo a. Aenean tempor nulla eu suscipit faucibus.		
-				%a.uk-button.ud-readmore.uk-buttonmini.uk-button-primary{:href => '#'}
-					Read More
-/%div.ud-transbutton-bg
-/	%div.uk-container.uk-container-center.ud-transbutton-trans
-/		%div.uk-container.ud-transbutton-content.uk-text-center
-/			%h3.ud-transbutton-text
-/				Once and Underdog, Always an Underdog!
-/			%a.uk-button.uk-button-large.uk-button-success{:href => '#'}
-/				Apply Now!
+%h1
+  Headings
+
+<h1>h1. Heading</h1>
+<h2>h2. Heading</h2>
+<h3>h3. Heading</h3>
+<h4>h4. Heading</h4>
+<h5>h5. Heading</h5>
+<h6>h6. Heading</h6>
+<hr />
+<h1 id="paragraph">Paragraph</h1>
+<p>Lorem ipsum dolor sit amet, <a href="#" title="test link">test link</a> adipiscing elit. Nullam dignissim convallis est. Quisque aliquam. Donec faucibus. Nunc iaculis suscipit dui. Nam sit amet sem. Aliquam libero nisi, imperdiet at, tincidunt nec, gravida vehicula, nisl. Praesent mattis, massa quis luctus fermentum, turpis mi volutpat justo, eu volutpat enim diam eget metus. Maecenas ornare tortor. Donec sed tellus eget sapien fringilla nonummy. Mauris a ante. Suspendisse quam sem, consequat at, commodo vitae, feugiat in, nunc. Morbi imperdiet augue quis tellus.</p>
+<p>Lorem ipsum dolor sit amet, <em>emphasis</em> consectetuer adipiscing elit. Nullam dignissim convallis est. Quisque aliquam. Donec faucibus. Nunc iaculis suscipit dui. Nam sit amet sem. Aliquam libero nisi, imperdiet at, tincidunt nec, gravida vehicula, nisl. Praesent mattis, massa quis luctus fermentum, turpis mi volutpat justo, eu volutpat enim diam eget metus. Maecenas ornare tortor. Donec sed tellus eget sapien fringilla nonummy. Mauris a ante. Suspendisse quam sem, consequat at, commodo vitae, feugiat in, nunc. Morbi imperdiet augue quis tellus.</p>
+<hr />
+<h1 id="list_types">List Types</h1>
+<h3>Definition List</h3>
+<dl>
+<dt>Definition List Title</dt>
+<dd>This is a definition list division.</dd>
+</dl>
+<h3>Ordered List</h3>
+<ol>
+<li>List Item 1</li>
+<li>List Item 2</li>
+<li>List Item 3</li>
+</ol>
+<h3>Unordered List</h3>
+<ul>
+<li>List Item 1</li>
+<li>List Item 2</li>
+<li>List Item 3</li>
+</ul>
+<h3>%default Ordered List</h3>
+<ol class="default">
+<li>List Item 1</li>
+<li>List Item 2</li>
+<li>List Item 3</li>
+</ol>
+<h3>%default Unordered List</h3>
+<ul class="default">
+<li>List Item 1</li>
+<li>List Item 2</li>
+<li>List Item 3</li>
+</ul>
+<hr />
+<h1 id="form_elements">Fieldsets and Form Elements</h1>
+<fieldset>
+<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Nullam dignissim convallis est. Quisque aliquam. Donec faucibus. Nunc iaculis suscipit dui. Nam sit amet sem. Aliquam libero nisi, imperdiet at, tincidunt nec, gravida vehicula, nisl. Praesent mattis, massa quis luctus fermentum, turpis mi volutpat justo, eu volutpat enim diam eget metus.</p>
+<form>
+<h2>Form Element</h2>
+<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Nullam dignissim convallis est. Quisque aliquam. Donec faucibus. Nunc iaculis suscipit dui.</p>
+<p><label for="text_field">Text Field:</label>
+<input type="text" id="text_field" /></p>
+<p><label for="text_area">Text Area:</label>
+<textarea id="text_area"></textarea></p>
+<p><label for="select_element">Select Element:</label>
+<select name="select_element">
+<optgroup label="Option Group 1">
+<option value="1">Option 1</option>
+<option value="2">Option 2</option>
+<option value="3">Option 3</option>
+</optgroup>
+<optgroup label="Option Group 2">
+<option value="1">Option 1</option>
+<option value="2">Option 2</option>
+<option value="3">Option 3</option>
+</optgroup>
+</select></p>
+<p><label for="radio_buttons">Radio Buttons:</label>
+<label>
+<input type="radio" class="radio" name="radio_button" value="radio_1" /> Radio 1
+</label>
+<label>
+<input type="radio" class="radio" name="radio_button" value="radio_2" /> Radio 2
+</label>
+<label>
+<input type="radio" class="radio" name="radio_button" value="radio_3" /> Radio 3
+</label>
+</p>
+<p><label for="checkboxes">Checkboxes:</label>
+<label>
+<input type="checkbox" class="checkbox" name="checkboxes" value="check_1" /> Radio 1
+</label>
+<label>
+<input type="checkbox" class="checkbox" name="checkboxes" value="check_2" /> Radio 2
+</label>
+<label>
+<input type="checkbox" class="checkbox" name="checkboxes" value="check_3" /> Radio 3
+</label>
+</p>
+<p><label for="password">Password:</label>
+<input type="password" class="password" name="password" />
+</p>
+<p><label for="file">File Input:</label>
+<input type="file" class="file" name="file" />
+</p>
+<p><input class="button" type="submit" value="Submit" /></p>
+</form>
+</fieldset>
+<hr />
+<h1 id="tables">Tables</h1>
+<table cellspacing="0" cellpadding="0">
+<tr>
+<th>Table Header 1</th><th>Table Header 2</th><th>Table Header 3</th>
+</tr>
+<tr>
+<td>Division 1</td><td>Division 2</td><td>Division 3</td>
+</tr>
+<tr class="even">
+<td>Division 1</td><td>Division 2</td><td>Division 3</td>
+</tr>
+<tr>
+<td>Division 1</td><td>Division 2</td><td>Division 3</td>
+</tr>
+</table>
+<hr />
+<h1 id="misc">Misc Stuff - abbr, acronym, pre, code, sub, sup, etc.</h1>
+<p>Lorem <sup>superscript</sup> dolor <sub>subscript</sub> amet, consectetuer adipiscing elit. Nullam dignissim convallis est. Quisque aliquam. <cite>cite</cite>. Nunc iaculis suscipit dui. Nam sit amet sem. Aliquam libero nisi, imperdiet at, tincidunt nec, gravida vehicula, nisl. Praesent mattis, massa quis luctus fermentum, turpis mi volutpat justo, eu volutpat enim diam eget metus. Maecenas ornare tortor. Donec sed tellus eget sapien fringilla nonummy. <acronym title="National Basketball Association">NBA</acronym> Mauris a ante. Suspendisse quam sem, consequat at, commodo vitae, feugiat in, nunc. Morbi imperdiet augue quis tellus.  <abbr title="Avenue">AVE</abbr></p>
+<pre><p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Nullam dignissim convallis est. Quisque aliquam. Donec faucibus. Nunc iaculis suscipit dui. Nam sit amet sem. Aliquam libero nisi, imperdiet at, tincidunt nec, gravida vehicula, nisl. Praesent mattis, massa quis luctus fermentum, turpis mi volutpat justo, eu volutpat enim diam eget metus. Maecenas ornare tortor. Donec sed tellus eget sapien fringilla nonummy. <acronym title="National Basketball Association">NBA</acronym> Mauris a ante. Suspendisse quam sem, consequat at, commodo vitae, feugiat in, nunc. Morbi imperdiet augue quis tellus.  <abbr title="Avenue">AVE</abbr></p></pre>
+<blockquote>
+<p> This stylesheet is going to help so freaking much.</p>
+<cite>Blockquote</cite>
+</blockquote>
+<hr />
+<h1 id="flashes">Flash / error messages</h1>
+<div class="success">
+<span>This is a success message <a href="#">with a link</a></span>
+</div>
+<div class="error">
+<span>This is an error message <a href="#">with a link</a></span>
+</div>
+<div class="notice">
+<span>This is an notice message <a href="#">with a link</a></span>
+</div>
+<div class="alert">
+<span>This is an alert message <a href="#">with a link</a></span>
+</div>
+<hr />

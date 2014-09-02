@@ -1,7 +1,13 @@
-@import "normalize"
+@import "normalize";
 @import "bourbon/bourbon";
 @import "base/grid-settings";
 @import "base/base";
 @import "neat/neat";
 
-// Your code here :P
+/**
+*
+**/
+div.container {
+	width:100%;
+	max-width:1200px;
+}
