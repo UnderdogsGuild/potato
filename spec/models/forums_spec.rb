@@ -7,7 +7,7 @@ describe "Forum models" do
 	# afterwards, creating all necessary entities upfront makes much more sense.
 	before :all do
 		# All pregenerated objects are 30 days old, for testing purposes.
-		# Timecop.freeze(Date.today - 30)
+		Timecop.freeze(Date.today - 30)
 
 		@user = create :user
 
