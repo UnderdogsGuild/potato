@@ -7,7 +7,7 @@ potato.sublime-workspace
 *_master.css
 *.log
 bin/*
-public/site.css
-public/site.js
+public/css
+public/js
 mkaito.session.vim
 tmp/*
