@@ -65,6 +65,10 @@ RSpec.configure do |c|
     Application.db.transaction(:rollback=>:always){example.run}
   end
 
+	c.after(:each) do
+		Timecop.return
+	end
+
 	# c.after :suite do
 	# 	Sequel::Migrator.run(Application.db, migdir, target: 0)
 	# end

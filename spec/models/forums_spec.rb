@@ -7,17 +7,17 @@ describe "Forum models" do
 	# afterwards, creating all necessary entities upfront makes much more sense.
 	before :all do
 		# All pregenerated objects are 30 days old, for testing purposes.
-		Timecop.freeze(Date.today - 30) do
-			@user = create :user
+		# Timecop.freeze(Date.today - 30)
 
-			@thread = create :forum_thread
-			@officer_thread = create :officer_thread
-			@deleted_thread = create :deleted_thread
+		@user = create :user
 
-			@post = create :forum_post, forum_thread: @thread
-			@officer_post = create :forum_post, forum_thread: @officer_thread
-			@deleted_post = create :deleted_post, forum_thread: @thread
-		end
+		@thread = create :forum_thread
+		@officer_thread = create :officer_thread
+		@deleted_thread = create :deleted_thread
+
+		@post = create :forum_post, forum_thread: @thread
+		@officer_post = create :forum_post, forum_thread: @officer_thread
+		@deleted_post = create :deleted_post, forum_thread: @thread
 	end
 	
 	## 
@@ -26,6 +26,8 @@ describe "Forum models" do
 	after :all do
 		# Deletes cascade, so this will clear threads and posts too.
 		ForumThread.each { |f| f.destroy }
+
+		# Timecop.return
 	end
 
 	##
@@ -107,7 +109,8 @@ describe "Forum models" do
 			end
 
 			it "updates the timestamp on the thread" do
-				expect{@thread.add_post(user: @user, content: "foo")}.to change{@thread.updated_at}
+				Timecop.freeze(Date.today + 2)
+				expect { @thread.add_post(user: @user, content: "foo") }.to change{ @thread.updated_at }
 			end
 		end
 
@@ -161,6 +164,7 @@ describe "Forum models" do
 
 		describe "timestamps" do
 			it "updates the updated_at field automatically" do
+				Timecop.freeze(Date.today + 2)
 				expect{@post.update(content: "bar")}.to change { @post.updated_at }
 			end
 		end

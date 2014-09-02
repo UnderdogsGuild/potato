@@ -19,7 +19,7 @@ class ForumThread < Sequel::Model
 	alias_method :remove_post, :remove_forum_post
 	alias_method :remove_all_posts, :remove_all_forum_posts
 
-	# Default ordering
+	# Default ordering: as last bumped
 	self.dataset = self.dataset.order(Sequel.desc(:updated_at))
 
 	def validate
@@ -81,7 +81,9 @@ class ForumThread < Sequel::Model
 
 	def add_post(pdata)
 		new_p = self.add_forum_post(pdata)
+
 		self.update(updated_at: new_p.updated_at)
+
 		return new_p
 	end
 
@@ -122,7 +124,7 @@ end
 # Holds the content and authorship data for a post, as well as timestamps.
 class ForumPost < Sequel::Model
 	plugin :validation_helpers
-	plugin :timestamps
+	plugin :timestamps, update_on_create: true
 
 	# Posts belong to a user
 	many_to_one :user
@@ -156,6 +158,11 @@ class ForumPost < Sequel::Model
 		"post-#{self.id}"
 	end
 
+	# def after_create
+	# 	super
+	# 	self.thread.update updated_at: self.updated_at
+	# end
+
 	##
 	# Build a string of apropriate css classes for the current post, as a string
 	# ready for insertion in HTML.
@@ -185,3 +192,4 @@ class ForumPost < Sequel::Model
 	# 	}
 	# end
 end
+
