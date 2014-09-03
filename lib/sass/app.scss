@@ -4,10 +4,24 @@
 @import "base/base";
 @import "neat/neat";
 
+// Coloring Variables
+$darkgreen: #0B4239;
+$lightgreen: #00BD72;
+$yellowgreen: #B4E85E;
+$yellow: #F5FF53;
+$orange: #E34517;
+
 /**
+*
+*	Basic Structure
 *
 **/
 div.container {
-	width:100%;
-	max-width:1200px;
+	@include outer-container;
 }
+
+// Navigation
+@import "elements/nav";
+
+// Device Rules
+@import "device-sizes";

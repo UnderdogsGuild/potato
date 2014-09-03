@@ -1,0 +1,25 @@
+$mobile: new-breakpoint(max-width 500px 4);
+$small: new-breakpoint(min-width 501px max-width 900px 8);
+$medium: new-breakpoint(min-width 901px max-width 1200px 16);
+$large: new-breakpoint(min-width 1201px 16);
+@include media($mobile) {
+	body {
+		background:#c00;
+	}
+}
+
+@include media($small) {
+	body {
+		background:#00c;
+	}
+}
+
+@include media($medium) {
+	body {
+		background:#0c0;
+	}
+}
+
+@include media($large) {
+
+}

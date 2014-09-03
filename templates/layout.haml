@@ -6,5 +6,40 @@
 			Underdogs Guild
 		%link{:rel => 'stylesheet', :type => 'text/css', :href => 'css/app.min.css'}
 	%body
-		=yield
-
+		.container
+			%header.centered-navigation
+				.centered-navigation-wrapper
+					%a.mobile-logo{:href => '#'}
+						%img{:src => 'https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/placeholder_logo_3_dark.png'}
+					%a.centered-navigation-menu-button{:href => '#'}
+						MENU
+					%ul.centered-navigation-menu
+						%li.nav-link
+							%a{:href => '/'}
+								Home
+						%li.nav-link
+							%a
+								About Us
+						%li.nav-link
+							%a
+								Events
+						%li.nav-link.logo
+							%a.logo
+								%img{:src => 'https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/placeholder_logo_3_dark.png'}
+						%li.nav-link
+							%a
+								Community
+						%li.nav-link.more
+							%a
+								Account
+							%ul.submenu
+								%li
+									%a
+										Login
+								%li
+									%a
+										Apply
+						%li.nav-link
+							%a
+								Wiki
+			=yield

@@ -43,6 +43,7 @@ group :development do
 	gem 'rb-inotify'
 	gem "guard"
 	gem "guard-sass"
+	gem "guard-livereload"
 end
 
 group :test do
