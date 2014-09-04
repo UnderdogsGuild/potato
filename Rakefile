@@ -53,6 +53,10 @@ namespace :db do
 	Sequel.extension :migration
 	migration_dir = "lib/models/migrations"
 
+	task :reset do
+		`mysql -uroot -p -e 'drop database underdogs; create database underdogs; drop database underdogs_test; create database underdogs_test;'`
+	end
+
 	task :environment, [:env] do |cmd, args|
 		@@env = args[:env] || "development"
 		Bundler.require
