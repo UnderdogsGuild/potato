@@ -2,7 +2,6 @@
 database:
   development: 'mysql2://underdogs@localhost/underdogs'
   test: 'mysql2://underdogs@localhost/underdogs_test'
-  production: 'mysql2://foo:bar@localhost/underdogs'
 ---
 
 Production values are read from execution environment, to avoid placing
