@@ -61,6 +61,12 @@ namespace :db do
 	Sequel.extension :migration
 	migration_dir = "lib/models/migrations"
 
+	desc "Hard reset the development and testing databases via root user. EDIT THE DATABASE NAMES IN RAKEFILE TASK!!!"
+	task :reset do
+		`mysql -uroot -p -e 'drop database underdogs; create database underdogs;'`
+		`mysql -uroot -p -e 'drop database underdogs_test; create database underdogs_test;'`
+	end
+
 	task :environment, [:env] do |cmd, args|
 		@@env = args[:env] || "development"
 		Bundler.require
@@ -99,7 +105,7 @@ namespace :db do
 	namespace :migrate do
 
 		desc "Perform automigration (reset your db data)"
-		task :auto => :environment do
+		task :auto => [:environment, :reset] do
 			::Sequel::Migrator.run Sequel::Model.db, migration_dir, :target => 0
 			::Sequel::Migrator.run Sequel::Model.db, migration_dir
 			puts "<= sq:migrate:auto executed"
