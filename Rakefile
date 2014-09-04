@@ -5,7 +5,7 @@ require 'turnout/rake_tasks'
 desc "Run all specs"
 RSpec::Core::RakeTask.new(:spec) do |spec|
 	spec.ruby_opts = '-Ilib:spec -r spec_helper'
-  spec.rspec_opts = '--order random --format progress --color'
+  spec.rspec_opts = '--order random --format documentation --color'
 end
 
 # Make sure js and css are in place for phantomjs dependant specs.
