@@ -1,18 +1,8 @@
 Sequel.migration do
 	change do
 
-		# create_table(:forums) do
-		# 	primary_key :id
-
-		# 	String :name
-		# 	String :slug
-		# 	String :description
-		# 	Boolean :officer, default: false
-		# end
-
 		create_table(:forum_threads) do
 			primary_key :id
-			# foreign_key :forum_id, :forums, on_delete: :cascade
 
 			String :title, null: false
 			String :slug, null: false
