@@ -67,6 +67,8 @@ class Application < Sinatra::Base
 						# Give the now logged-in user a brand new session
 						session.clear
 
+						logger.debug "Creating session for user #{u.id}."
+
 						# Check for and set up permanent session.
 						# One year should be plenty of time to come back.
 						if params['remember']
