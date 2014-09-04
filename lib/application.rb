@@ -18,7 +18,6 @@ class Application < Sinatra::Base
 		register Sinatra::ConfigFile
 		::I18n.enforce_available_locales = true
 
-		enable :logging
 		set :app_file, __FILE__
 		set :root, File.expand_path(File.join(File.dirname(__FILE__), ".."))
 		set :views, Proc.new { File.join(root, "templates") }
@@ -27,6 +26,8 @@ class Application < Sinatra::Base
 		set :db, 0
 		disable :static
 		config_file "config/application.yaml"
+
+		enable :logging
 	end
 
 	configure :production do
