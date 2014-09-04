@@ -105,6 +105,8 @@ GEM
       rack (>= 0.9.1)
     rack-flash (0.1.2)
       rack
+    rack-livereload (0.3.15)
+      rack
     rack-protection (1.5.3)
       rack
     rack-test (0.6.2)
@@ -198,6 +200,7 @@ DEPENDENCIES
   pry
   rack-contrib
   rack-flash
+  rack-livereload
   rack-test
   rake
   rb-inotify

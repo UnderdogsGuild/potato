@@ -7,6 +7,7 @@ require 'rack/contrib'
 require 'stringex'
 require 'rdiscount'
 require 'rack/turnout'
+require 'rack-livereload'
 require 'haml'
 require 'sass'
 require 'i18n'
@@ -33,9 +34,6 @@ class Application < Sinatra::Base
 		use Rack::Session::EncryptedCookie,
 			secret: '9a0aff2e4861436d5777c8d0a801994603a5faa4fd77f99ae4d0bc10b73ce5fa',
 			expire_after: (2 * 60 * 60)
-	end
-
-	configure :productiion, :development do
 		use Rack::Turnout
 	end
 
@@ -43,6 +41,10 @@ class Application < Sinatra::Base
 		use Rack::Session::Cookie,
 			secret: '9a0aff2e4861436d5777c8d0a801994603a5faa4fd77f99ae4d0bc10b73ce5fa',
 			expire_after: (2 * 60 * 60)
+	end
+
+	configure :development do
+		use Rack::LiveReload
 	end
 
 	configure :test do
