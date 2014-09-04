@@ -1,3 +1,6 @@
+require 'color'
+require 'color/rgb/contrast'
+
 ##
 # Forum related models
 ##
@@ -12,6 +15,7 @@ class ForumThread < Sequel::Model
 
 	# many_to_one :forum
 	one_to_many :forum_posts
+	many_to_many :tags
 	
 	# Convenience aliases
 	alias_method :posts, :forum_posts
@@ -105,6 +109,23 @@ class ForumThread < Sequel::Model
 		post.content
 	end
 
+	##
+	# Add a tag by name
+	# alias_method :_add_tag, :add_tag
+	def add_tag_by_name(tname)
+		t = Tag.first(name: tname)
+		return nil unless t
+		self.add_tag(t)
+	end
+
+	##
+	# Remove a tag by name
+	def remove_tag_by_name(tname)
+		t = self.tags_dataset.first(name: tname)
+		return nil unless t
+		self.remove_tag(t)
+	end
+
 	# def as_json
 	# 	{
 	# 		title: title,
@@ -193,3 +214,20 @@ class ForumPost < Sequel::Model
 	# end
 end
 
+class Tag < Sequel::Model
+	plugin :validation_helpers
+	many_to_many :forum_threads
+
+	def html_tag
+		"<span style='color: ##{self.color}'>#{self.name}</span>"
+	end
+
+	def validate
+		super
+		validates_presence :name
+		validates_unique :name
+
+		validates_presence :color
+		validates_unique :color
+	end
+end

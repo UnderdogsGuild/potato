@@ -1,3 +1,5 @@
+require 'color-generator'
+
 FactoryGirl.define do
 
 	factory :forum_thread do
@@ -31,6 +33,11 @@ FactoryGirl.define do
 		factory :deleted_post do
 			deleted true
 		end
+	end
+
+	factory :tag do
+		name { Faker::Lorem.word }
+		color { ColorGenerator.new(saturation: 0.3, lightness: 0.75).create_hex }
 	end
 
 end

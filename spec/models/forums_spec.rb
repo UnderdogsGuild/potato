@@ -1,4 +1,4 @@
-describe "Forum models" do
+describe "Forum model" do
 	##
 	# While I can use let() and before :each, I find that it slows down tests
 	# a *lot* when tons of database entries are created and cleared all the time.
@@ -21,6 +21,8 @@ describe "Forum models" do
 		@post = create :forum_post, forum_thread: @thread
 		@officer_post = create :forum_post, forum_thread: @officer_thread
 		@deleted_post = create :deleted_post, forum_thread: @thread
+
+		@tag = create :tag
 	end
 	
 	## 
@@ -155,6 +157,39 @@ describe "Forum models" do
 				expect(@thread.content).to be(@thread.post.content)
 			end
 		end
+
+		describe "#add_tag_by_name" do
+			it "takes a tag name" do
+				@thread.add_tag_by_name("event")
+			end
+
+			it "doesn't create new tags" do
+				expect{@thread.add_tag_by_name("event")}.to_not change{Tag.all.count}
+			end
+
+			it "returns nil when attempting to add a non-existing tag" do
+				expect(@thread.add_tag_by_name("Idontexist")).to be_nil
+			end
+
+			it "adds existing tags to threads" do
+				expect(@thread.add_tag_by_name(@tag.name)).to_not be_nil
+				expect(@thread.tags).to include(@tag)
+			end
+		end
+
+		describe "#remove_tag_by_name" do
+			it "removes a tag when given its name" do
+				@thread.add_tag_by_name(@tag.name)
+				expect(@thread.tags).to include(@tag)
+
+				@thread.remove_tag_by_name(@tag.name)
+				expect(@thread.tags).to_not include(@tag)
+			end
+
+			it "returns nil when attempting to remove a tag that's not associated with the thread" do
+				expect(@thread.remove_tag_by_name(@tag.name)).to be_nil
+			end
+		end
 	end
 
 	describe ForumPost do
@@ -209,5 +244,8 @@ describe "Forum models" do
 				expect(@post.html_id).to eq("post-#{@post.id}")
 			end
 		end
+	end
+
+	describe Tag do
 	end
 end

@@ -9,6 +9,7 @@ require 'capybara/poltergeist'
 require 'active_support/core_ext/class/subclasses'
 require 'factory_girl'
 require 'faker'
+require 'color-generator'
 require 'timecop'
 
 require 'application'
@@ -56,9 +57,9 @@ RSpec.configure do |c|
 			to_create { |instance| instance.save }
 		end
 
-		# Application.db.transaction(rollback: :always) do
-		# 	FactoryGirl.lint
-		# end
+		Application.db.transaction(rollback: :always) do
+			FactoryGirl.lint
+		end
 	end
 
   c.around(:each) do |example|
