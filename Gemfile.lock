@@ -31,7 +31,6 @@ GEM
       timers (~> 1.1.0)
     cliver (0.3.2)
     coderay (1.1.0)
-    color (1.7.1)
     color-generator (0.0.4)
     daemons (1.1.9)
     diff-lcs (1.2.5)
@@ -177,7 +176,6 @@ DEPENDENCIES
   bitters
   bourbon
   capybara
-  color
   color-generator
   encrypted_cookie
   factory_girl

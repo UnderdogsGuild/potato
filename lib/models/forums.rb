@@ -1,6 +1,3 @@
-require 'color'
-require 'color/rgb/contrast'
-
 ##
 # Forum related models
 ##

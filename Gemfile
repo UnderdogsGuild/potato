@@ -20,7 +20,7 @@ gem "bcrypt"
 gem "rdiscount"
 gem "unicorn"
 gem "turnout"
-gem "color"
+gem "color-generator"
 # gem "tmail"
 # gem "i18n"
 
@@ -54,7 +54,6 @@ group :test do
 	gem "poltergeist"
 	gem "factory_girl"
 	gem "faker"
-	gem "color-generator"
 	gem "timecop"
 	gem "guard-rspec"
 end
