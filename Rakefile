@@ -11,46 +11,33 @@ end
 # task :spec => :minify
 task :default => :spec
 
+directory "public/css"
+
 # Order is important!
 jsfiles = [
-  'lib/js/jquery.js',
-  'lib/js/uikit.js',
-  'lib/js/jquery.cycle2.js',
-  'lib/js/codemirror.js',
-  'lib/js/markdown.js',
-  'lib/js/overlay.js',
-  'lib/js/xml.js',
-  'lib/js/gfm.js',
-  'lib/js/marked.js',
-  'lib/js/markdownarea.js',
-  'lib/js/form-file.js',
-  'lib/js/form-password.js',
-  'lib/js/notify.js',
-  'lib/js/overlay.js',
-  'lib/js/sortable.js',
-  'lib/js/sticky.js',
-  'lib/js/timepicker.js',
-  'lib/js/sha512.js',
-  'lib/js/jquery.colorbox.js',
-  'lib/js/tooltips.js',
-  'lib/js/application.js'
+  'lib/js/jquery-2.1.1.js',
+  'lib/js/app.js'
 ]
 
+sassfiles = FileList["lib/sass/**/*.scss"]
+
 desc "Minify Javascript files"
-file 'public/js/application.min.js' => jsfiles do |t|
+file 'public/js/app.min.js' => jsfiles do |t|
   `uglifyjs #{t.prerequisites.join(" ")} -o #{t.name}`
 end
 
 desc "Minify CSS files"
-file 'public/css/app.min.css' => FileList["lib/sass/**/*.scss"] do |t|
+file 'public/css/app.min.css' => sassfiles do |t|
   `sass -t compressed lib/sass/app.scss #{t.name}`
 end
 
+file 'public/css/app.min.css' => 'public/css'
+
 desc "Minify Javascript and CSS files"
-task :minify => ['public/js/application.min.js', 'public/css/application.min.css']
+multitask :minify => ['public/js/app.min.js', 'public/css/app.min.css']
 
 task :minclean do
-  `rm public/site.js public/site.css`
+  `rm public/js/app.js public/css/app.css`
 end
 
 ##
