@@ -179,15 +179,40 @@ describe "Forum model" do
 
 		describe "#remove_tag_by_name" do
 			it "removes a tag when given its name" do
-				@thread.add_tag_by_name(@tag.name)
+				@thread.add_tag_by_name @tag.name
 				expect(@thread.tags).to include(@tag)
 
-				@thread.remove_tag_by_name(@tag.name)
+				@thread.remove_tag_by_name @tag.name
 				expect(@thread.tags).to_not include(@tag)
 			end
 
 			it "returns nil when attempting to remove a tag that's not associated with the thread" do
 				expect(@thread.remove_tag_by_name(@tag.name)).to be_nil
+			end
+		end
+
+		describe "::by_tag_names(*tns)" do
+			before :each do
+				@thread.add_tag_by_name @tag.name
+			end
+
+			it "finds a thread when given a tag name" do
+				expect( ForumThread.by_tag_names(@tag.name) ).to include(@thread)
+			end
+
+			it "finds a thread when given multiple tag names" do
+				@tag2 = create :tag
+				@thread.add_tag_by_name @tag2.name
+				expect( ForumThread.by_tag_names(@tag.name, @tag2.name) ).to include(@thread)
+			end
+
+			it "doesn't find threads not tagged with the given tag name" do
+				@tag2 = create :tag
+				expect( ForumThread.by_tag_names(@tag2.name) ).to_not include(@thread)
+			end
+
+			it "returns [] when searching for a nonexistent tag" do
+				expect( ForumThread.by_tag_names("Idonotexist") ).to eq([])
 			end
 		end
 	end

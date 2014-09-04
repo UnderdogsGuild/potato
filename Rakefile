@@ -89,7 +89,11 @@ namespace :db do
 		@password = Digest::SHA2.new(512).update("password").to_s
 		u = create(:user, login: "user", password: @password, email: "myfancymail@example.com")
 		u.add_role create(:role, label: "admin", root: true)
+		create_list(:tag, 5)
 		create_list(:forum_thread, 20)
+		ForumThread.each do |t|
+			t.add_tag_by_name Tag.all.sample.name
+		end
 	end
 
 	namespace :migrate do

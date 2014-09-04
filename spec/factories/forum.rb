@@ -36,7 +36,7 @@ FactoryGirl.define do
 	end
 
 	factory :tag do
-		name { Faker::Lorem.word }
+		sequence(:name) { |n| "#{Faker::Lorem.word}#{n}" }
 		color { ColorGenerator.new(saturation: 0.3, lightness: 0.75).create_hex }
 	end
 

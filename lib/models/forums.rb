@@ -126,6 +126,17 @@ class ForumThread < Sequel::Model
 		self.remove_tag(t)
 	end
 
+	##
+	# Return all threads tagged with a given tag name, or [] if given invalid
+	# tag names.
+	def self.by_tag_names (*tns)
+		tags = tns.map { |tn| Tag.first(name: tn) }
+		return [] if tags.any?(&:nil?)
+
+		filter = tags.map { |t| [:tags, t] }
+		self.where(filter)
+	end
+
 	# def as_json
 	# 	{
 	# 		title: title,
