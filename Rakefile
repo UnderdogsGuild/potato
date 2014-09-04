@@ -8,50 +8,42 @@ RSpec::Core::RakeTask.new(:spec) do |spec|
   spec.rspec_opts = '--order random --format progress --color'
 end
 
-# task :spec => :minify
+# Make sure js and css are in place for phantomjs dependant specs.
+task :spec => :minify
+
+# Run everything as default task
 task :default => :spec
 
+##
 # Order is important!
-jsfiles = [
-  'lib/js/jquery.js',
-  'lib/js/uikit.js',
-  'lib/js/jquery.cycle2.js',
-  'lib/js/codemirror.js',
-  'lib/js/markdown.js',
-  'lib/js/overlay.js',
-  'lib/js/xml.js',
-  'lib/js/gfm.js',
-  'lib/js/marked.js',
-  'lib/js/markdownarea.js',
-  'lib/js/form-file.js',
-  'lib/js/form-password.js',
-  'lib/js/notify.js',
-  'lib/js/overlay.js',
-  'lib/js/sortable.js',
-  'lib/js/sticky.js',
-  'lib/js/timepicker.js',
-  'lib/js/sha512.js',
-  'lib/js/jquery.colorbox.js',
-  'lib/js/tooltips.js',
-  'lib/js/application.js'
-]
+# Put libraries in the libs folder.
+# Put plugins that depend on libraries in the plugin folder.
+# Put any application code that uses libs and plugins in top-level .js files.
+#
+# libs and plugins can contain additional folders for convenience, but don't
+# rely on their ordering.
+jsfiles = FileList['lib/js/libs/**/*.js', 'lib/js/plugins/**/*.js', 'lib/js/*.js']
+
+# These are just used for timestamp checking.
+sassfiles = FileList["lib/sass/**/*.scss"]
 
 desc "Minify Javascript files"
-file 'public/js/application.min.js' => jsfiles do |t|
+file 'public/js/app.min.js' => jsfiles do |t|
   `uglifyjs #{t.prerequisites.join(" ")} -o #{t.name}`
 end
 
 desc "Minify CSS files"
-file 'public/css/app.min.css' => FileList["lib/sass/**/*.scss"] do |t|
+file 'public/css/app.min.css' => sassfiles do |t|
   `sass -t compressed lib/sass/app.scss #{t.name}`
 end
 
-desc "Minify Javascript and CSS files"
-task :minify => ['public/js/application.min.js', 'public/css/application.min.css']
+# Create the output folder if necessary
+directory 'public/css'
+file 'public/css/app.min.css' => 'public/css'
 
-task :minclean do
-  `rm public/site.js public/site.css`
-end
+# Asset minification will run in parallel when appropriate
+desc "Minify Javascript and CSS files"
+multitask :minify => ['public/js/app.min.js', 'public/css/app.min.css']
 
 ##
 # Blatantly copied from:
@@ -60,12 +52,6 @@ namespace :db do
 	require 'sequel'
 	Sequel.extension :migration
 	migration_dir = "lib/models/migrations"
-
-	desc "Hard reset the development and testing databases via root user. EDIT THE DATABASE NAMES IN RAKEFILE TASK!!!"
-	task :reset do
-		`mysql -uroot -p -e 'drop database underdogs; create database underdogs;'`
-		`mysql -uroot -p -e 'drop database underdogs_test; create database underdogs_test;'`
-	end
 
 	task :environment, [:env] do |cmd, args|
 		@@env = args[:env] || "development"
@@ -97,7 +83,7 @@ namespace :db do
 		end
 
 		@password = Digest::SHA2.new(512).update("password").to_s
-		u = create(:user, login: "user", password: @password, email: "me@mkaito.com")
+		u = create(:user, login: "user", password: @password, email: "myfancymail@example.com")
 		u.add_role create(:role, label: "admin", root: true)
 		create_list(:forum_thread, 20)
 	end
@@ -105,7 +91,7 @@ namespace :db do
 	namespace :migrate do
 
 		desc "Perform automigration (reset your db data)"
-		task :auto => [:environment, :reset] do
+		task :auto => :environment do
 			::Sequel::Migrator.run Sequel::Model.db, migration_dir, :target => 0
 			::Sequel::Migrator.run Sequel::Model.db, migration_dir
 			puts "<= sq:migrate:auto executed"
