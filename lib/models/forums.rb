@@ -129,6 +129,7 @@ class ForumThread < Sequel::Model
 	##
 	# Return all threads tagged with a given tag name, or [] if given invalid
 	# tag names.
+	# TODO: Return useful information when things go wrong
 	def self.by_tag_names (*tns)
 		tags = tns.map { |tn| Tag.first(name: tn) }
 		return [] if tags.any?(&:nil?)
