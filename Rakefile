@@ -8,17 +8,23 @@ RSpec::Core::RakeTask.new(:spec) do |spec|
   spec.rspec_opts = '--order random --format progress --color'
 end
 
-# task :spec => :minify
+# Make sure js and css are in place for phantomjs dependant specs.
+task :spec => :minify
+
+# Run everything as default task
 task :default => :spec
 
-directory "public/css"
-
+##
 # Order is important!
-jsfiles = [
-  'lib/js/libs/jquery-2.1.1.js',
-  'lib/js/app.js'
-]
+# Put libraries in the libs folder.
+# Put plugins that depend on libraries in the plugin folder.
+# Put any application code that uses libs and plugins in top-level .js files.
+#
+# libs and plugins can contain additional folders for convenience, but don't
+# rely on their ordering.
+jsfiles = FileList['lib/js/libs/**/*.js', 'lib/js/plugins/**/*.js', 'lib/js/*.js']
 
+# These are just used for timestamp checking.
 sassfiles = FileList["lib/sass/**/*.scss"]
 
 desc "Minify Javascript files"
@@ -31,14 +37,13 @@ file 'public/css/app.min.css' => sassfiles do |t|
   `sass -t compressed lib/sass/app.scss #{t.name}`
 end
 
+# Create the output folder if necessary
+directory 'public/css'
 file 'public/css/app.min.css' => 'public/css'
 
+# Asset minification will run in parallel when appropriate
 desc "Minify Javascript and CSS files"
 multitask :minify => ['public/js/app.min.js', 'public/css/app.min.css']
-
-task :minclean do
-  `rm public/js/app.js public/css/app.css`
-end
 
 ##
 # Blatantly copied from:
@@ -78,7 +83,7 @@ namespace :db do
 		end
 
 		@password = Digest::SHA2.new(512).update("password").to_s
-		u = create(:user, login: "user", password: @password, email: "me@mkaito.com")
+		u = create(:user, login: "user", password: @password, email: "myfancymail@example.com")
 		u.add_role create(:role, label: "admin", root: true)
 		create_list(:forum_thread, 20)
 	end
