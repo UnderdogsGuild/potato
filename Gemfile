@@ -42,8 +42,10 @@ group :development do
 	gem 'thin'
 	gem 'rb-inotify'
 	gem "guard"
-	gem "guard-sass"
+	# gem "guard-sass"
 	gem "guard-livereload"
+	# gem "guard-concat"
+	gem "guard-rake"
 end
 
 group :test do

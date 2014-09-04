@@ -15,7 +15,7 @@ directory "public/css"
 
 # Order is important!
 jsfiles = [
-  'lib/js/jquery-2.1.1.js',
+  'lib/js/libs/jquery-2.1.1.js',
   'lib/js/app.js'
 ]
 
