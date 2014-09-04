@@ -33,12 +33,12 @@ Sequel.migration do
 
 		create_join_table forum_thread_id: :forum_threads, tag_id: :tags
 
-		# create_table(:thread_visits) do
-		# 	primary_key :id
-		# 	foreign_key :user_id, :users, on_delete: :cascade
-		# 	foreign_key :forum_thread_id, :forum_threads, on_delete: :cascade
-		# 	DateTime :when, default: Sequel::CURRENT_TIMESTAMP
-		# end
+		create_table(:visits) do
+			primary_key :id
+			foreign_key :user_id, :users, on_delete: :cascade
+			foreign_key :forum_thread_id, :forum_threads, on_delete: :cascade
+			DateTime :when, default: Sequel::CURRENT_TIMESTAMP
+		end
 
 	end
 end

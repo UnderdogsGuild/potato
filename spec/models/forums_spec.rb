@@ -215,6 +215,58 @@ describe "Forum model" do
 				expect( ForumThread.by_tag_names("Idonotexist") ).to eq([])
 			end
 		end
+
+		describe "#visit(user)" do
+			it "updates an existing visit" do
+				@visit = @thread.add_visit user: @user
+
+				Timecop.freeze(Date.today + 2)
+				@thread.visit @user
+
+				expect { @visit.reload }.to change { @visit.when }
+			end
+
+			it "creates a new visit when one doesn't exist" do
+				mock(@thread.add_visit(user: @user)) { nil }
+				@thread.visit(@user)
+			end
+		end
+
+		describe "#first_new_post_for(user)" do
+			it "returns the first post if there has been no visit" do
+				expect(@thread.first_new_post_for(@user)).to eq(@thread.post)
+			end
+
+			it "returns the first new post since the last visit" do
+				@thread.visit(@user)
+				Timecop.freeze(Date.today + 2)
+
+				p = create :forum_post, forum_thread: @thread
+				expect(@thread.first_new_post_for(@user)).to eq(p)
+			end
+
+			it "returns the last post in a thread with no new posts" do
+				p = create :forum_post, forum_thread: @thread
+				@thread.visit(@user)
+				expect(@thread.first_new_post_for(@user)).to eq(p)
+			end
+		end
+		
+		describe "#updated_for?(user)" do
+			it "returns true if there are new posts" do
+				@thread.visit(@user)
+				Timecop.freeze(Date.today + 2)
+
+				create :forum_post, forum_thread: @thread
+				expect(@thread.updated_for?(@user)).to be_truthy
+			end
+
+			it "returns false if there are no new posts" do
+				create :forum_post, forum_thread: @thread
+				@thread.visit(@user)
+				expect(@thread.updated_for?(@user)).to be_falsey
+			end
+		end
 	end
 
 	describe ForumPost do
@@ -269,8 +321,5 @@ describe "Forum model" do
 				expect(@post.html_id).to eq("post-#{@post.id}")
 			end
 		end
-	end
-
-	describe Tag do
 	end
 end

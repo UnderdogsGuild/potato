@@ -13,6 +13,9 @@ class ForumThread < Sequel::Model
 	# many_to_one :forum
 	one_to_many :forum_posts
 	many_to_many :tags
+
+	# Thread visits
+	one_to_many :visits
 	
 	# Convenience aliases
 	alias_method :posts, :forum_posts
@@ -135,6 +138,46 @@ class ForumThread < Sequel::Model
 		self.where(filter)
 	end
 
+	##
+	# Visit a thread
+	def visit(user)
+		if v = self.visit_for(user)
+			v.update when: Time.now
+
+		else
+			self.add_visit user: user
+
+		end
+	end
+
+	def visit_for(user)
+		self.visits_dataset.first(user: user)
+	end
+
+	def first_new_post_for(user)
+		if v = self.visit_for(user)
+			self.forum_posts_dataset.first { created_at > v.when } or self.forum_posts_dataset.last
+		else
+			self.post
+		end
+	end
+
+	def updated_for?(user)
+		if v = self.visit_for(user)
+			!! self.forum_posts_dataset.first { created_at > v.when }
+		else
+			false
+		end
+	end
+
+	def css_classes
+		classes = ["thread"]
+
+		classes << "has-new-posts" if self.updated_for?(Application.user)
+
+		classes.join " "
+	end
+
 	# def as_json
 	# 	{
 	# 		title: title,
@@ -239,4 +282,10 @@ class Tag < Sequel::Model
 		validates_presence :color
 		validates_unique :color
 	end
+end
+
+class Visit < Sequel::Model
+	plugin :validation_helpers
+	many_to_one :user
+	many_to_one :forum_thread
 end

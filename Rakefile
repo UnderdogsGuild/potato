@@ -58,7 +58,7 @@ namespace :db do
 	end
 
 	task :environment, [:env] do |cmd, args|
-		@@env = args[:env] || "development"
+		# @@env = args[:env] || "development"
 		Bundler.require
 		require 'models/all'
 	end
