@@ -83,7 +83,7 @@ class Application < Sinatra::Base
 
 						# See if we have to send him back to where he came from; otherwise,
 						# just send him to the frontpage.
-						redirect session[:go_back] ? to(session.delete(:go_back)) : to('/')
+						redirect session.has_key?( :go_back )  ? to( session.delete(:go_back) ) : to('/')
 
 					else
 						@error = :password
