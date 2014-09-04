@@ -33,8 +33,6 @@ guard :sass,
 	:style => :extended,
 	:extension => '.min.css'
 
-# vim:ft=ruby
-
 guard 'livereload' do
   watch(%r{app/views/.+\.(erb|haml|slim)$})
   watch(%r{app/helpers/.+\.rb})
@@ -43,3 +41,5 @@ guard 'livereload' do
   # Rails Assets Pipeline
   watch(%r{(app|vendor)(/assets/\w+/(.+\.(css|js|html|png|jpg))).*}) { |m| "/assets/#{m[3]}" }
 end
+
+# vim:ft=ruby
