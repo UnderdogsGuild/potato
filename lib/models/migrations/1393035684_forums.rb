@@ -40,5 +40,11 @@ Sequel.migration do
 			DateTime :when, default: Sequel::CURRENT_TIMESTAMP
 		end
 
+		create_table (:stars) do
+			primary_key :id
+			foreign_key :user_id, :users, on_delete: :cascade
+			foreign_key :forum_thread_id, :forum_threads, on_delete: :cascade
+		end
+
 	end
 end

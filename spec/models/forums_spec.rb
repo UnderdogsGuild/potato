@@ -120,11 +120,6 @@ describe "Forum model" do
 		end
 
 		describe "#posts" do
-			## Test is shaky because it's order dependant.
-			# it "finds all child posts" do
-			# 	expect(@thread.posts.count).to eq(4)
-			# end
-			
 			it "includes all child posts" do
 				expect(@thread.posts).to include(@post)
 			end
@@ -158,113 +153,154 @@ describe "Forum model" do
 			end
 		end
 
-		describe "#add_tag_by_name" do
-			it "takes a tag name" do
-				@thread.add_tag_by_name("event")
+		describe "thread tagging" do
+			describe "#add_tag_by_name" do
+				it "takes a tag name" do
+					@thread.add_tag_by_name("event")
+				end
+
+				it "doesn't create new tags" do
+					expect{@thread.add_tag_by_name("event")}.to_not change{Tag.all.count}
+				end
+
+				it "returns nil when attempting to add a non-existing tag" do
+					expect(@thread.add_tag_by_name("Idontexist")).to be_nil
+				end
+
+				it "adds existing tags to threads" do
+					expect(@thread.add_tag_by_name(@tag.name)).to_not be_nil
+					expect(@thread.tags).to include(@tag)
+				end
 			end
 
-			it "doesn't create new tags" do
-				expect{@thread.add_tag_by_name("event")}.to_not change{Tag.all.count}
+			describe "#remove_tag_by_name" do
+				it "removes a tag when given its name" do
+					@thread.add_tag_by_name @tag.name
+					expect(@thread.tags).to include(@tag)
+
+					@thread.remove_tag_by_name @tag.name
+					expect(@thread.tags).to_not include(@tag)
+				end
+
+				it "returns nil when attempting to remove a tag that's not associated with the thread" do
+					expect(@thread.remove_tag_by_name(@tag.name)).to be_nil
+				end
 			end
 
-			it "returns nil when attempting to add a non-existing tag" do
-				expect(@thread.add_tag_by_name("Idontexist")).to be_nil
-			end
+			describe "::by_tag_names(*tns)" do
+				before :each do
+					@thread.add_tag_by_name @tag.name
+				end
 
-			it "adds existing tags to threads" do
-				expect(@thread.add_tag_by_name(@tag.name)).to_not be_nil
-				expect(@thread.tags).to include(@tag)
-			end
-		end
+				it "finds a thread when given a tag name" do
+					expect( ForumThread.by_tag_names(@tag.name) ).to include(@thread)
+				end
 
-		describe "#remove_tag_by_name" do
-			it "removes a tag when given its name" do
-				@thread.add_tag_by_name @tag.name
-				expect(@thread.tags).to include(@tag)
+				it "finds a thread when given multiple tag names" do
+					@tag2 = create :tag
+					@thread.add_tag_by_name @tag2.name
+					expect( ForumThread.by_tag_names(@tag.name, @tag2.name) ).to include(@thread)
+				end
 
-				@thread.remove_tag_by_name @tag.name
-				expect(@thread.tags).to_not include(@tag)
-			end
+				it "doesn't find threads not tagged with the given tag name" do
+					@tag2 = create :tag
+					expect( ForumThread.by_tag_names(@tag2.name) ).to_not include(@thread)
+				end
 
-			it "returns nil when attempting to remove a tag that's not associated with the thread" do
-				expect(@thread.remove_tag_by_name(@tag.name)).to be_nil
-			end
-		end
-
-		describe "::by_tag_names(*tns)" do
-			before :each do
-				@thread.add_tag_by_name @tag.name
-			end
-
-			it "finds a thread when given a tag name" do
-				expect( ForumThread.by_tag_names(@tag.name) ).to include(@thread)
-			end
-
-			it "finds a thread when given multiple tag names" do
-				@tag2 = create :tag
-				@thread.add_tag_by_name @tag2.name
-				expect( ForumThread.by_tag_names(@tag.name, @tag2.name) ).to include(@thread)
-			end
-
-			it "doesn't find threads not tagged with the given tag name" do
-				@tag2 = create :tag
-				expect( ForumThread.by_tag_names(@tag2.name) ).to_not include(@thread)
-			end
-
-			it "returns [] when searching for a nonexistent tag" do
-				expect( ForumThread.by_tag_names("Idonotexist") ).to eq([])
-			end
-		end
-
-		describe "#visit(user)" do
-			it "updates an existing visit" do
-				@visit = @thread.add_visit user: @user
-
-				Timecop.freeze(Date.today + 2)
-				@thread.visit @user
-
-				expect { @visit.reload }.to change { @visit.when }
-			end
-
-			it "creates a new visit when one doesn't exist" do
-				mock(@thread.add_visit(user: @user)) { nil }
-				@thread.visit(@user)
+				it "returns [] when searching for a nonexistent tag" do
+					expect( ForumThread.by_tag_names("Idonotexist") ).to eq([])
+				end
 			end
 		end
 
-		describe "#first_new_post_for(user)" do
-			it "returns the first post if there has been no visit" do
-				expect(@thread.first_new_post_for(@user)).to eq(@thread.post)
+		describe "read tracking" do
+			describe "#visit(user)" do
+				it "updates an existing visit" do
+					@visit = @thread.add_visit user: @user
+
+					Timecop.freeze(Date.today + 2)
+					@thread.visit @user
+
+					expect { @visit.reload }.to change { @visit.when }
+				end
+
+				it "creates a new visit when one doesn't exist" do
+					mock(@thread.add_visit(user: @user)) { nil }
+					@thread.visit(@user)
+				end
 			end
 
-			it "returns the first new post since the last visit" do
-				@thread.visit(@user)
-				Timecop.freeze(Date.today + 2)
+			describe "#first_new_post_for(user)" do
+				it "returns the first post if there has been no visit" do
+					expect(@thread.first_new_post_for(@user)).to eq(@thread.post)
+				end
 
-				p = create :forum_post, forum_thread: @thread
-				expect(@thread.first_new_post_for(@user)).to eq(p)
+				it "returns the first new post since the last visit" do
+					@thread.visit(@user)
+					Timecop.freeze(Date.today + 2)
+
+					p = create :forum_post, forum_thread: @thread
+					expect(@thread.first_new_post_for(@user)).to eq(p)
+				end
+
+				it "returns the last post in a thread with no new posts" do
+					p = create :forum_post, forum_thread: @thread
+					@thread.visit(@user)
+					expect(@thread.first_new_post_for(@user)).to eq(p)
+				end
 			end
+			
+			describe "#updated_for?(user)" do
+				it "returns true if there are new posts" do
+					@thread.visit(@user)
+					Timecop.freeze(Date.today + 2)
 
-			it "returns the last post in a thread with no new posts" do
-				p = create :forum_post, forum_thread: @thread
-				@thread.visit(@user)
-				expect(@thread.first_new_post_for(@user)).to eq(p)
+					create :forum_post, forum_thread: @thread
+					expect(@thread.updated_for?(@user)).to be_truthy
+				end
+
+				it "returns false if there are no new posts" do
+					create :forum_post, forum_thread: @thread
+					@thread.visit(@user)
+					expect(@thread.updated_for?(@user)).to be_falsey
+				end
 			end
 		end
-		
-		describe "#updated_for?(user)" do
-			it "returns true if there are new posts" do
-				@thread.visit(@user)
-				Timecop.freeze(Date.today + 2)
 
-				create :forum_post, forum_thread: @thread
-				expect(@thread.updated_for?(@user)).to be_truthy
+		describe "thread starring" do
+			describe "#star_for(user)" do
+				it "adds a star" do
+					@thread.star_for(@user)
+					expect( @thread.stars_dataset.first(user: @user) ).to_not be_nil
+				end
+
+				it "doesn't add duplicate stars" do
+					@thread.star_for(@user)
+					@thread.star_for(@user)
+					expect( @thread.stars_dataset.where(user: @user).count ).to eq(1)
+				end
 			end
 
-			it "returns false if there are no new posts" do
-				create :forum_post, forum_thread: @thread
-				@thread.visit(@user)
-				expect(@thread.updated_for?(@user)).to be_falsey
+			describe "#starred_for?(user)" do
+				it "returns true if a thread is starred for a user" do
+					@thread.star_for(@user)
+					expect( @thread.starred_for?(@user) ).to be_truthy
+				end
+
+				it "returns false if a thread is not starred for a user" do
+					expect( @thread.starred_for?(@user) ).to be_falsey
+				end
+			end
+
+			describe "::starred_for(user)" do
+				it "returns threads starred for a user" do
+					@thread.star_for(@user)
+					expect( ForumThread.starred_for(@user) ).to include(@thread)
+				end
+
+				it "doestn't returns threads not starred for a user" do
+					expect( ForumThread.starred_for(@user) ).to_not include(@thread)
+				end
 			end
 		end
 	end

@@ -7,6 +7,7 @@ class User < Sequel::Model
 	many_to_many :roles
 	many_to_many :permissions
 	one_to_many :visits
+	one_to_many :stars
 	one_to_many :news, class: :NewsEntry
 	one_to_many :forum_posts
 	alias_method :posts, :forum_posts

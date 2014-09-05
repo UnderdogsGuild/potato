@@ -14,8 +14,8 @@ class ForumThread < Sequel::Model
 	one_to_many :forum_posts
 	many_to_many :tags
 
-	# Thread visits
 	one_to_many :visits
+	one_to_many :stars
 	
 	# Convenience aliases
 	alias_method :posts, :forum_posts
@@ -139,7 +139,7 @@ class ForumThread < Sequel::Model
 	end
 
 	##
-	# Visit a thread
+	# Visit a thread, update timestamps.
 	def visit(user)
 		if v = self.visit_for(user)
 			v.update when: Time.now
@@ -150,10 +150,14 @@ class ForumThread < Sequel::Model
 		end
 	end
 
+	##
+	# Return the relevant visit object for a thread and user
 	def visit_for(user)
 		self.visits_dataset.first(user: user)
 	end
 
+	##
+	# Returns the first post created after the last visit of a user
 	def first_new_post_for(user)
 		if v = self.visit_for(user)
 			self.forum_posts_dataset.first { created_at > v.when } or self.forum_posts_dataset.last
@@ -162,6 +166,9 @@ class ForumThread < Sequel::Model
 		end
 	end
 
+	##
+	# Returns true if the thread contains posts created since the last time the
+	# user viewed the thread
 	def updated_for?(user)
 		if v = self.visit_for(user)
 			!! self.forum_posts_dataset.first { created_at > v.when }
@@ -170,12 +177,26 @@ class ForumThread < Sequel::Model
 		end
 	end
 
-	def css_classes
-		classes = ["thread"]
+	##
+	# Add a star for user and thread
+	def star_for(user)
+		self.stars_dataset.first(user: user) or self.add_star(user: user)
+	end
 
-		classes << "has-new-posts" if self.updated_for?(Application.user)
+	##
+	# Check whether a thread is starred for a user
+	def starred_for?(user)
+		! self.stars_dataset.first(user: user).nil?
+	end
 
-		classes.join " "
+	##
+	# The ugly hardcoded sql join mess from doom returns a dataset containing all
+	# threads starred for a certain user.
+	def self.starred_for(user)
+		self.select(:forum_threads__id, :title, :slug, :views, :updated_at, :officer, :deleted).
+			left_join(Star, forum_thread_id: :id).left_join(User, id: :user_id).
+			where(forum_threads__id: :stars__forum_thread_id).
+			where(users__id: :stars__user_id)
 	end
 
 	# def as_json
@@ -285,7 +306,11 @@ class Tag < Sequel::Model
 end
 
 class Visit < Sequel::Model
-	plugin :validation_helpers
+	many_to_one :user
+	many_to_one :forum_thread
+end
+
+class Star < Sequel::Model
 	many_to_one :user
 	many_to_one :forum_thread
 end
