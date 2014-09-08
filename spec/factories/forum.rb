@@ -38,6 +38,14 @@ FactoryGirl.define do
 	factory :tag do
 		sequence(:name) { |n| "#{Faker::Lorem.word}#{n}" }
 		color { ColorGenerator.new(saturation: 0.3, lightness: 0.75).create_hex }
+
+		before(:save) do |t, evaluator|
+			# TODO: Check specifically for a validation error in color
+			# TODO: DRY the color generation
+			while not t.valid?
+				t.color = ColorGenerator.new(saturation: 0.3, lightness: 0.75).create_hex
+			end
+		end
 	end
 
 end
