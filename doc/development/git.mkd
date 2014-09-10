@@ -1,0 +1,87 @@
+This document attempts to outline the workflow we are to use in Git.
+
+# General outline
+
+Learn to use git branches and stashes. Most work should be done in personal
+branches, and stashes are useful when switching while having work in progress.
+The only thing being committed straight to master is documentation.
+
+Doing a `git fetch` before starting to work will show you whether there are new
+commits on the remote. New commits on master should mean that there are things
+to review, such as documentation, or a finished feature that was merged.
+
+When working on branches, try to keep them rebased with master. That way,
+merges are painless, and you get to test your work with any new features that
+were merged.
+
+Sometimes, it's better do work on a branch without rebasing. Use your
+judgement, but make sure to rebase at the end and resolve any conflicts before
+merging to master.
+
+## Development branch
+
+Once we deploy, `master` should be untouchable, and should represent what is
+currently sitting on the server. Every deployment should be tagged with a
+version string, so we can roll back and investigate any issues.
+
+Feature branches will be merged into `develop`, tested, tagged, and only merged
+to master prior to deployment. Any commits not specific to a feature branch
+should land on `develop`.
+
+Features should be worked on in personal branches. A personal branch is one
+namespaced under your username. A namespace is not something git supports, but
+simply a branch naming conventions where namespaces are separated by forward
+slashes, like URL segments, or folders on a UNIX filesystem.
+
+I suggest you keep branches fairly specific. Try to work on a single logical
+feature, and only on things that can not be separated from the work on this
+feature. If you want to work on multiple features before merging to `develop`,
+you should make your own development master branch, such as `mkaito/forums` for
+all forum work, but doing actual work on branches such as
+`mkaito/forums/search`, or `mkaito/forums/tagging` and only merging into the
+parent.  When the overarching feature is complete and tested, merge the entire
+parent into `develop`.
+
+This keeps git history clean and organized, and allows for quick switching
+between working states of the application. As an example, I've been working on
+`mkaito/forums/search` for a while, but this feature required intrusive changes
+to the forum models. This would have hindered any further work on the same code
+segments until search was completed, but I was able to implement starring and
+tagging in separate branches easily while search was still incomplete, and even
+partially broken.
+
+It has the added benefit of allowing exploratory work. For example, I explored
+several ways to implement tagging. The first two turned out to be garbage, and
+all of it was easily undone by simply deleting the `mkaito/forums/tagging`
+branch and doing a fresh checkout from `mkaito/forums`, which retained my
+previous work on the forums; all without touching `master`.
+
+## Reading list
+
+About a branching workflow:
+
+* `git help branch`
+
+* `git help merge`
+
+* `git help checkout`
+
+* `git help stash`
+
+* `git help rebase`
+
+* `git help fetch`
+
+Probably not necessary to study in depth, but potentially beneficial to your
+happiness with git:
+
+* `git help add`
+
+* `git help commit`
+
+* `git help push`
+
+* `git help pull`
+
+I advocate `git fetch` followed by `git merge`, instead of `git pull`, but I
+suggest you do a little reading and decide yourself.
