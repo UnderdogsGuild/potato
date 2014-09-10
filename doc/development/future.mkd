@@ -1,0 +1,41 @@
+This file is where I attempt to outline yet-to-exist features, and discuss how
+to implement them.
+
+# Email
+
+Quite possibly, our best bet for getting people to use the site is to poke them
+with an email when appropriate. Possible occasions include new forum posts,
+private messages, and news entries.
+
+Before we can enable mailing, we need to implement user settings, so members
+can configure what for and when they want to be mailed.
+
+## Tech Details
+
+I'll be using the [Pony](https://github.com/benprew/pony) gem for mail sending,
+and using either HAML or ERB for mail templating. I'm partial to plaintext
+email myself, so ERB is probably a better choice.
+
+Not mentioned in the Pony docs is that you can pass an array of emails:
+
+		Pony.mail(to: ['you@example.com','her@example.com'])
+
+This works for the cc and bcc fields as well.
+
+A naive guess, I'll be dumping all recipients into the To: field. I'll need to
+have a read at Google's [bulk mailing
+guidelines](https://support.google.com/mail/answer/81126?hl=en) so we don't end
+up in every spam folder ever, and on Gmail's blacklist.
+
+### Alternative Tech
+
+The only real alternative is the [mail](https://github.com/mikel/mail) gem,
+which does both sending and receiving. It is a fair bit more low level and
+involved than Pony, which is why I choose the latter for us, since our mailing
+needs are actually quite humble.
+
+As for mail transfer, I vote for a local Postfix installation over stuff like
+Gmail of SendGrid. Primarily, we already need a local Postfix, configured and
+ready to send and receive. Gmail has their own rules, especially concerning
+batch mail sending, and SendGrid is way overkill for sending ~20 emails once a
+week.
