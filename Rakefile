@@ -65,7 +65,7 @@ namespace :db do
 
 	task :shell => :environment do
 		require 'pry'
-		binding.pry
+		pry
 	end
 
 	desc "Seed the database"
