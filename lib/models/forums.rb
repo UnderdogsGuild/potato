@@ -190,13 +190,69 @@ class ForumThread < Sequel::Model
 	end
 
 	##
-	# The ugly hardcoded sql join mess from doom returns a dataset containing all
-	# threads starred for a certain user.
+	# Retrieve all starred threads for a given user
 	def self.starred_for(user)
-		self.select(:forum_threads__id, :title, :slug, :views, :updated_at, :officer, :deleted).
-			left_join(Star, forum_thread_id: :id).left_join(User, id: :user_id).
-			where(forum_threads__id: :stars__forum_thread_id).
-			where(users__id: :stars__user_id)
+		# Limit fields to those present in the forum_threads table,
+		# perform an inner join on stars and users,
+		# limit dataset to stars for given user.
+		self.select(:forum_threads__id, :title, :slug, :views, :updated_at, :officer, :deleted)
+			.join(Star, forum_thread_id: :id)
+			.join(User, id: :user_id)
+			.where(stars__user_id: user.id)
+	end
+
+	##
+	# Messy search code from hell!
+	#
+	# Split the query on whitespace, filter words into @tags, %states, or terms.
+	# Feed terms to fulltext for the primary result set.
+	# If no terms, attempt to treat states as terms for special search.
+	# If no terms and no states, get the entire thread set.
+	# Apply tags as filter to the set.
+	def self.search(qstring, user)
+		tags = []
+		terms = []
+		states = []
+
+		qstring.split.each do |term|
+			if term[0] == '@'
+				tags << term[1..-1]
+			elsif term[0] == '%'
+				states << term[1..-1]
+			else
+				terms << term
+			end
+		end
+
+		tagged = self.by_tag_names(*tags) unless tags.empty?
+
+		unless terms.empty?
+			texted = ForumPost.dataset.full_text_search(:content, terms).all
+			texted.map! { |p| p.thread }
+			texted.uniq!
+		end
+		
+		threads = if not tagged.nil? and not texted.nil?
+			tagged & texted
+		elsif not tagged.nil?
+			tagged
+		elsif not texted.nil?
+			texted
+		elsif tags.empty? and terms.empty?
+			ForumThread.all
+		else
+			[]
+		end
+
+		if states.include?('starred')
+			threads.select! { |t| t.starred_for?(user) }
+		end
+
+		if states.include?('unread')
+			threads.select! { |t| t.updated_for?(user) }
+		end
+
+		threads
 	end
 
 	# def as_json
