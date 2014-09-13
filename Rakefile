@@ -54,7 +54,7 @@ namespace :db do
 	migration_dir = "lib/models/migrations"
 
 	task :reset do
-		`mysql -uroot -p -e 'drop database underdogs; create database underdogs; drop database underdogs_test; create database underdogs_test;'`
+		`mysql -uroot -p -e 'drop database if exists underdogs; create database underdogs; drop database if exists underdogs_test; create database underdogs_test;'`
 	end
 
 	task :environment, [:env] do |cmd, args|
