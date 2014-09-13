@@ -10,6 +10,7 @@ require 'active_support/core_ext/class/subclasses'
 require 'factory_girl'
 require 'faker'
 require 'color-generator'
+require 'date'
 require 'timecop'
 
 require 'application'
@@ -65,12 +66,4 @@ RSpec.configure do |c|
   c.around(:each) do |example|
     Application.db.transaction(:rollback=>:always){example.run}
   end
-
-	c.after(:each) do
-		Timecop.return
-	end
-
-	# c.after :suite do
-	# 	Sequel::Migrator.run(Application.db, migdir, target: 0)
-	# end
 end

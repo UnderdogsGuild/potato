@@ -11,7 +11,7 @@ class ForumThread < Sequel::Model
 	plugin :validation_helpers
 
 	# many_to_one :forum
-	one_to_many :forum_posts
+	one_to_many :forum_posts, after_add: :after_add_post
 	many_to_many :tags
 
 	one_to_many :visits
@@ -83,14 +83,6 @@ class ForumThread < Sequel::Model
 		return self.forum_posts_dataset.where(filter)
 	end
 
-	def add_post(pdata)
-		new_p = self.add_forum_post(pdata)
-
-		self.update(updated_at: new_p.updated_at)
-
-		return new_p
-	end
-
 	##
 	# Convenience method to get the first post in the thread
 	def post
@@ -109,7 +101,7 @@ class ForumThread < Sequel::Model
 		post.content
 	end
 
-	##
+	# {{{ Tags
 	# Add a tag by name
 	# alias_method :_add_tag, :add_tag
 	def add_tag_by_name(tname)
@@ -135,7 +127,22 @@ class ForumThread < Sequel::Model
 		return [] if tags.any?(&:nil?)
 
 		filter = tags.map { |t| [:tags, t] }
-		self.where(filter)
+		self.where(filter).all
+	end
+	# }}}
+	# {{{ Read tracking
+	
+	##
+	# Bump the thread when adding a new post
+	def after_add_post p
+		update updated_at: p.updated_at
+		# bump
+	end
+
+	##
+	# Update modification timestamp to now.
+	def bump
+		update updated_at: Time.now
 	end
 
 	##
@@ -171,12 +178,32 @@ class ForumThread < Sequel::Model
 	# user viewed the thread
 	def updated_for?(user)
 		if v = self.visit_for(user)
-			!! self.forum_posts_dataset.first { created_at > v.when }
+			updated_at > v.when
 		else
-			false
+			updated_at < Date.today - 30
 		end
 	end
 
+	##
+	# Retrieve all threads with new content for a given user
+	def self.new_for(user)
+		# Limit fields to those present in the forum_threads table,
+		self.select(:forum_threads__id, :title, :slug, :views, :updated_at, :officer, :deleted).
+
+		# perform left join on visits (includes threads with no visits),
+			left_join(:visits, forum_thread_id: :id).
+
+		# limit dataset to visits for given user and filter for threads updated since last visit,
+			where { Sequel.&({visits__user_id: user.id},
+											(forum_threads__updated_at > visits__when))}.
+
+		# include threads with no visits, but onlt those updated within 30 days.
+			or    { Sequel.&({visits__user_id: nil},
+											(forum_threads__updated_at > Date.today - 30))}
+	end
+	# }}}
+	# {{{ Stars
+	
 	##
 	# Add a star for user and thread
 	def star_for(user)
@@ -193,17 +220,19 @@ class ForumThread < Sequel::Model
 	# Retrieve all starred threads for a given user
 	def self.starred_for(user)
 		# Limit fields to those present in the forum_threads table,
-		# perform an inner join on stars and users,
-		# limit dataset to stars for given user.
-		self.select(:forum_threads__id, :title, :slug, :views, :updated_at, :officer, :deleted)
-			.join(Star, forum_thread_id: :id)
-			.join(User, id: :user_id)
-			.where(stars__user_id: user.id)
+		self.select(:forum_threads__id, :title, :slug, :views, :updated_at, :officer, :deleted).
+
+			# perform an inner join on stars and users,
+			join(Star, forum_thread_id: :id).
+			join(User, id: :user_id).
+
+			# limit dataset to stars for given user.
+			where(stars__user_id: user.id)
 	end
 
-	##
-	# Messy search code from hell!
-	#
+	# }}}
+	# {{{ Search frontend
+
 	# Split the query on whitespace, filter words into @tags, %states, or terms.
 	# Feed terms to fulltext for the primary result set.
 	# If no terms, attempt to treat states as terms for special search.
@@ -254,18 +283,7 @@ class ForumThread < Sequel::Model
 
 		threads
 	end
-
-	# def as_json
-	# 	{
-	# 		title: title,
-	# 		author: author.as_json,
-	# 		officer: officer,
-	# 		url: url,
-	# 		views: views,
-	# 		last: posts.last.as_json,
-	# 		created_at: created_at,
-	# 	}
-	# end
+	# }}}
 end
 
 ##
@@ -283,7 +301,6 @@ class ForumPost < Sequel::Model
 	# and to a thread
 	many_to_one :forum_thread
 	alias_method :thread, :forum_thread
-	
 
 	def validate
 		super
@@ -307,11 +324,6 @@ class ForumPost < Sequel::Model
 	def html_id
 		"post-#{self.id}"
 	end
-
-	# def after_create
-	# 	super
-	# 	self.thread.update updated_at: self.updated_at
-	# end
 
 	##
 	# Build a string of apropriate css classes for the current post, as a string
@@ -369,4 +381,6 @@ end
 class Star < Sequel::Model
 	many_to_one :user
 	many_to_one :forum_thread
-end
+end 
+
+# vim:fdm=marker

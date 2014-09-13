@@ -6,12 +6,6 @@ describe "Forum model" do
 	# Since test examples are always wrapped in a transaction that is rolled back
 	# afterwards, creating all necessary entities upfront makes much more sense.
 	before :all do
-		# All pregenerated objects are 30 days old, for testing purposes.
-		# Since time is frozen, remember to move it yourself with another call to
-		# Timecop.freeze if are writing time-sensitive tests, such as updates to
-		# timestamps and such.
-		Timecop.freeze(Date.today - 30)
-
 		@user = create :user
 
 		@thread = create :forum_thread
@@ -31,8 +25,6 @@ describe "Forum model" do
 	after :all do
 		# Deletes cascade, so this will clear threads and posts too.
 		ForumThread.each { |f| f.destroy }
-
-		# Timecop.return
 	end
 
 	##
@@ -108,14 +100,13 @@ describe "Forum model" do
 				@new_post = @thread.add_post(user: @user, content: "foo")
 
 				expect(@thread.posts).to include(@new_post)
-
-				@thread.remove_post(@new_post)
-				@new_post.destroy
 			end
 
 			it "updates the timestamp on the thread" do
-				Timecop.freeze(Date.today + 2)
-				expect { @thread.add_post(user: @user, content: "foo") }.to change{ @thread.updated_at }
+				Timecop. travel 30 do
+					expect { @thread.add_post user: @user, content: "foo" }
+						.to change{ @thread.updated_at }
+				end
 			end
 		end
 
@@ -217,11 +208,10 @@ describe "Forum model" do
 			describe "#visit(user)" do
 				it "updates an existing visit" do
 					@visit = @thread.add_visit user: @user
-
-					Timecop.freeze(Date.today + 2)
-					@thread.visit @user
-
-					expect { @visit.reload }.to change { @visit.when }
+					Timecop. travel 30 do
+						@thread.visit @user
+						expect { @visit.reload }.to change { @visit.when }
+					end
 				end
 
 				it "creates a new visit when one doesn't exist" do
@@ -237,14 +227,14 @@ describe "Forum model" do
 
 				it "returns the first new post since the last visit" do
 					@thread.visit(@user)
-					Timecop.freeze(Date.today + 2)
-
-					p = create :forum_post, forum_thread: @thread
-					expect(@thread.first_new_post_for(@user)).to eq(p)
+					Timecop. travel 30 do
+						p = @thread.add_post user: create(:user), content: "Foo"
+						expect(@thread.first_new_post_for(@user)).to eq(p)
+					end
 				end
 
 				it "returns the last post in a thread with no new posts" do
-					p = create :forum_post, forum_thread: @thread
+					p = @thread.add_post user: create(:user), content: "Foo"
 					@thread.visit(@user)
 					expect(@thread.first_new_post_for(@user)).to eq(p)
 				end
@@ -253,16 +243,55 @@ describe "Forum model" do
 			describe "#updated_for?(user)" do
 				it "returns true if there are new posts" do
 					@thread.visit(@user)
-					Timecop.freeze(Date.today + 2)
-
-					create :forum_post, forum_thread: @thread
-					expect(@thread.updated_for?(@user)).to be_truthy
+					Timecop.travel 30 do
+						@thread.add_post user: create(:user), content: "foo"
+						expect(@thread.updated_for?(@user)).to be_truthy
+					end
 				end
 
 				it "returns false if there are no new posts" do
-					create :forum_post, forum_thread: @thread
-					@thread.visit(@user)
-					expect(@thread.updated_for?(@user)).to be_falsey
+					@thread.add_post user: create(:user), content: "foo"
+					Timecop.travel 30 do
+						@thread.visit(@user)
+						expect(@thread.updated_for?(@user)).to be_falsey
+					end
+				end
+			end
+
+			describe "::new_for(user)" do
+				describe "with an existing Visit" do
+					it "doesn't return threads without new content" do
+						@thread.add_post user: create(:user), content: "foo"
+						Timecop.travel 30 do
+							@thread.visit(@user)
+							expect(ForumThread.new_for(@user)).to_not include(@thread)
+						end
+					end
+
+					it "returns threads with new content since the visit" do
+						@thread.visit(@user)
+						Timecop.travel 30 do
+							@thread.add_post user: create(:user), content: "foo"
+							expect(ForumThread.new_for(@user)).to include(@thread)
+						end
+					end
+				end
+
+				describe "with no existing Visit" do
+					before :each do
+						Visit.where(user: @user, forum_thread: @thread).destroy
+					end
+
+					it "returns threads with new content" do
+						@thread.add_post user: create(:user), content: "foo"
+						expect(ForumThread.new_for(@user)).to include(@thread)
+					end
+
+					# it "doesn't return threads updated longer than 30 days ago" do
+					# 	#Timecop.travel(Date.today + 32) do
+					#			expect(ForumThread.new_for(@user)).to_not include(@thread)
+					# 	end
+					# end
 				end
 			end
 		end
@@ -303,6 +332,43 @@ describe "Forum model" do
 				end
 			end
 		end
+
+		describe "searching" do
+			# describe "query string parsing" do
+			# 	it "delegates tag search to ::by_tag_names()" do
+			# 		mock(ForumThread).by_tag_names(@tag.name) { [] }
+			# 		ForumThread.search("@#{@tag.name}", @user)
+			# 	end
+
+			# 	it "finds tagged threads" do
+			# 		@thread.add_tag_by_name(@tag.name)
+			# 		expect( ForumThread.search("@#{@tag.name}", @user) ).to include(@thread)
+			# 	end
+			# end
+
+			# describe "fulltext searching" do
+			# 	it "delegates text queries to the fulltext search" do
+			# 		expect( ForumThread.search(@thread.post.content.split[1], @user) ).to include(@thread)
+			# 	end
+			# end
+
+			describe "state searching" do
+				before :each do
+					@starred_thread = create :forum_thread
+					@starred_thread.star_for(@user)
+
+					@unread_thread = create :forum_thread
+				end
+
+				# it "returns starred threads with %starred" do
+				# 	expect( ForumThread.search("%starred", @user) ).to include(@starred_thread)
+				# end
+				
+				# it "returns unread threads with %unread" do
+				# 	expect( ForumThread.search("%unread", @user) ).to include(@unread_thread)
+				# end
+			end
+		end
 	end
 
 	describe ForumPost do
@@ -315,10 +381,19 @@ describe "Forum model" do
 
 		describe "timestamps" do
 			it "updates the updated_at field automatically" do
-				Timecop.freeze(Date.today + 2)
-				expect{@post.update(content: "bar")}.to change { @post.updated_at }
+				Timecop.travel 30 do
+					expect{@post.update(content: "bar")}.to change { @post.updated_at }
+				end
 			end
 		end
+
+		# describe "#create" do
+		# 	it "updates the parent thread's timestamp" do
+		# 		#Timecop.travel(Date.today + 2)
+		# 		expect { create :forum_post, forum_thread: @thread }
+		# 			.to change { @thread.updated_at }
+		# 	end
+		# end
 
 		describe "#user" do
 			it "finds the author" do
