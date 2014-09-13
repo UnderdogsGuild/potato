@@ -256,6 +256,12 @@ describe "Forum model" do
 						expect(@thread.updated_for?(@user)).to be_falsey
 					end
 				end
+
+				it "returns false if thread was bumped 30+ days ago" do
+					Timecop.travel(Date.today + 32) do
+						expect(@thread.updated_for?(@user)).to be_falsey
+					end
+				end
 			end
 
 			describe "::updated_for(user)" do
@@ -287,11 +293,11 @@ describe "Forum model" do
 						expect(ForumThread.updated_for(@user)).to include(@thread)
 					end
 
-					# it "doesn't return threads updated longer than 30 days ago" do
-					# 	#Timecop.travel(Date.today + 32) do
-					#			expect(ForumThread.updated_for(@user)).to_not include(@thread)
-					# 	end
-					# end
+					it "doesn't return threads updated longer than 30 days ago" do
+						Timecop.travel(Date.today + 32) do
+							expect(ForumThread.updated_for(@user)).to_not include(@thread)
+						end
+					end
 				end
 			end
 		end

@@ -177,10 +177,10 @@ class ForumThread < Sequel::Model
 	# Returns true if the thread contains posts created since the last time the
 	# user viewed the thread
 	def updated_for?(user)
-		if v = self.visit_for(user)
+		if updated_at > Date.today - 30 and v = self.visit_for(user)
 			updated_at > v.when
 		else
-			updated_at < Date.today - 30
+			false
 		end
 	end
 
@@ -190,14 +190,14 @@ class ForumThread < Sequel::Model
 		# Limit fields to those present in the forum_threads table,
 		self.select(:forum_threads__id, :title, :slug, :views, :updated_at, :officer, :deleted).
 
-		# perform left join on visits (includes threads with no visits),
+			# perform left join on visits (includes threads with no visits),
 			left_join(:visits, forum_thread_id: :id).
 
-		# limit dataset to visits for given user and filter for threads updated since last visit,
+			# limit dataset to visits for given user and filter for threads updated since last visit,
 			where { Sequel.&({visits__user_id: user.id},
 											(forum_threads__updated_at > visits__when))}.
 
-		# include threads with no visits, but onlt those updated within 30 days.
+			# include threads with no visits, but only those updated within 30 days.
 			or    { Sequel.&({visits__user_id: nil},
 											(forum_threads__updated_at > Date.today - 30))}
 	end
