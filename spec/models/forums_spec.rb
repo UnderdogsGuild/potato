@@ -258,13 +258,13 @@ describe "Forum model" do
 				end
 			end
 
-			describe "::new_for(user)" do
+			describe "::updated_for(user)" do
 				describe "with an existing Visit" do
 					it "doesn't return threads without new content" do
 						@thread.add_post user: create(:user), content: "foo"
 						Timecop.travel 30 do
 							@thread.visit(@user)
-							expect(ForumThread.new_for(@user)).to_not include(@thread)
+							expect(ForumThread.updated_for(@user)).to_not include(@thread)
 						end
 					end
 
@@ -272,7 +272,7 @@ describe "Forum model" do
 						@thread.visit(@user)
 						Timecop.travel 30 do
 							@thread.add_post user: create(:user), content: "foo"
-							expect(ForumThread.new_for(@user)).to include(@thread)
+							expect(ForumThread.updated_for(@user)).to include(@thread)
 						end
 					end
 				end
@@ -284,12 +284,12 @@ describe "Forum model" do
 
 					it "returns threads with new content" do
 						@thread.add_post user: create(:user), content: "foo"
-						expect(ForumThread.new_for(@user)).to include(@thread)
+						expect(ForumThread.updated_for(@user)).to include(@thread)
 					end
 
 					# it "doesn't return threads updated longer than 30 days ago" do
 					# 	#Timecop.travel(Date.today + 32) do
-					#			expect(ForumThread.new_for(@user)).to_not include(@thread)
+					#			expect(ForumThread.updated_for(@user)).to_not include(@thread)
 					# 	end
 					# end
 				end

@@ -186,7 +186,7 @@ class ForumThread < Sequel::Model
 
 	##
 	# Retrieve all threads with new content for a given user
-	def self.new_for(user)
+	def self.updated_for(user)
 		# Limit fields to those present in the forum_threads table,
 		self.select(:forum_threads__id, :title, :slug, :views, :updated_at, :officer, :deleted).
 
