@@ -104,8 +104,8 @@ describe "Forum model" do
 
 			it "updates the timestamp on the thread" do
 				Timecop. travel 30 do
-					expect { @thread.add_post user: @user, content: "foo" }
-						.to change{ @thread.updated_at }
+					expect { @thread.add_post user: @user, content: "foo" }.
+						to change{ @thread.updated_at }
 				end
 			end
 		end
