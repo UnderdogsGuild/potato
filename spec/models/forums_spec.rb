@@ -103,9 +103,9 @@ describe "Forum model" do
 			end
 
 			it "updates the timestamp on the thread" do
-				Timecop. travel 30 do
-					expect { @thread.add_post user: @user, content: "foo" }.
-						to change{ @thread.updated_at }
+				Timecop.travel 30 do
+					p = @thread.add_post user: @user, content: "foo"
+					expect(@thread.updated_at).to eq(p.updated_at)
 				end
 			end
 		end
