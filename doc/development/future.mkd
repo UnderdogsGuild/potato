@@ -39,3 +39,9 @@ Gmail of SendGrid. Primarily, we already need a local Postfix, configured and
 ready to send and receive. Gmail has their own rules, especially concerning
 batch mail sending, and SendGrid is way overkill for sending ~20 emails once a
 week.
+
+## Gmail Actions
+
+As documented
+[here](https://developers.google.com/gmail/actions/actions/actions-overview),
+gmail supports some metadata for custom actions.
