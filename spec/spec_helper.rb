@@ -3,7 +3,6 @@ ENV['RACK_ENV'] ||= "test"
 require 'bundler/setup'
 require 'rspec'
 require 'rack/test'
-require 'rr'
 require 'capybara/rspec'
 require 'capybara/poltergeist'
 require 'active_support/core_ext/class/subclasses'
