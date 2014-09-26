@@ -338,43 +338,6 @@ describe "Forum model" do
 				end
 			end
 		end
-
-		describe "searching" do
-			# describe "query string parsing" do
-			# 	it "delegates tag search to ::by_tag_names()" do
-			# 		mock(ForumThread).by_tag_names(@tag.name) { [] }
-			# 		ForumThread.search("@#{@tag.name}", @user)
-			# 	end
-
-			# 	it "finds tagged threads" do
-			# 		@thread.add_tag_by_name(@tag.name)
-			# 		expect( ForumThread.search("@#{@tag.name}", @user) ).to include(@thread)
-			# 	end
-			# end
-
-			# describe "fulltext searching" do
-			# 	it "delegates text queries to the fulltext search" do
-			# 		expect( ForumThread.search(@thread.post.content.split[1], @user) ).to include(@thread)
-			# 	end
-			# end
-
-			describe "state searching" do
-				before :each do
-					@starred_thread = create :forum_thread
-					@starred_thread.star_for(@user)
-
-					@unread_thread = create :forum_thread
-				end
-
-				# it "returns starred threads with %starred" do
-				# 	expect( ForumThread.search("%starred", @user) ).to include(@starred_thread)
-				# end
-				
-				# it "returns unread threads with %unread" do
-				# 	expect( ForumThread.search("%unread", @user) ).to include(@unread_thread)
-				# end
-			end
-		end
 	end
 
 	describe ForumPost do
